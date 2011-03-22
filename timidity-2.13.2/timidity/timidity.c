@@ -103,6 +103,8 @@
 #define __attribute__(x) /* ignore */
 #endif
 
+#include "utau.h"
+
 /* option enums */
 enum {
 	TIM_OPT_FIRST = 256,
@@ -348,6 +350,8 @@ static const struct option longopts[] = {
 #else
 #define MAIN_INTERFACE static
 #endif /* main */
+
+char* utau=0;
 
 MAIN_INTERFACE void timidity_start_initialize(void);
 MAIN_INTERFACE int timidity_pre_load_configuration(void);
@@ -4776,6 +4780,8 @@ static inline int parse_opt_default_module(const char *arg)
 static inline int parse_opt_preserve_silence(const char *arg)
 {
         opt_preserve_silence = 1;
+	utau=getenv("UTAU");
+	if(utau) utau_init();
 	return 0;
 }
 

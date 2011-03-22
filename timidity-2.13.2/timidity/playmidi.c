@@ -60,6 +60,8 @@
 
 extern void convert_mod_to_midi_file(MidiEvent * ev);
 
+extern char* utau;
+
 #define ABORT_AT_FATAL 1 /*#################*/
 #define MYCHECK(s) do { if(s == 0) { printf("## L %d\n", __LINE__); abort(); } } while(0)
 
@@ -1850,8 +1852,20 @@ static int find_samples(MidiEvent *e, int *vlist)
 	int i, j, ch, bank, prog, note, nv;
 	SpecialPatch *s;
 	Instrument *ip;
+
 	
 	ch = e->channel;
+	if (utau) {
+		if ((s = utau_special_patch()) == NULL) {
+			ctl->cmsg(CMSG_WARNING, VERB_VERBOSE,
+					"Strange: Special patch [UTAU] is not installed"
+					);
+			return 0;
+		}
+		note = e->a + channel[ch].key_shift + note_key_offset;
+		note = (note < 0) ? 0 : ((note > 127) ? 127 : note);
+		return select_play_sample(s->sample, s->samples, &note, vlist, e);
+	}
 	if (channel[ch].special_sample > 0) {
 		if ((s = special_patch[channel[ch].special_sample]) == NULL) {
 			ctl->cmsg(CMSG_WARNING, VERB_VERBOSE,
@@ -1880,6 +1894,7 @@ static int find_samples(MidiEvent *e, int *vlist)
 		if ((prog = channel[ch].program) == SPECIAL_PROGRAM)
 			ip = default_instrument;
 		else {
+			
 			instrument_map(channel[ch].mapID, &bank, &prog);
 			if (! (ip = play_midi_load_instrument(0, bank, prog)))
 				return 0;	/* No instrument? Then we can't play. */
@@ -2768,6 +2783,7 @@ static void new_chorus_voice_alternate(int v1, int level)
 /*! note_on() (prescanning) */
 static void note_on_prescan(MidiEvent *ev)
 {
+	if(utau) return;
 	int i, ch = ev->channel, note = MIDI_EVENT_NOTE(ev);
 	int32 random_delay = 0;
 
@@ -2829,6 +2845,7 @@ static void note_on(MidiEvent *e)
 	}
     if((nv = find_samples(e, vlist)) == 0)
 	return;
+    
 
     vid = new_vidq(e->channel, note);
 

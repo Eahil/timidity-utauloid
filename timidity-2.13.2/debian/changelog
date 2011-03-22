@@ -1,3 +1,15 @@
+timidity (2.13.2-37local2) lucid; urgency=low
+
+  * add utau.c
+
+ -- sasukeuchiha <sasukeuchiha@sasukeuchiha-desktop>  Tue, 22 Mar 2011 19:50:43 +0100
+
+timidity (2.13.2-37local1) lucid; urgency=low
+
+  * add freebsoft patch
+
+ -- sasukeuchiha <sasukeuchiha@sasukeuchiha-desktop>  Tue, 22 Mar 2011 18:23:09 +0100
+
 timidity (2.13.2-37) unstable; urgency=low
 
   * update source format to 3.0

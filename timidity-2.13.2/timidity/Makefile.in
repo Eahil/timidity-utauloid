@@ -74,7 +74,7 @@ am__aclocal_m4_deps = $(top_srcdir)/autoconf/alsa.m4 \
 	$(top_srcdir)/autoconf/vorbis.m4 $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(install_sh) -d
+mkinstalldirs = $(SHELL) $(top_srcdir)/autoconf/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h $(top_builddir)/interface.h
 CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
@@ -95,8 +95,8 @@ am_timidity_OBJECTS = aiff_a.$(OBJEXT) aq.$(OBJEXT) au_a.$(OBJEXT) \
 	resample.$(OBJEXT) reverb.$(OBJEXT) sbkconv.$(OBJEXT) \
 	sffile.$(OBJEXT) sfitem.$(OBJEXT) smfconv.$(OBJEXT) \
 	smplfile.$(OBJEXT) sndfont.$(OBJEXT) tables.$(OBJEXT) \
-	timidity.$(OBJEXT) version.$(OBJEXT) wave_a.$(OBJEXT) \
-	wrd_read.$(OBJEXT) wrdt.$(OBJEXT)
+	timidity.$(OBJEXT) utau.$(OBJEXT) version.$(OBJEXT) \
+	wave_a.$(OBJEXT) wrd_read.$(OBJEXT) wrdt.$(OBJEXT)
 timidity_OBJECTS = $(am_timidity_OBJECTS)
 @BORLANDC_FALSE@@ENABLE_W32GUI_FALSE@@ENABLE_W32G_SYN_TRUE@am__DEPENDENCIES_1 = $(top_builddir)/interface/w32g_res.res
 @BORLANDC_FALSE@@ENABLE_W32GUI_TRUE@am__DEPENDENCIES_1 = $(top_builddir)/interface/w32g_res.res
@@ -240,6 +240,7 @@ ESD_CONFIG = @ESD_CONFIG@
 ESD_LIBS = @ESD_LIBS@
 EXEEXT = @EXEEXT@
 EXTRALIBS = @EXTRALIBS@
+GREP = @GREP@
 GTK_CFLAGS = @GTK_CFLAGS@
 GTK_CONFIG = @GTK_CONFIG@
 GTK_LIBS = @GTK_LIBS@
@@ -276,6 +277,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
+PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 PKG_CONFIG = @PKG_CONFIG@
@@ -303,14 +305,13 @@ WATCOM_C_TRUE = @WATCOM_C_TRUE@
 WATCOM_LDFLAGS = @WATCOM_LDFLAGS@
 WISH = @WISH@
 W_so_libs = @W_so_libs@
+XMKMF = @XMKMF@
 X_CFLAGS = @X_CFLAGS@
 X_EXTRA_LIBS = @X_EXTRA_LIBS@
 X_LIBS = @X_LIBS@
 X_PRE_LIBS = @X_PRE_LIBS@
 a_so_libs = @a_so_libs@
 ac_ct_CC = @ac_ct_CC@
-ac_ct_RANLIB = @ac_ct_RANLIB@
-ac_ct_STRIP = @ac_ct_STRIP@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
 am__include = @am__include@
@@ -325,6 +326,9 @@ build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
 datadir = @datadir@
+datarootdir = @datarootdir@
+docdir = @docdir@
+dvidir = @dvidir@
 dynamic_targets = @dynamic_targets@
 e_so_libs = @e_so_libs@
 exec_prefix = @exec_prefix@
@@ -334,6 +338,7 @@ host_alias = @host_alias@
 host_cpu = @host_cpu@
 host_os = @host_os@
 host_vendor = @host_vendor@
+htmldir = @htmldir@
 i_so_libs = @i_so_libs@
 includedir = @includedir@
 infodir = @infodir@
@@ -342,6 +347,7 @@ k_so_libs = @k_so_libs@
 libdir = @libdir@
 libexecdir = @libexecdir@
 lispdir = @lispdir@
+localedir = @localedir@
 localstatedir = @localstatedir@
 m_so_libs = @m_so_libs@
 mandir = @mandir@
@@ -349,8 +355,10 @@ mkdir_p = @mkdir_p@
 n_so_libs = @n_so_libs@
 oldincludedir = @oldincludedir@
 p_so_libs = @p_so_libs@
+pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
+psdir = @psdir@
 r_so_libs = @r_so_libs@
 s_so_libs = @s_so_libs@
 sbindir = @sbindir@
@@ -471,6 +479,8 @@ timidity_SOURCES = \
 	tables.h \
 	timidity.c \
 	timidity.h \
+	utau.c \
+	utau.h \
 	version.c \
 	wave_a.c \
 	wrd.h \
@@ -752,6 +762,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sun_a.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tables.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/timidity.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utau.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/version.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vorbis_a.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/w32_a.Po@am__quote@

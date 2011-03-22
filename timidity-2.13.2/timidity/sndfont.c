@@ -585,7 +585,7 @@ static Instrument *load_from_file(SFInsts *rec, InstList *ip)
 	inst->instname = rec->inst_namebuf[ip->pr_idx];
 	inst->type = INST_SF2;
 	inst->samples = ip->samples;
-	inst->sample = (Sample *)safe_malloc(sizeof(Sample) * ip->samples);
+	inst->sample = (Sample *)safe_malloc(sizeof(Sample) * ip->samples);//allocate samples
 	memset(inst->sample, 0, sizeof(Sample) * ip->samples);
 	for (i = 0, sp = ip->slist; i < ip->samples && sp; i++, sp = sp->next) {
 		Sample *sample = inst->sample + i;

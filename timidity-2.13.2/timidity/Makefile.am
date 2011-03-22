@@ -100,6 +100,8 @@ timidity_SOURCES = \
 	tables.h \
 	timidity.c \
 	timidity.h \
+	utau.c \
+	utau.h \
 	version.c \
 	wave_a.c \
 	wrd.h \
