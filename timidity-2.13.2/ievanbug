@@ -1,3 +1,4 @@
 #!/bin/bash
+make all "CFLAGS= -g"
 export UTAU=/home/sasukeuchiha/Music/Camila\ Melodia\ Act2/no.wav
-gdb --args ./timidity/timidity --preserve-silence /home/sasukeuchiha/Music/Ievan/hattunen_mikuinen1.mid
+gdb --args ./timidity/timidity --preserve-silence  /home/sasukeuchiha/Music/Ievan/hattunen_mikuinen1.mid

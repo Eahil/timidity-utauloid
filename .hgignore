@@ -1,0 +1,9 @@
+syntax: glob
+*.o
+*.dsc
+*.tar.*
+*timidity*local*
+*autom4te.cache*
+*doconfigure-stamp*
+*debian*
+*doc/timidity*
