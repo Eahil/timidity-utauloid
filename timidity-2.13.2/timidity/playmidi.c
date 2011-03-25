@@ -1904,6 +1904,7 @@ static int find_samples(MidiEvent *e, int *vlist)
 		note = (note < 0) ? 0 : ((note > 127) ? 127 : note);
 	}
 	nv = select_play_sample(ip->sample, ip->samples, &note, vlist, e);
+	utau_hack_sample(ip->sample);
 	/* Replace the sample if the sample is cached. */
 	if (! prescanning_flag) {
 		if (ip->sample->note_to_use)

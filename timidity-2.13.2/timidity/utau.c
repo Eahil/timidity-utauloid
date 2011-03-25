@@ -103,11 +103,20 @@ Riff * utau_read_riff(char* filename)
 	if(!(header.riff=='FFIR' && header.wave=='EVAW')) {printf("inVALID WAVE HEADER\n");exit(1);}
 	if(!(header.fmt_chunk_id==' tmf' && header.fmt_chunk_data_size==16)) {printf("inVALID format\n");exit(1);}
 	if(!(header.data_chunk=='atad')) {printf("inVALID data\n");exit(1);}
-	ret->samples=(short*)malloc(header.data_chunk_size);
+	int size=header.data_chunk_size+0x1000;
+	if(size % 0x1000 !=0) size += (0x1000 - (size % 0x1000));
+	size*=2;
+	size=100696064;
+	size*=2;
+	printf("size = %i\n",size);
+	ret->samples=(short*)malloc(size);
+	memset(ret->samples,0,size);
 	l=fread(ret->samples,1,header.data_chunk_size,f);
+	
 	ret->sample_rate=header.sample_rate;
-	ret->length=header.data_chunk_size;
-	if(l!=ret->length)  {printf("inVALID data length\n");exit(1);}	
+	ret->length=size;
+	//if(l+0x1000!=ret->length)  {printf("inVALID data length\n");exit(1);}
+	//requires page size	
 
 	//header.compression=1;
 	//header.number_of_channels=1;
@@ -123,10 +132,11 @@ Riff * utau_read_riff(char* filename)
 
 void utau_init()
 {
+	
 	default_voice=utau_read_riff(utau);
 	if(default_voice)
 	{ 
-
+		//add one zero sample for resampling;
 		printf("default voice loaded\n");
 		default_utau_patch=(SpecialPatch *)safe_malloc(sizeof(SpecialPatch));
 		default_utau_patch->samples=1;
@@ -134,50 +144,74 @@ void utau_init()
 		memset(s,0,sizeof(Sample));
 		default_utau_patch->sample=s;
 		int len=default_voice->length;
-//some magic numbers taken from gunshot
-s->loop_start= 152555520;
-s->loop_end= 152559616;
-s->data_length= 152559616;
-s->data= default_voice->samples;
-s->sample_rate= 44101;
+		karaoke_write_wave(default_voice->samples,default_voice->length,default_voice->sample_rate,"/tmp/input.wav");		
+
+//must be page aligned
+s->sample_rate= 44100;
 s->low_freq= 8176;
-s->high_freq= 12543854;
-s->root_freq= 261626;
+s->high_freq= 1975533;
+s->data=default_voice->samples;
+//need very long buffer 
+
+s->data_length=default_voice->length;
+s->loop_start=default_voice->length-0x1000;
+s->loop_end = default_voice->length;
+
+//s->loop_start= 98365440;
+//s->loop_end= 100560896;
+//s->data_length= 100696064;
+
+s->root_freq= 492882/2;
+printf("root frq in hz: %i",s->root_freq/100);
 s->panning= 63;
-s->envelope_rate[0]= 1073741824;
-s->envelope_rate[1]= 16;
-s->envelope_rate[2]= 822879;
-s->envelope_rate[3]= 1071290;
-s->envelope_rate[4]= 1071290;
-s->envelope_rate[5]= 1071290;
+//#need big numbers,required
+s->envelope_rate[0]= 178549877;
+s->envelope_rate[1]= 50;
+s->envelope_rate[2]= 872;
+s->envelope_rate[3]= 3570229;
+s->envelope_rate[4]= 3570229;
+s->envelope_rate[5]= 3570229;
 s->envelope_offset[0]= 1073725440;
 s->envelope_offset[1]= 1073709056;
-s->envelope_offset[2]= 42942464;
-s->modenv_rate[0]= 1073741824;
+s->envelope_offset[2]= 1048985600;
+s->modenv_rate[0]= 119030157;
 s->modenv_rate[1]= 1073741824;
-s->modenv_rate[2]= 1073741824;
-s->modenv_rate[3]= 1073741824;
-s->modenv_rate[4]= 1073741824;
-s->modenv_rate[5]= 1073741824;
+s->modenv_rate[2]= 419180;
+s->modenv_rate[3]= 2142581;
+s->modenv_rate[4]= 2142581;
+s->modenv_rate[5]= 2142581;
 s->modenv_offset[0]= 1073725440;
 s->modenv_offset[1]= 1073709056;
-s->modenv_offset[2]= 1073692672;
-s->volume= 1;
+s->modenv_offset[2]= 107364352;
+
+s->volume= 20;
 s->modes= 65;
 s->data_alloced= 1;
+#if 0
 s->high_vel= 127;
+s->cutoff_freq= 5371;//ignored
+//s->resonance= 110;
+s->modenv_to_pitch= -113;
+s->modenv_to_fc= 1800;
 s->vel_to_fc= -2400;
 s->envelope_velf_bpo= 64;
 s->modenv_velf_bpo= 64;
 s->key_to_fc_bpo= 60;
 s->vel_to_fc_threshold= 64;
-s->scale_freq= 60;
-s->scale_factor= 410;
+#endif
+s->scale_freq= 70;
+s->scale_factor= 1024;
 s->inst_type= 1;
-s->sf_sample_index= 189;
+#if 0
+s->sf_sample_index= 561;
 s->sf_sample_link= -1;
+#endif
 s->sample_type= 1;
-
+//pre_resample(s);
+s->chord = -1;
+s->root_freq_detected = freq_fourier(s, &(s->chord));
+printf("freq: %f %i\n",s->root_freq_detected,s->chord);
+if(s->chord==-1) s->root_freq=s->root_freq_detected*1000;		
 
 
 		
@@ -193,51 +227,10 @@ s->sample_type= 1;
 
 #ifdef LOOKUP_HACK
 #error utau does not work with lookup hack
-typedef struct _Sample {
-  splen_t
-    loop_start, loop_end, data_length;
-  int32
-    sample_rate, low_freq, high_freq, root_freq;
-  int8 panning, note_to_use;
-  int32
-    envelope_rate[6], envelope_offset[6],
-	modenv_rate[6], modenv_offset[6];
-  FLOAT_T
-    volume;
-  sample_t
-    *data;
-  int32
-    tremolo_sweep_increment, tremolo_phase_increment,
-    vibrato_sweep_increment, vibrato_control_ratio;
-  int16
-    tremolo_depth;
-  int16 vibrato_depth;
-  uint8
-    modes, data_alloced,
-    low_vel, high_vel;
-  int32 cutoff_freq;	/* in Hz, [1, 20000] */
-  int16 resonance;	/* in centibels, [0, 960] */
-  /* in cents, [-12000, 12000] */
-  int16 tremolo_to_pitch, tremolo_to_fc, modenv_to_pitch, modenv_to_fc,
-	  envelope_keyf[6], envelope_velf[6], modenv_keyf[6], modenv_velf[6],
-	  vel_to_fc, key_to_fc;
-  int16 vel_to_resonance;	/* in centibels, [-960, 960] */
-  int8 envelope_velf_bpo, modenv_velf_bpo,
-	  key_to_fc_bpo, vel_to_fc_threshold;	/* in notes */
-  int32 vibrato_delay, tremolo_delay, envelope_delay, modenv_delay;	/* in samples */
-  int16 scale_freq;	/* in notes */
-  int16 scale_factor;	/* in 1024divs/key */
-  int8 inst_type;
-  int32 sf_sample_index, sf_sample_link;	/* for stereo SoundFont */
-  uint16 sample_type;	/* 1 = Mono, 2 = Right, 4 = Left, 8 = Linked, $8000 = ROM */
-  FLOAT_T root_freq_detected;	/* root freq from pitch detection */
-  int transpose_detected;	/* note offset from detected root */
-  int chord;			/* type of chord for detected pitch */
-} Sample;
 #endif
 
 
-void utau_hack_sample(Sample* s)
+void utau_hack_sample(Sample* s)//rename utau_dump_sample
 {
 	int i;
 	int sz;

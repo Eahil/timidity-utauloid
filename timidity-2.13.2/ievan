@@ -1,3 +1,3 @@
 #!/bin/bash
-export UTAU=/home/sasukeuchiha/Music/Camila\ Melodia\ Act2/no.wav
-./timidity/timidity --preserve-silence /home/sasukeuchiha/Music/Ievan/hattunen_mikuinen1.mid
+export UTAU=/home/sasukeuchiha/Music/Camila\ Melodia\ Act2/a.wav
+./timidity/timidity --preserve-silence ~/Music/SMOON_US7.mid
