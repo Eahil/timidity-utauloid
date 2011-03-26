@@ -1,0 +1,11 @@
+Offset is the parameter of the blue highlight thing from the left. Basically you can cover any blank space on your wav file or any weird sound from your recording with this and it wont be heard when you make your UTAU sing.
+
+Consonant is the parameter of the pink highlight thing. Anything you cover with this will not be altered when the note is stretched in UTAU.
+
+Cuttoff is the parameter of the blue highlight from the right. Just cover any blank space after your recording with this or anything that is not consistent with the rest of your recording at the end.
+
+Preutter is the parameter of the red line. Put this at the end of the consonant in your recording. When you select the red line in the editor you will notice it says "top of note" this is basically how soon the note will begin to sound when you make your UTAUloid sing. This parameter shortens the lenght of the preceding note.
+
+Overlap is the parameter of the green line. This parameter defines the length of utterance extention of the *preceding* note in milliseconds. Sometimes this parameter isn't needed at all but when the consonant is too long I usually put this at the middle of the consonant in the recording. With this you are assigning how soon the note with this sample will overlap with the previous note.
+
+http://overseasutau.forumotion.net/t10-how-to-make-an-utauloid-something-to-help-get-you-started

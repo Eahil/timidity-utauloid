@@ -34,9 +34,17 @@
 #include "wrd.h"
 #include "aq.h"
 #include "freq.h"
+// AA 2E = '+' or '↑'
+
+#ifdef LOOKUP_HACK
+#error utau does not work with lookup hack
+#endif
+
+static char* utau_text="no lyrics";
+
 
 struct riff_header
-	{	
+{	
 		int riff;
 		int chunk_data_size;
 		int wave;
@@ -50,7 +58,7 @@ struct riff_header
 		short bits_per_sample;
 		int data_chunk;
 		int data_chunk_size;
-	};
+};
 
 typedef struct _Riff
 {
@@ -59,16 +67,23 @@ typedef struct _Riff
 	int sample_rate;
 } Riff;
 
-extern char* utau;//the utauloid voicebank path
-Riff* default_voice=0;
-
-SpecialPatch* default_utau_patch=0;
-
-
-void karaoke_write_wave(short* samples,int length,int sample_rate,char* filename)
+typedef struct _Oto
 {
+	char name[64];
+	char alias[64];
+	int offset,consonant,cutoff,pre_utterance,overlap;
+} Oto;
 
-	
+Oto voicebank[4000];
+
+extern char* utau;//the utauloid voicebank path
+
+
+
+
+static void utau_write_wave(short* samples,int length,int sample_rate,char* filename) //only for debugging
+{
+	unlink(filename);
 	struct riff_header header;
 	header.riff='FFIR';
 	header.chunk_data_size=sizeof(struct riff_header)-8+length;
@@ -89,63 +104,9 @@ void karaoke_write_wave(short* samples,int length,int sample_rate,char* filename
 	fclose(f);
 }
 
-Riff * utau_read_riff(char* filename)
+#if 0
+void utau_init_sample(Sample* s)
 {
-
-	Riff* ret=0;
-	printf("reading %s\n",filename);
-	FILE* f=fopen(filename,"r");
-	if(f==NULL) return 0;
-	ret=malloc(sizeof(Riff));
-	struct riff_header header;
-	int l=fread(&header,1,sizeof(header),f);
-	if(l!=sizeof(header))  {printf("inVALID WAVE HEADER size\n");exit(1);}
-	if(!(header.riff=='FFIR' && header.wave=='EVAW')) {printf("inVALID WAVE HEADER\n");exit(1);}
-	if(!(header.fmt_chunk_id==' tmf' && header.fmt_chunk_data_size==16)) {printf("inVALID format\n");exit(1);}
-	if(!(header.data_chunk=='atad')) {printf("inVALID data\n");exit(1);}
-	int size=header.data_chunk_size+0x1000;
-	if(size % 0x1000 !=0) size += (0x1000 - (size % 0x1000));
-	size*=2;
-	size=100696064;
-	size*=2;
-	printf("size = %i\n",size);
-	ret->samples=(short*)malloc(size);
-	memset(ret->samples,0,size);
-	l=fread(ret->samples,1,header.data_chunk_size,f);
-	
-	ret->sample_rate=header.sample_rate;
-	ret->length=size;
-	//if(l+0x1000!=ret->length)  {printf("inVALID data length\n");exit(1);}
-	//requires page size	
-
-	//header.compression=1;
-	//header.number_of_channels=1;
-	//header.sample_rate=sample_rate;
-	//header.block_align=4;
-	//header.bytes_per_sec=header.sample_rate * header.block_align;
-	//header.bits_per_sample=16;
-
-	
-	fclose(f);
-	return ret;
-}
-
-void utau_init()
-{
-	
-	default_voice=utau_read_riff(utau);
-	if(default_voice)
-	{ 
-		//add one zero sample for resampling;
-		printf("default voice loaded\n");
-		default_utau_patch=(SpecialPatch *)safe_malloc(sizeof(SpecialPatch));
-		default_utau_patch->samples=1;
-		Sample* s=(Sample *)safe_malloc(sizeof(Sample));
-		memset(s,0,sizeof(Sample));
-		default_utau_patch->sample=s;
-		int len=default_voice->length;
-		karaoke_write_wave(default_voice->samples,default_voice->length,default_voice->sample_rate,"/tmp/input.wav");		
-
 //must be page aligned
 s->sample_rate= 44100;
 s->low_freq= 8176;
@@ -211,113 +172,104 @@ s->sample_type= 1;
 s->chord = -1;
 s->root_freq_detected = freq_fourier(s, &(s->chord));
 printf("freq: %f %i\n",s->root_freq_detected,s->chord);
-if(s->chord==-1) s->root_freq=s->root_freq_detected*1000;		
-
-
-		
-	}
-	else
-	{
-		printf("error: invalid voicebank\n");
-		return 0;
-	}
-	
-	
+if(s->chord==-1) s->root_freq=s->root_freq_detected*1000;
 }
-
-#ifdef LOOKUP_HACK
-#error utau does not work with lookup hack
 #endif
 
+Riff * utau_read_riff(char* filename)
+{
 
-void utau_hack_sample(Sample* s)//rename utau_dump_sample
+	Riff* ret=0;
+	FILE* f=fopen(filename,"r");
+	if(f==NULL) return 0;
+	ret=malloc(sizeof(Riff));
+	struct riff_header header;
+	int l=fread(&header,1,sizeof(header),f);
+	if(l!=sizeof(header))  {printf("inVALID WAVE HEADER size\n");exit(1);}
+	if(!(header.riff=='FFIR' && header.wave=='EVAW')) {printf("inVALID WAVE HEADER\n");exit(1);}
+	if(!(header.fmt_chunk_id==' tmf' && header.fmt_chunk_data_size==16)) {printf("inVALID format\n");exit(1);}
+	if(!(header.data_chunk=='atad')) {printf("inVALID data\n");exit(1);}
+	int size=header.data_chunk_size+0x1000;
+	if(size % 0x1000 !=0) size += (0x1000 - (size % 0x1000));
+	ret->samples=(short*)malloc(size);
+	memset(ret->samples,0,size);
+	l=fread(ret->samples,1,header.data_chunk_size,f);
+	
+	ret->sample_rate=header.sample_rate;
+	ret->length=size;
+	//if(l+0x1000!=ret->length)  {printf("inVALID data length\n");exit(1);}
+	//header.number_of_channels=1;
+	//header.sample_rate=sample_rate;
+	//header.block_align=4;
+	//header.bytes_per_sec=header.sample_rate * header.block_align;
+	//header.bits_per_sample=16;
+	//TODO check input
+	fclose(f);
+	return ret;
+}
+
+static void parse_oto(char* oto,Oto* o)
 {
 	int i;
-	int sz;
-	#define LOG(v) if(s->v!=0) printf("s->%s= %i;\n",#v,(int)s->v);
-	#define LOG6(v) for(i=0;i<6;i++) if(s->v[i]!=0) printf("s->%s[%i]= %i;\n",#v,i,(int)s->v[i]);
-	#define LOGF(v) if(s->v!=0) printf("s->%s= %f;\n",#v,s->v);
-	printf("<---\n");
-//==================================
-	LOG(loop_start);
-	LOG(loop_end);
-	LOG(data_length);
-//-----------------------------------
-	LOG(data);
-//-------------------------------
-	LOG(sample_rate);
-	LOG(low_freq);
-	LOG(high_freq);
-	LOG(root_freq);
-//-------------------------------
-	LOG(panning);
-	LOG(note_to_use);
-//----------------------------
-	LOG6(envelope_rate);
-	LOG6(envelope_offset);
-	LOG6(modenv_rate)
-	LOG6(modenv_offset);
-//----------------------------------------
-	LOG(volume);
-//----------------------------------------
-	LOG(tremolo_sweep_increment);
-	LOG(tremolo_phase_increment);
-	LOG(vibrato_sweep_increment)
-	LOG(vibrato_control_ratio);
-//-------------------------------------------
-	LOG(tremolo_depth);
-	LOG(vibrato_depth);
-//-------------------------------------------
-	LOG(modes);
-	LOG(data_alloced);
-	LOG(low_vel);
-	LOG(high_vel);
-//-------------------------------------------
-	LOG(cutoff_freq);
-	LOG(resonance);
-//-------------------------------------------
-	LOG(tremolo_to_pitch);
-	LOG(tremolo_to_fc)
-	LOG(modenv_to_pitch)
-	LOG(modenv_to_fc);
-//---
-LOG6(envelope_keyf);
-LOG6(envelope_velf);
-LOG6(modenv_keyf);
-LOG6(modenv_velf);
-//---
-	LOG(vel_to_fc);
-	LOG(key_to_fc);
-//--------------------------------
-	LOG(vel_to_resonance);
-//--------------------------------
-	LOG(envelope_velf_bpo);
-	LOG(modenv_velf_bpo);
-	LOG(key_to_fc_bpo);
-	LOG(vel_to_fc_threshold);
-//--------------------------------
-	LOG(vibrato_delay);
-	LOG(tremolo_delay);
-	LOG(envelope_delay);
-	LOG(modenv_delay);
-//--------------------------------
-	LOG(scale_freq);
-	LOG(scale_factor);
-//--------------------------------
-	LOG(inst_type);
-//--------------------------------
-	LOG(sf_sample_index);
-	LOG(sf_sample_link);
-//--------------------------------
-	LOG(sample_type);
-	LOGF(root_freq_detected);
-	LOG(transpose_detected);
-	LOG(chord);
-	printf("--->\n");
-	
+	for(i=0;i<1024;i++) if (oto[i]=='\r'|| oto[i]=='\n') oto[i]=0;
+	for(i=0;i<1024;i++) if (oto[i]=='='|| oto[i]==',') oto[i]=' ';
+	sscanf(oto,"%s %s %i %i %i %i %i",&o->name,&o->alias,&o->consonant,&o->offset,&o->cutoff,&o->pre_utterance,&o->overlap);
+}
+
+static int oto_compare_name (const void * a, const void * b)
+{
+  Oto* c=(Oto*)a;
+  Oto* d=(Oto*)b;
+  return strcmp(c->name,d->name);
+}
+
+static int oto_compare_alias (const void * a, const void * b)
+{
+  Oto* c=(Oto*)a;
+  Oto* d=(Oto*)b;
+  return strcmp(c->alias,d->alias);
+}
+
+
+void utau_init()
+{
+	char oto_ini[1024];
+	sprintf(oto_ini,"%s/oto.ini",utau);
+	FILE* f=fopen(oto_ini,"r");
+	if(f==0) {printf("could not find oto ini\n");exit(0);}
+	char oto[1024];
+	int i=0;
+
+	while(fgets(oto,sizeof(oto),f))
+	{
+	parse_oto(oto,&voicebank[i]);
+	i++;
+	}
+	//sort (values, 6, sizeof(int), compare);
+	qsort(voicebank,i,sizeof(Oto),oto_compare_name);
+	int count=i;	
+	for(i=0;i<count;i++)
+	{
+	char wav_file[1024];
+	sprintf(wav_file,"%s/%s",utau,voicebank[i].name);
+	printf("FIXME: load wave file %s %x and link oto %i %i\n",wav_file,utau_read_riff(wav_file),i,i-1);
+	//TODO: oto_load(i,i-1);
+	}
+}
+
+void utau_set_text(char* text)
+{
+	//printf("set text: %s\n",text);
+	utau_text=text;
+	//use bsearch to find a patch
 }
 
 SpecialPatch* utau_special_patch()
 {
-	return default_utau_patch;
+	return NULL;
+}
+
+char* utau_get_text()
+{
+	return utau_text;
 }

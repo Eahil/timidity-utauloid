@@ -7,3 +7,6 @@ syntax: glob
 *doconfigure-stamp*
 *debian*
 *doc/timidity*
+*.Po
+*.a
+*.orig

@@ -1858,7 +1858,7 @@ static int find_samples(MidiEvent *e, int *vlist)
 	if (utau) {
 		if ((s = utau_special_patch()) == NULL) {
 			ctl->cmsg(CMSG_WARNING, VERB_VERBOSE,
-					"Strange: Special patch [UTAU] is not installed"
+					"Strange: Special patch [%s] is not installed",utau_get_text()
 					);
 			return 0;
 		}
@@ -1904,7 +1904,7 @@ static int find_samples(MidiEvent *e, int *vlist)
 		note = (note < 0) ? 0 : ((note > 127) ? 127 : note);
 	}
 	nv = select_play_sample(ip->sample, ip->samples, &note, vlist, e);
-	utau_hack_sample(ip->sample);
+	if(utau) return nv;
 	/* Replace the sample if the sample is cached. */
 	if (! prescanning_flag) {
 		if (ip->sample->note_to_use)
@@ -7885,7 +7885,8 @@ int play_event(MidiEvent *ev)
       case ME_TEXT:
       case ME_KARAOKE_LYRIC:
 	i = ev->a | ((int)ev->b << 8);
-	ctl_mode_event(CTLE_LYRIC, 1, i, 0);
+	if(utau) utau_set_text(event2string(i)+1);
+	else ctl_mode_event(CTLE_LYRIC, 1, i, 0);
 	break;
 
       case ME_GSLCD:
