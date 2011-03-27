@@ -1852,19 +1852,20 @@ static int find_samples(MidiEvent *e, int *vlist)
 	int i, j, ch, bank, prog, note, nv;
 	SpecialPatch *s;
 	Instrument *ip;
+	Sample* utau_sample;
 
 	
 	ch = e->channel;
 	if (utau) {
-		if ((s = utau_special_patch()) == NULL) {
+		if ((utau_sample=utau_get_sample(&i))==0) {
 			ctl->cmsg(CMSG_WARNING, VERB_VERBOSE,
-					"Strange: Special patch [%s] is not installed",utau_get_text()
+					"Strange: Oto [%s] is not installed",utau_get_text()
 					);
 			return 0;
 		}
 		note = e->a + channel[ch].key_shift + note_key_offset;
 		note = (note < 0) ? 0 : ((note > 127) ? 127 : note);
-		return select_play_sample(s->sample, s->samples, &note, vlist, e);
+		return select_play_sample(utau_sample, i, &note, vlist, e);
 	}
 	if (channel[ch].special_sample > 0) {
 		if ((s = special_patch[channel[ch].special_sample]) == NULL) {

@@ -1,3 +1,0 @@
-#!/bin/bash
-export UTAU=/home/sasukeuchiha/Music/Camila\ Melodia\ Act2
-gdb --args ./timidity/timidity --preserve-silence /home/sasukeuchiha/Music/evaop_karaoke.mid -Ow

@@ -40,7 +40,7 @@
 #error utau does not work with lookup hack
 #endif
 
-static char* utau_text="no lyrics";
+static char* utau_text="a";
 
 
 struct riff_header
@@ -72,9 +72,13 @@ typedef struct _Oto
 	char name[64];
 	char alias[64];
 	int offset,consonant,cutoff,pre_utterance,overlap;
+	Riff* wavefile;
+	Sample* sample;
+	int samples;
 } Oto;
 
 Oto voicebank[4000];
+int voicebank_count;
 
 extern char* utau;//the utauloid voicebank path
 
@@ -105,27 +109,36 @@ static void utau_write_wave(short* samples,int length,int sample_rate,char* file
 }
 
 #if 0
-void utau_init_sample(Sample* s)
+
+#endif
+
+static int32 to_offset(int32 offset)
+{
+	return offset << 14;
+}
+
+
+
+
+void utau_init_sample(Sample* s,Riff* riff)
 {
 //must be page aligned
 s->sample_rate= 44100;
 s->low_freq= 8176;
 s->high_freq= 1975533;
-s->data=default_voice->samples;
-//need very long buffer 
+s->data=riff->samples;
+s->data_length=riff->length;
+s->loop_start=riff->length-0x1000;
+s->loop_end = riff->length;
+s->loop_start= 98365440;
+s->loop_end= 100560896;
+s->data_length= 100696064;
 
-s->data_length=default_voice->length;
-s->loop_start=default_voice->length-0x1000;
-s->loop_end = default_voice->length;
-
-//s->loop_start= 98365440;
-//s->loop_end= 100560896;
-//s->data_length= 100696064;
-
-s->root_freq= 492882/2;
-printf("root frq in hz: %i",s->root_freq/100);
+s->root_freq= 492882;
+printf("root frq in hz: %f\n",((float)s->root_freq)/1000);
 s->panning= 63;
 //#need big numbers,required
+#if 0
 s->envelope_rate[0]= 178549877;
 s->envelope_rate[1]= 50;
 s->envelope_rate[2]= 872;
@@ -144,9 +157,10 @@ s->modenv_rate[5]= 2142581;
 s->modenv_offset[0]= 1073725440;
 s->modenv_offset[1]= 1073709056;
 s->modenv_offset[2]= 107364352;
+#endif
 
 s->volume= 20;
-s->modes= 65;
+s->modes= 3;
 s->data_alloced= 1;
 #if 0
 s->high_vel= 127;
@@ -168,13 +182,9 @@ s->sf_sample_index= 561;
 s->sf_sample_link= -1;
 #endif
 s->sample_type= 1;
-//pre_resample(s);
-s->chord = -1;
-s->root_freq_detected = freq_fourier(s, &(s->chord));
-printf("freq: %f %i\n",s->root_freq_detected,s->chord);
-if(s->chord==-1) s->root_freq=s->root_freq_detected*1000;
 }
-#endif
+
+
 
 Riff * utau_read_riff(char* filename)
 {
@@ -239,37 +249,62 @@ void utau_init()
 	if(f==0) {printf("could not find oto ini\n");exit(0);}
 	char oto[1024];
 	int i=0;
+	int j;
 
 	while(fgets(oto,sizeof(oto),f))
 	{
 	parse_oto(oto,&voicebank[i]);
 	i++;
 	}
-	//sort (values, 6, sizeof(int), compare);
-	qsort(voicebank,i,sizeof(Oto),oto_compare_name);
-	int count=i;	
-	for(i=0;i<count;i++)
+	voicebank_count=i;
+
+
+	qsort(voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
+	for(i=0;i<voicebank_count;i++)
 	{
 	char wav_file[1024];
 	sprintf(wav_file,"%s/%s",utau,voicebank[i].name);
-	printf("FIXME: load wave file %s %x and link oto %i %i\n",wav_file,utau_read_riff(wav_file),i,i-1);
-	//TODO: oto_load(i,i-1);
+	if(i>1 && strcmp(voicebank[i].name,voicebank[i-1].name)==0) voicebank[i].wavefile=voicebank[i-1].wavefile;
+	else if((voicebank[i].wavefile=utau_read_riff(wav_file))==0) printf("failed to load %s\n",voicebank[i].name);
+	if(voicebank[i].wavefile)
+	{
+		voicebank[i].sample=(Sample*)malloc(sizeof(Sample));
+		memset(voicebank[i].sample,0,sizeof(Sample));
+		utau_init_sample(voicebank[i].sample,voicebank[i].wavefile);	
+		for(j=0;j<strlen(voicebank[i].name);j++)
+			if(voicebank[i].name[j]=='.') voicebank[i].name[j]=0;
 	}
+	}
+	qsort(voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
 }
 
 void utau_set_text(char* text)
 {
 	//printf("set text: %s\n",text);
+	while(*text=='\\' || *text=='/' || *text==' ')
+	text++;
 	utau_text=text;
+	
 	//use bsearch to find a patch
-}
-
-SpecialPatch* utau_special_patch()
-{
-	return NULL;
 }
 
 char* utau_get_text()
 {
 	return utau_text;
 }
+
+Sample* utau_get_sample(int* count)
+{
+	Oto* o=bsearch(utau_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
+	if(o==0)
+	{
+	*count=0;
+	return 0;
+	}
+	else
+	{
+	*count=1;
+	return o->sample;
+	}
+}
+
