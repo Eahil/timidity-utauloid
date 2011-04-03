@@ -7607,7 +7607,7 @@ int play_event(MidiEvent *ev)
 	break;
 
 	/* Controls */
-      case ME_TONE_BANK_MSB:
+      case ME_TONE_BANK_MSB://7
 	channel[ch].bank_msb = ev->a;
 	break;
 
@@ -7885,7 +7885,13 @@ int play_event(MidiEvent *ev)
       case ME_INSERT_TEXT:
       case ME_TEXT:
       case ME_KARAOKE_LYRIC:
+      	//56 		 57 	 ,59     2 ,60 3	  ,61 4   , 62 5 
+	//ME_CHORUS_TEXT,ME_LYRIC,ME_MARKER,ME_INSERT_TEXT,ME_TEXT,ME_KARAOKE_LYRIC;
+	//
+	if(ev->type==ME_LYRIC) ev->type==ME_KARAOKE_LYRIC; //KARAOKE HACK, karaoke non standard format (SoftKaraoke)
 	i = ev->a | ((int)ev->b << 8);
+	//printf("%i %s\n",(int)ev->type,event2string(i)+1);
+
 	if(utau) utau_set_text(event2string(i)+1);
 	else ctl_mode_event(CTLE_LYRIC, 1, i, 0);
 	break;

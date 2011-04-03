@@ -130,9 +130,16 @@ s->data=riff->samples;
 s->data_length=riff->length;
 s->loop_start=riff->length-0x1000;
 s->loop_end = riff->length;
-s->loop_start= 98365440;
-s->loop_end= 100560896;
-s->data_length= 100696064;
+int x=100696064/1024;
+printf("minimal %i\n",x);
+x=riff->length << FRACTION_BITS;
+printf("current %i\n",x);
+printf("fixed %i\n",FRACTION_BITS);		
+s->loop_start= x-0x1000;
+s->loop_end= x;
+s->loop_start= 0;
+s->loop_end= 0;
+s->data_length= x;
 
 s->root_freq= 492882;
 printf("root frq in hz: %f\n",((float)s->root_freq)/1000);
@@ -280,12 +287,9 @@ void utau_init()
 
 void utau_set_text(char* text)
 {
-	//printf("set text: %s\n",text);
 	while(*text=='\\' || *text=='/' || *text==' ')
 	text++;
 	utau_text=text;
-	
-	//use bsearch to find a patch
 }
 
 char* utau_get_text()

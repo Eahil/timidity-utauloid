@@ -1,0 +1,177 @@
+.TH ABCMATCH 1 "24 August 2007"
+.SH NAME
+abcmatch \- search sequences of notes in an ABC file
+.SH SYNOPSIS
+\fBabcmatch\fP \fIdata-file\fP [\fInumber\fR] [-a] [-br \fId\fP] [-c] [-con] [-ign] [-length_hist] [-pitch_hist] [-qnt] [-r \fIn\fP] [-v] [-ver]
+.SH "DESCRIPTION"
+.PP
+.B abcmatch
+searches an ABC file containing (potentially) many tunes for specific
+sequences of notes. For example, if you know a few bars of a tune, you
+can use this program to find the tune having this sequence and perhaps
+identify the tune.
+.PP
+At a minimum, abcmatch requires two files. A \fItemplate file\fP called
+\fBmatch.abc\fP which contains the bars that you are searching for and
+a large file consisting of a hundred or more ABC tunes.
+The program automatically loads up the match.abc file and
+then scans every tune in the large file.
+.PP
+Though the program can be run stand-alone, it is really meant to be
+run with a GUI such as runabc.tcl (which is not yet part of
+Debian). Most of its output is rather cryptic.
+.SH "THE MATCHING PROCESS"
+.PP
+The \fItemplate file\fR must be a well-formed ABC file containing the
+basic \fBX:\fP, \fBM:\fP, \fBL:\fP, and \fBK:\fP headers as well as
+the bars to be matched. (Normally, this file is created by
+runabc.tcl.) It is important to finish each bar in the match file with
+a vertical line.
+.PP
+.B abcmatch
+uses the key signature to figure out the relative position of the
+notes in the scale, and to determine all the assumed sharps and
+flats. Therefore the program can find matching bars in a tune that has
+been transposed to another key, as long as the key difference is not
+too large. Matches are output in a list format looking like
+.P
+29 30 4
+.br
+30 31 4
+
+.PP
+Each line indicates a particular match found by the program. The first
+number on each line gives the relative position of the tune in the
+\fIdata-file\fP, while the next number gives the \fBX:\fP number of
+that tune. The last number is the bar number of the matching tune. Bar
+numbers are counted sequentially from the start of the tune, and all
+\fBV:\fP and \fBP:\fP indications are ignored. That is, the bar number
+returned by \fBabcmatch\fP may not match bar numbers printed by one of
+the PostScript-producing ABC processors such as \fBabcm2ps\fP or
+\fBabcmidi-yaps\fP.
+.PP
+For the purposes of matching, \fBabcmatch\fP ignores all guitar
+chords, lyrics, note decorations (e.g., staccato markings), grace
+notes, etc. In chords such as \fB[G2c2]\fP, only the highest note is
+considered. Any warnings or error messages from the ABC parser are
+suppressed unless the \fB-c\fP option is given.
+
+.SH OPTIONS
+.TP
+.B \-a
+Report any matching bars. By default, if the template file contains a
+sequence of several bars, the program will try to find places in the
+data file where the whole sequence matches. With this option, it
+returns all places in the data file where \fIany\fP of the bars in the
+template file match.
+.TP
+.BI \-br " d"
+`Brief mode' is designed to identify groups of tunes sharing common
+bars. In this mode, the program determines the number of all bars in each
+tune from the data file which are also present in the template
+file. If the number of common bars is greater than or equal to the
+value of the \fId\fP parameter, the program reports the tune and the
+number of common bars. Currently there is no user control of the
+matching criterion; the rhythm must match exactly, and the notes are
+transposed to suit the key signature.
+.TP
+.B \-c
+Display error and warning messages from the ABC parser (which are
+suppressed by default).
+.TP
+.B \-con
+Do a pitch contour match. In this case, the program uses the key
+signature only to indicate accidentals. The pitch contour is computed
+from the pitch difference (interval) between adjacent notes. That is,
+\fBC2 DE\fP, \fBc2 de\fP, and \fBG2 AB\fP all have the same pitch
+contour.
+.TP
+.B \-ign
+Ignore simple bars.
+.TP
+.B \-length_hist
+This does no matching at all but returns a histogram of the
+distribution of note lengths in the data file. The output looks like
+
+.RS
+length histogram
+.br
+12 100
+.br
+24 20
+.br
+36 6
+.br
+48 2
+.br
+72 4
+.RE
+
+.RS
+where a quarter note is 24 units, an eight note 12 units, a dotted
+half note 72 units etc.
+.RE
+.TP
+.B \-pitch_hist
+This does no matching at all but returns a histogram of the
+distribution of pitches in the data file. The output looks like
+
+.RS
+pitch histogram
+.br
+64 2
+.br
+66 9
+.br
+67 11
+...
+.RE
+
+.RS
+where the first number on each line is a MIDI note number and the
+second is a count of the number of times that note occurred.
+.RE
+.TP
+.B \-qnt
+Do a quantized pitch contour match. This works as described above for
+the \fB-con\fP option, but will also quantize the intervals as
+follows: Unison and semitone intervals are assigned value 0, major
+2nds to major 3rds value 1, and a perfect 4th or greater value
+2. Negative numbers are used for descending intervals.
+.TP
+.BI \-r " n"
+Resolution for matching. If the \fIn\fP parameter is zero, a perfect
+match must be found, meaning that the lengths of each note in a bar
+must match exactly in order to be reported. The larger the value of
+\fIn\fP, the looser the match will be. Note lengths are converted into
+temporal units where a quarter note is normally assigned a value of 24
+(therefore an eighth note has a value of 12, a sixteenth a value of 6,
+a half note a value of 48 etc.) If you specify a temporal resolution
+of 12, then the pitch values of the notes only need to match at the
+time units that are multiples of an eight note. This means that the
+program would match the two bars \fBC2 D2\fP and \fBC C D D\fP, as
+well as \fBC2 D2\fP and \fBC/D/C/D/D2\fP. By selecting a suitable
+value for \fIn\fP, you can search for matches only at the beginning of
+a measure or at the beginning of each beat.
+.TP
+.B \-v
+Run verbosely.
+.TP
+.B \-ver
+Display the program's version number.
+.SH LIMITATIONS
+.PP
+The program has some limitations. For example, the data file must
+contain bar lines, and tied notes cannot be longer than the equivalent
+of 8 quarter notes. A resolution (\fB-r\fP option) that is too small
+may cause some buffers to be exceeded. When there are differences of
+key signatures of more than 5 semitones, the program may transpose the
+notes in the wrong direction. Also, tunes with more than one key
+signature or time signature may not be processed correctly.
+.SH "SEE ALSO"
+.IR abc2midi "(1), " midi2abc "(1), " mftext "(1)"
+.SH AUTHOR
+This manual page was written by Anselm Lingnau <lingnau@debian.org>
+for the GNU/Linux system.
+.SH VERSION
+This manual page describes abcmatch version 1.42 as of 21 December 2006.
