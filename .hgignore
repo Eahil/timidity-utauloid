@@ -10,3 +10,4 @@ syntax: glob
 *.Po
 *.a
 *.orig
+*.diff.gz
