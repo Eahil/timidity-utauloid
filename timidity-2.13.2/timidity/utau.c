@@ -120,30 +120,39 @@ static int32 to_offset(int32 offset)
 
 
 
-void utau_init_sample(Sample* s,Riff* riff)
+void utau_init_sample(int i)
 {
+Sample* s=voicebank[i].sample;
+Riff* riff=voicebank[i].wavefile;
 //must be page aligned
 s->sample_rate= 44100;
 s->low_freq= 8176;
 s->high_freq= 1975533;
 s->data=riff->samples;
-s->data_length=riff->length;
-s->loop_start=riff->length-0x1000;
-s->loop_end = riff->length;
-int x=100696064/1024;
-printf("minimal %i\n",x);
-x=riff->length << FRACTION_BITS;
-printf("current %i\n",x);
-printf("fixed %i\n",FRACTION_BITS);		
-s->loop_start= x-0x1000;
-s->loop_end= x;
 s->loop_start= 0;
 s->loop_end= 0;
-s->data_length= x;
-
+s->data_length= (riff->length/2) << FRACTION_BITS;
+s->loop_end= (riff->length/2) << FRACTION_BITS;
+s->loop_start= (riff->length/2) << FRACTION_BITS-0x1000;
 s->root_freq= 492882;
-printf("root frq in hz: %f\n",((float)s->root_freq)/1000);
+
 s->panning= 63;
+s->volume= 20;
+s->modes= 3;
+s->data_alloced= 1;
+
+s->scale_freq= 70;
+s->scale_factor= 1024;
+s->inst_type= 1;
+s->sample_type= 1;
+s->chord = -1;
+s->root_freq_detected = freq_fourier(s, &(s->chord));
+s->root_freq=s->root_freq_detected*1000;
+
+//printf("root frq in hz: %f\n",((float)s->root_freq)/1000);
+
+
+
 //#need big numbers,required
 #if 0
 s->envelope_rate[0]= 178549877;
@@ -166,9 +175,7 @@ s->modenv_offset[1]= 1073709056;
 s->modenv_offset[2]= 107364352;
 #endif
 
-s->volume= 20;
-s->modes= 3;
-s->data_alloced= 1;
+
 #if 0
 s->high_vel= 127;
 s->cutoff_freq= 5371;//ignored
@@ -181,14 +188,6 @@ s->modenv_velf_bpo= 64;
 s->key_to_fc_bpo= 60;
 s->vel_to_fc_threshold= 64;
 #endif
-s->scale_freq= 70;
-s->scale_factor= 1024;
-s->inst_type= 1;
-#if 0
-s->sf_sample_index= 561;
-s->sf_sample_link= -1;
-#endif
-s->sample_type= 1;
 }
 
 
@@ -206,8 +205,8 @@ Riff * utau_read_riff(char* filename)
 	if(!(header.riff=='FFIR' && header.wave=='EVAW')) {printf("inVALID WAVE HEADER\n");exit(1);}
 	if(!(header.fmt_chunk_id==' tmf' && header.fmt_chunk_data_size==16)) {printf("inVALID format\n");exit(1);}
 	if(!(header.data_chunk=='atad')) {printf("inVALID data\n");exit(1);}
-	int size=header.data_chunk_size+0x1000;
-	if(size % 0x1000 !=0) size += (0x1000 - (size % 0x1000));
+	int size=header.data_chunk_size*2;
+	//if(size % 0x1000 !=0) size += (0x1000 - (size % 0x1000));
 	ret->samples=(short*)malloc(size);
 	memset(ret->samples,0,size);
 	l=fread(ret->samples,1,header.data_chunk_size,f);
@@ -265,7 +264,7 @@ void utau_init()
 	}
 	voicebank_count=i;
 
-
+	printf("loading voicebank...");fflush(stdout);
 	qsort(voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
 	for(i=0;i<voicebank_count;i++)
 	{
@@ -277,12 +276,15 @@ void utau_init()
 	{
 		voicebank[i].sample=(Sample*)malloc(sizeof(Sample));
 		memset(voicebank[i].sample,0,sizeof(Sample));
-		utau_init_sample(voicebank[i].sample,voicebank[i].wavefile);	
+		utau_init_sample(i);	
 		for(j=0;j<strlen(voicebank[i].name);j++)
 			if(voicebank[i].name[j]=='.') voicebank[i].name[j]=0;
+		
 	}
 	}
 	qsort(voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
+	printf("done\n");
+	
 }
 
 void utau_set_text(char* text)

@@ -1,4 +1,0 @@
-#!/bin/bash
-export UTAU=/home/sasukeuchiha/Music/Camila\ Melodia\ Act2
-gdb --args ./timidity/timidity --preserve-silence tests/test1.mid -Ow
-audacity tests/test1.wav
