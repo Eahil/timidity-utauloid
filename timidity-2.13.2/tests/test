@@ -1,5 +1,6 @@
 #!/bin/bash
 export UTAU=/home/sasukeuchiha/Music/Camila\ Melodia\ Act2
+#export UTAU=vox
 ../../abcmidi-20070318/abc2midi $1
 B=$(basename $1 .abc)
 mv $B\1.mid $B.mid

@@ -124,17 +124,13 @@ void utau_init_sample(int i)
 {
 Sample* s=voicebank[i].sample;
 Riff* riff=voicebank[i].wavefile;
-//must be page aligned
-s->sample_rate= 44100;
-s->low_freq= 8176;
-s->high_freq= 1975533;
+//s->sample_rate= 44100;
+s->sample_rate=riff->sample_rate;
 s->data=riff->samples;
-s->loop_start= 0;
-s->loop_end= 0;
 s->data_length= (riff->length/2) << FRACTION_BITS;
 s->loop_end= (riff->length/2) << FRACTION_BITS;
 s->loop_start= (riff->length/2) << FRACTION_BITS-0x1000;
-s->root_freq= 492882;
+
 
 s->panning= 63;
 s->volume= 20;
@@ -148,6 +144,8 @@ s->sample_type= 1;
 s->chord = -1;
 s->root_freq_detected = freq_fourier(s, &(s->chord));
 s->root_freq=s->root_freq_detected*1000;
+s->low_freq= s->root_freq/1.4;
+s->high_freq= s->root_freq*1.4;
 
 //printf("root frq in hz: %f\n",((float)s->root_freq)/1000);
 
@@ -292,6 +290,7 @@ void utau_set_text(char* text)
 	while(*text=='\\' || *text=='/' || *text==' ')
 	text++;
 	utau_text=text;
+	printf("oto %s\n",text);
 }
 
 char* utau_get_text()
