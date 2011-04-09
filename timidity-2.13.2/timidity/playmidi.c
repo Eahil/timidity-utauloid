@@ -5166,7 +5166,7 @@ static void play_midi_prescan(MidiEvent *ev)
 	  //ME_CHORUS_TEXT,ME_LYRIC,ME_MARKER,ME_INSERT_TEXT,ME_TEXT,ME_KARAOKE_LYRIC;
 	  //
 	  i = ev->a | ((int)ev->b << 8);
-	  if(utau) utau_set_text(event2string(i)+1);
+	  //if(utau) utau_set_text(event2string(i)+1);
 	  break;
 
 	  case ME_MAINVOLUME:
@@ -7898,6 +7898,8 @@ int play_event(MidiEvent *ev)
       case ME_TEXT:
       case ME_KARAOKE_LYRIC:
 	ctl_mode_event(CTLE_LYRIC, 1, i, 0);
+	 i = ev->a | ((int)ev->b << 8);
+	 if(utau) utau_set_text(event2string(i)+1);
 	break;
 
       case ME_GSLCD:

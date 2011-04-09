@@ -107,15 +107,36 @@ static void utau_write_wave(short* samples,int length,int sample_rate,char* file
 	fwrite(samples,1,length,f);
 	fclose(f);
 }
-
 #if 0
-
-#endif
-
 static int32 to_offset(int32 offset)
 {
 	return offset << 14;
 }
+#endif
+
+static int32 env_offset(int offset)
+{
+    return (int32)offset << (7+15);
+}
+
+/* calculate ramp rate in fractional unit;
+ * diff = 8bit, time = msec
+ */
+static int32 env_rate(int diff, double msec)
+{
+    double rate;
+
+    if(msec < 6)
+	msec = 6;
+    if(diff == 0)
+	diff = 255;
+    diff <<= (7+15);
+    rate = ((double)diff / play_mode->rate) * control_ratio * 1000.0 / msec;
+    if(fast_decay)
+	rate *= 2;
+    return (int32)rate;
+}
+
 
 
 
@@ -124,17 +145,30 @@ void utau_init_sample(int i)
 {
 Sample* s=voicebank[i].sample;
 Riff* riff=voicebank[i].wavefile;
-//s->sample_rate= 44100;
+int offset=voicebank[i].offset;
+int cutoff=voicebank[i].cutoff;
+int pre_utterance=voicebank[i].pre_utterance;
+int overlap=voicebank[i].overlap;
+int length = (riff->length/2);
 s->sample_rate=riff->sample_rate;
-s->data=riff->samples;
-s->data_length= (riff->length/2) << FRACTION_BITS;
-s->loop_end= (riff->length/2) << FRACTION_BITS;
-s->loop_start= (riff->length/2) << FRACTION_BITS-0x1000;
 
+if(pre_utterance > 0 || overlap >0 )
+printf("FIXME: %s: pre utterance: %i  overlap: %i\n",voicebank[i].name,pre_utterance,overlap);
+
+offset*=riff->sample_rate;
+offset/=1000;
+cutoff*=riff->sample_rate;
+cutoff/=1000;
+
+
+s->data_length =  length-offset-cutoff << FRACTION_BITS;
+s->loop_end    =  length-offset-cutoff << FRACTION_BITS;
+s->loop_start  = s->loop_end - 0x1000;
+s->data=riff->samples+offset;
 
 s->panning= 63;
 s->volume= 20;
-s->modes= 3;
+s->modes= 3;//FIXME use envelope
 s->data_alloced= 1;
 
 s->scale_freq= 70;
@@ -151,27 +185,27 @@ s->high_freq= s->root_freq*1.4;
 
 
 
-//#need big numbers,required
-#if 0
-s->envelope_rate[0]= 178549877;
-s->envelope_rate[1]= 50;
-s->envelope_rate[2]= 872;
-s->envelope_rate[3]= 3570229;
-s->envelope_rate[4]= 3570229;
-s->envelope_rate[5]= 3570229;
-s->envelope_offset[0]= 1073725440;
-s->envelope_offset[1]= 1073709056;
-s->envelope_offset[2]= 1048985600;
-s->modenv_rate[0]= 119030157;
-s->modenv_rate[1]= 1073741824;
-s->modenv_rate[2]= 419180;
-s->modenv_rate[3]= 2142581;
-s->modenv_rate[4]= 2142581;
-s->modenv_rate[5]= 2142581;
-s->modenv_offset[0]= 1073725440;
-s->modenv_offset[1]= 1073709056;
-s->modenv_offset[2]= 107364352;
-#endif
+	/* envelope (0,1:attack, 2:sustain, 3,4,5:release) */
+	s->modes |= MODES_ENVELOPE;
+	int rate1=env_offset(255);
+	int rate2=env_offset(64);
+	/* attack */
+	s->envelope_offset[0] = env_offset(255);
+	s->envelope_rate[0]   = rate1;	
+	s->envelope_offset[1] = s->envelope_offset[0];
+	s->envelope_rate[1]   = 0; /* skip this stage */
+	/* sustain */
+	s->envelope_offset[2] = s->envelope_offset[1];
+	s->envelope_rate[2]   = 0;
+	/* release */
+	s->envelope_offset[3] = env_offset(0);
+	s->envelope_rate[3]   = rate2;
+	s->envelope_offset[4] = s->envelope_offset[3];
+	s->envelope_rate[4]   = 0; /* skip this stage */
+	s->envelope_offset[5] = s->envelope_offset[4];
+	s->envelope_rate[5]   = 0; /* skip this stage, then the voice is
+				       disappeared */
+
 
 
 #if 0
@@ -228,6 +262,19 @@ static void parse_oto(char* oto,Oto* o)
 	for(i=0;i<1024;i++) if (oto[i]=='\r'|| oto[i]=='\n') oto[i]=0;
 	for(i=0;i<1024;i++) if (oto[i]=='='|| oto[i]==',') oto[i]=' ';
 	sscanf(oto,"%s %s %i %i %i %i %i",&o->name,&o->alias,&o->consonant,&o->offset,&o->cutoff,&o->pre_utterance,&o->overlap);
+	
+
+	
+	//pink part to be streched
+	//blue part end and beginning
+	//http://utau.wikia.com/wiki/File:How_To_Create_your_own_UTAU_voice_bank_rev0.40.pdf
+	//offset (left blank)
+	//consonant (fixed part) lengh
+	//cutoff (right blank)
+
+	//pre utterance,overlap TODO
+	//red line -> previous option, sound start
+	//green line -> overlap (vowals,n's,m's)
 }
 
 static int oto_compare_name (const void * a, const void * b)

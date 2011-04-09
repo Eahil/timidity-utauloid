@@ -484,6 +484,7 @@ static int32 env_rate(int diff, double msec)
 	diff = 255;
     diff <<= (7+15);
     rate = ((double)diff / play_mode->rate) * control_ratio * 1000.0 / msec;
+	//control_ratio // play_mode->rate := unknown
     if(fast_decay)
 	rate *= 2;
     return (int32)rate;
