@@ -1905,7 +1905,7 @@ static int find_samples(MidiEvent *e, int *vlist)
 		note = (note < 0) ? 0 : ((note > 127) ? 127 : note);
 	}
 	nv = select_play_sample(ip->sample, ip->samples, &note, vlist, e);
-	if(utau) return nv;
+	
 	/* Replace the sample if the sample is cached. */
 	if (! prescanning_flag) {
 		if (ip->sample->note_to_use)
@@ -5095,10 +5095,12 @@ static void play_midi_prescan(MidiEvent *ev)
 	{
 	  case ME_NOTEON:
 		note_on_prescan(ev);
+		if(utau) utau_prescan_on(ev->time);
 	    break;
 
 	  case ME_NOTEOFF:
 	    resamp_cache_refer_off(ch, MIDI_EVENT_NOTE(ev), ev->time);
+		if(utau) utau_prescan_off(ev->time);
 	    break;
 
 	  case ME_PORTAMENTO_TIME_MSB:
@@ -5166,7 +5168,7 @@ static void play_midi_prescan(MidiEvent *ev)
 	  //ME_CHORUS_TEXT,ME_LYRIC,ME_MARKER,ME_INSERT_TEXT,ME_TEXT,ME_KARAOKE_LYRIC;
 	  //
 	  i = ev->a | ((int)ev->b << 8);
-	  //if(utau) utau_set_text(event2string(i)+1);
+	  if(utau) utau_prescan_lyr(event2string(i)+1);
 	  break;
 
 	  case ME_MAINVOLUME:
@@ -6747,6 +6749,7 @@ static void do_compute_data_midi(int32 count)
 			}
 
 			if(!IS_SET_CHANNELMASK(channel_mute, voice[i].channel)) {
+				utau_mix(voice[i].sample,i);
 				mix_voice(vpb, i, count);
 			} else {
 				free_voice(i);
@@ -7546,6 +7549,7 @@ int play_event(MidiEvent *ev)
     if(cet > current_sample)
     {
 	int rc;
+	//FIXME: utau needs event timing
 
 
     if(midi_streaming!=0){
@@ -8276,11 +8280,13 @@ static int play_midi(MidiEvent *eventlist, int32 samples)
     {
 	midi_restart_time = 1;
 	rc = play_event(current_event);
+	if(utau) printf("UTAU handle event %i\n",current_event);
 	if(rc != RC_NONE)
 	    break;
 	if (midi_restart_time)    /* don't skip the first event if == 0 */
 	    current_event++;
     }
+    printf("UTAU did handle events %i\n",current_event);
 
     if(play_count++ > 3)
     {

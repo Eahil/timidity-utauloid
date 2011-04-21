@@ -1,7 +1,0 @@
-#!/bin/bash
-../../abcmidi-20070318/abc2midi $1
-B=$(basename $1 .abc)
-mv $B\1.mid $B.mid
-rm $B.wav
-gdb --args ../timidity/timidity $B.mid -Ow
-audacity $B.wav

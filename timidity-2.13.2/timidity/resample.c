@@ -1333,6 +1333,9 @@ resample_t *resample_voice(int v, int32 *countptr)
 	return resample_buffer;
     }
 
+	//TODO: add debugging output in utau,
+	//		sustain and loop is handled here
+
     mode = vp->sample->modes;
     if((mode & MODES_LOOPING) &&
        ((mode & MODES_ENVELOPE) ||

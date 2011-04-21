@@ -1,0 +1,4 @@
+#!/bin/bash
+export LANG=ja_JP
+cd ~/.wine/drive_c/Program\ Files/UTAU/
+wine ~/.wine/drive_c/Program\ Files/UTAU/utau.exe

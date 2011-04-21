@@ -40,7 +40,7 @@
 #error utau does not work with lookup hack
 #endif
 
-static char* utau_text="a";
+static char* utau_text="o";
 
 
 struct riff_header
@@ -146,6 +146,7 @@ void utau_init_sample(int i)
 Sample* s=voicebank[i].sample;
 Riff* riff=voicebank[i].wavefile;
 int offset=voicebank[i].offset;
+int consonant=voicebank[i].offset;
 int cutoff=voicebank[i].cutoff;
 int pre_utterance=voicebank[i].pre_utterance;
 int overlap=voicebank[i].overlap;
@@ -155,14 +156,18 @@ s->sample_rate=riff->sample_rate;
 if(pre_utterance > 0 || overlap >0 )
 printf("FIXME: %s: pre utterance: %i  overlap: %i\n",voicebank[i].name,pre_utterance,overlap);
 
+//offset+=consonant;
 offset*=riff->sample_rate;
 offset/=1000;
 cutoff*=riff->sample_rate;
 cutoff/=1000;
 
+offset=0;//ignore offset
+cutoff=0;
 
-s->data_length =  length-offset-cutoff << FRACTION_BITS;
-s->loop_end    =  length-offset-cutoff << FRACTION_BITS;
+
+s->data_length =  (length-offset-cutoff) << FRACTION_BITS;
+s->loop_end    =  (length-offset-cutoff) << FRACTION_BITS;
 s->loop_start  = s->loop_end - 0x1000;
 s->data=riff->samples+offset;
 
@@ -186,9 +191,11 @@ s->high_freq= s->root_freq*1.4;
 
 
 	/* envelope (0,1:attack, 2:sustain, 3,4,5:release) */
+#if 1
 	s->modes |= MODES_ENVELOPE;
 	int rate1=env_offset(255);
-	int rate2=env_offset(64);
+	int rate2=env_offset(255);
+	int rate3=env_offset(200);
 	/* attack */
 	s->envelope_offset[0] = env_offset(255);
 	s->envelope_rate[0]   = rate1;	
@@ -196,7 +203,7 @@ s->high_freq= s->root_freq*1.4;
 	s->envelope_rate[1]   = 0; /* skip this stage */
 	/* sustain */
 	s->envelope_offset[2] = s->envelope_offset[1];
-	s->envelope_rate[2]   = 0;
+	s->envelope_rate[2]   = rate3;//do not skip sustain
 	/* release */
 	s->envelope_offset[3] = env_offset(0);
 	s->envelope_rate[3]   = rate2;
@@ -205,6 +212,30 @@ s->high_freq= s->root_freq*1.4;
 	s->envelope_offset[5] = s->envelope_offset[4];
 	s->envelope_rate[5]   = 0; /* skip this stage, then the voice is
 				       disappeared */
+#endif
+	s->modes |= MODES_SUSTAIN;
+	s->modes |= MODES_LOOPING;
+#if BROKEN
+/* Remove abnormal loops which cause pop noise
+		 * in long sustain stage
+		 */
+		if (! (sp->modes & MODES_LOOPING)) {
+			sp->loop_start = sp->data_length - 1;
+			sp->loop_end = sp->data_length;
+			sp->data[sp->data_length - 1] = 0;
+		}
+
+	
+
+	int loop_start=(offset+consonant)*s->sample_rate/1000;
+	int length_msec=length/s->sample_rate;
+	int loop_end=loop_start+16;
+
+
+	s->loop_end    =  loop_start << FRACTION_BITS;
+	s->loop_start  =  loop_end << FRACTION_BITS;
+#endif
+	
 
 
 
@@ -337,7 +368,6 @@ void utau_set_text(char* text)
 	while(*text=='\\' || *text=='/' || *text==' ')
 	text++;
 	utau_text=text;
-	printf("oto %s\n",text);
 }
 
 char* utau_get_text()
@@ -350,13 +380,52 @@ Sample* utau_get_sample(int* count)
 	Oto* o=bsearch(utau_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
 	if(o==0)
 	{
+	printf("[oto not found %s]\n",utau_text);
 	*count=0;
 	return 0;
 	}
 	else
 	{
 	*count=1;
+	if(o->consonant||o->pre_utterance||o->overlap);
+	printf("Warning: ingnoring %i %i %i for %s\n",o->consonant,o->pre_utterance,o->overlap,utau_text);
 	return o->sample;
 	}
+}
+
+int prescan_start;
+void utau_prescan_on(int t)
+{
+	prescan_start=t;
+}
+void utau_prescan_off(int t)
+{
+	if(t==0) return;
+	int length=t-prescan_start;
+	if(length<22050) printf("UTAU prescan: %i %s is to shoort\n",length,utau_text);
+	//1/4 ~ 22050
+	//1/8 ~ 11025
+}
+void utau_prescan_lyr(char* t)
+{
+	utau_text=t;
+}
+
+void utau_mix(Sample* samp,int i)
+{
+#if 0
+	int start=samp->loop_start >> FRACTION_BITS;
+	int end=samp->loop_end >> FRACTION_BITS;
+	//int length=samp->data_length >> FRACTION_BITS;
+	int length=samp->data_length;
+	if(samp->modes & MODES_LOOPING)
+	{
+	 printf("UTAU mix %i %i %i\n",start,end,i);
+	 printf("modes looping\n");
+	 utau_write_wave(samp->data+start,length-start-end,samp->sample_rate,"/tmp/test.wav");
+	 exit(0);
+        }
+	//exit(0);
+#endif
 }
 
