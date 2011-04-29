@@ -1,0 +1,51 @@
+in find_samples:
+	utau_get_sample
+	select_play_sample ?pure_intonations
+		find_voice
+		ASSIGN voice[i]
+
+find_samples
+	new_vidq
+
+	recompute_bank_parameter(ch, note);
+	recompute_channel_filter(ch, note);
+
+	fx
+	legato = 1
+
+play_midi
+	LOOP:	play_event
+	      compute_data
+		SWITCH:
+			note_on
+			note_off
+			lyric
+
+compute_data
+	flush
+	do_compute_data
+		do_compute_data_midi
+			LOOP voices
+			mix voices
+			reverb
+  SOMEWHERE HERE set last sample time
+	channel[voice[i].channel].lasttime = current_sample + count;
+
+
+----------------------------------------------------------------
+
+	mix_voice:
+		buffer,voiceindex,count
+
+			resample voice: handle everthing else
+			filter
+			mix master
+
+	porta_resample_voice
+	normal_resample_voice		rs_plain/loop/bidir
+	vib_resample_voice 
+			--> interpolate
+	
+	//reverse eng how utau resampler is controled
+		
+			

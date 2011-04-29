@@ -58,6 +58,8 @@
 #include "freq.h"
 #include "quantity.h"
 
+#include "utau.h"
+
 extern void convert_mod_to_midi_file(MidiEvent * ev);
 
 extern char* utau;
@@ -5095,12 +5097,12 @@ static void play_midi_prescan(MidiEvent *ev)
 	{
 	  case ME_NOTEON:
 		note_on_prescan(ev);
-		if(utau) utau_prescan_on(ev->time);
+		if(utau) utau_prescan_on(ev);
 	    break;
 
 	  case ME_NOTEOFF:
 	    resamp_cache_refer_off(ch, MIDI_EVENT_NOTE(ev), ev->time);
-		if(utau) utau_prescan_off(ev->time);
+		if(utau) utau_prescan_off(ev);
 	    break;
 
 	  case ME_PORTAMENTO_TIME_MSB:
@@ -6749,7 +6751,7 @@ static void do_compute_data_midi(int32 count)
 			}
 
 			if(!IS_SET_CHANNELMASK(channel_mute, voice[i].channel)) {
-				utau_mix(voice[i].sample,i);
+				//utau_mix(&voice[i],i);
 				mix_voice(vpb, i, count);
 			} else {
 				free_voice(i);
@@ -7542,6 +7544,9 @@ int play_event(MidiEvent *ev)
     current_event = ev;
     cet = MIDI_EVENT_TIME(ev);
 
+    //printf("UTAU t in secs: %i %i\n",(cet - current_sample) / play_mode->rate,(cet) / play_mode->rate);
+	//if cet >= utau_dietime(); ->let the voice die	
+
     if(ctl->verbosity >= VERB_DEBUG_SILLY)
 	ctl->cmsg(CMSG_INFO, VERB_DEBUG_SILLY,
 		  "Midi Event %d: %s %d %d %d", cet,
@@ -7550,7 +7555,8 @@ int play_event(MidiEvent *ev)
     {
 	int rc;
 	//FIXME: utau needs event timing
-
+	
+	//if(utau) utau_time(cet,current_sample);
 
     if(midi_streaming!=0){
     	if ( (cet - current_sample) * 1000 / play_mode->rate > stream_max_compute ) {
@@ -8280,13 +8286,12 @@ static int play_midi(MidiEvent *eventlist, int32 samples)
     {
 	midi_restart_time = 1;
 	rc = play_event(current_event);
-	if(utau) printf("UTAU handle event %i\n",current_event);
 	if(rc != RC_NONE)
 	    break;
 	if (midi_restart_time)    /* don't skip the first event if == 0 */
 	    current_event++;
     }
-    printf("UTAU did handle events %i\n",current_event);
+    
 
     if(play_count++ > 3)
     {
