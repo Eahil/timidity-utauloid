@@ -73,9 +73,9 @@
 #endif
 #include "utau.h"
 
-//TODO lazy oto loading and note adjusting
+//TODO and note adjusting
 
-static char* utau_text="o";
+static char* utau_text="default";
 
 
 struct riff_header
@@ -123,9 +123,11 @@ typedef struct _Note
 Oto voicebank[4000];
 int voicebank_count;
 
+#if 0
 Note utau_notes[4000];
 int utau_note_index=0;
 int utau_note_count=0;
+#endif
 
 extern char* utau;//the utauloid voicebank path
 
@@ -215,8 +217,8 @@ void utau_init_sample(Oto* o)
     int length = (riff->length/2);
     s->sample_rate=riff->sample_rate;
 
-    //if(pre_utterance > 0 || overlap >0 )
-    printf("FIXME: %s: pre utterance: %i  overlap: %i offset: %i consonant:%i \n",o->name,pre_utterance,overlap,offset,consonant);
+    if(pre_utterance > 0 || overlap >0 )
+    printf("WARNING OTO IGNORED: %s: pre utterance: %i  overlap: %i offset: %i consonant:%i \n",o->name,pre_utterance,overlap,offset,consonant);
 
     //offset+=consonant;
     offset*=riff->sample_rate;
@@ -242,7 +244,7 @@ void utau_init_sample(Oto* o)
 
     s->scale_freq= 70;
     s->scale_factor= 1024;
-    s->inst_type= 1;
+    s->inst_type= INST_PCM;//not a soundfont
     s->sample_type= 1;
     s->chord = -1;
     s->root_freq_detected = freq_fourier(s, &(s->chord));
@@ -261,7 +263,8 @@ void utau_init_sample(Oto* o)
     s->modes |= MODES_ENVELOPE;
     int rate1=env_offset(255);
     int rate2=env_offset(255);
-    int rate3=env_offset(100);
+    int rate3=env_offset(0);
+    int endoffs=env_offset(255);	
     /* attack */
     s->envelope_offset[0] = env_offset(255);
     s->envelope_rate[0]   = rate1;
@@ -271,13 +274,12 @@ void utau_init_sample(Oto* o)
     s->envelope_offset[2] = s->envelope_offset[1];
     s->envelope_rate[2]   = 0;
     /* release */
-    s->envelope_offset[3] = env_offset(0);
-    s->envelope_rate[3]   = calc_rate(255, 45);//FIXME
-    s->envelope_offset[4] = s->envelope_offset[3];
-    s->envelope_rate[4]   = 0; /* skip this stage */
-    s->envelope_offset[5] = s->envelope_offset[4];
-    s->envelope_rate[5]   = 0; /* skip this stage, then the voice is
-				       disappeared */
+    s->envelope_offset[3] = endoffs;
+    s->envelope_rate[3] = rate3;
+    s->envelope_offset[4] = endoffs;
+    s->envelope_rate[4] = 0;
+    s->envelope_offset[5] = endoffs;
+    s->envelope_rate[5] = 0;
 #endif
     //s->modes |= MODES_SUSTAIN;
     //s->modes |= MODES_LOOPING;
@@ -386,7 +388,6 @@ void utau_init()
     }
     voicebank_count=i;
 
-    printf("loading voicebank...");fflush(stdout);
     qsort(voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
     for(i=0;i<voicebank_count;i++)
     {
@@ -406,12 +407,12 @@ void utau_init()
 	}
     }
     qsort(voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
-    printf("done\n");
 
 }
 
 void utau_set_text(char* text)
 {
+    if(strcmp(text,"(Setup)")==0) return;	
     while(*text=='\\' || *text=='/' || *text==' ')
 	text++;
     utau_text=text;
@@ -425,9 +426,9 @@ char* utau_get_text()
 
 Sample* utau_get_sample(int* count)
 {
-
-    printf("UTAU: set text %s %s %i %i %i\n",utau_text,utau_notes[utau_note_index].text,utau_notes[utau_note_index].start,utau_notes[utau_note_index].end,utau_note_index);
-    utau_note_index++;
+   
+   // printf("UTAU: set text %s %s %i %i %i\n",utau_text,utau_notes[utau_note_index].text,utau_notes[utau_note_index].start,utau_notes[utau_note_index].end,utau_note_index);
+   // utau_note_index++;
     Oto* o=bsearch(utau_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
     if(o==0)
     {
@@ -438,41 +439,58 @@ Sample* utau_get_sample(int* count)
     else
     {
 	*count=1;
-	if(o->consonant||o->pre_utterance||o->overlap);
-	printf("Warning: ingnoring %i %i %i for %s\n",o->consonant,o->pre_utterance,o->overlap,utau_text);
+	//if(o->consonant||o->pre_utterance||o->overlap);
+	//printf("Warning: ingnoring %i %i %i for %s\n",o->consonant,o->pre_utterance,o->overlap,utau_text);
 	return o->sample;
     }
 }
 
-int prescan_start;
+MidiEvent* start_event=0;
+static int lyr_count=0;
+static int note_count=0;
+static char* utau_prescan_text;
+//MidiEvent* setup_event=0;
 void utau_prescan_on(MidiEvent* e)
 {
-    prescan_start=e->time;
+    start_event=e;
+    printf("%i note on %i note_count \n",MIDI_EVENT_NOTE(e),note_count);	
 }
 void utau_prescan_off(MidiEvent* e)
 {
-    int t=e->time;
-    //if(t==0) return;
-    int length=t-prescan_start;
-    if(length<22050) printf("UTAU prescan: %i %s is to shoort\n",length,utau_text);
-
-    utau_notes[utau_note_count].start=prescan_start;
-    utau_notes[utau_note_count].end=t;
-    utau_notes[utau_note_count].text=strdup(utau_text);
-    utau_note_count++;
-
-    //e->time-=500;
-
-    //1/4 ~ 22050
-    //1/8 ~ 11025
+    note_count++;
+    if(note_count>lyr_count) 
+    {
+	printf("missing lyrics for note %i\n",note_count);
+	exit(0);
+    }
+    printf("%i note off\n",MIDI_EVENT_NOTE(e));		
+    //int length=t-prescan_start;
+    //if(length<22050) printf("UTAU prescan: %i %s is to shoort\n",length,utau_text);
+	
 }
 void utau_prescan_lyr(char* t)
 {
-    utau_text=t;
-    Oto* o=bsearch(utau_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
-    if(o) utau_init_sample(o);
-    else printf("bad sample\n");
+    utau_prescan_text=t;
+    if(strcmp(t,"(Setup)"))
+    {	
+    Oto* o=bsearch(utau_prescan_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
+    if(o)
+        utau_init_sample(o);
+    else
+	printf("bad sample\n");
+    }
+    lyr_count++;	
 
+}
+static int utau_last_voice=1;
+void utau_finnish_note(int i)
+{
+	if(utau_last_voice==i)
+	{
+	//voice[i].cache=NULL;//leak ?
+	printf("BAD OVERLAP %i\n",i);
+	}
+	utau_last_voice=i;
 }
 
 

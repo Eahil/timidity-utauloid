@@ -9,4 +9,6 @@ void utau_prescan_on(MidiEvent* e);	//prescan << oto.ini
 void utau_prescan_off(MidiEvent* e);
 void utau_prescan_lyr(char* t);
 
+void utau_finnish_note(int i);
+
 #endif

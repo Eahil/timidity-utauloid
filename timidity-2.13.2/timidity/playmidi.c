@@ -60,6 +60,8 @@
 
 #include "utau.h"
 
+static int utau_nc=0;
+
 extern void convert_mod_to_midi_file(MidiEvent * ev);
 
 extern char* utau;
@@ -1907,7 +1909,7 @@ static int find_samples(MidiEvent *e, int *vlist)
 		note = (note < 0) ? 0 : ((note > 127) ? 127 : note);
 	}
 	nv = select_play_sample(ip->sample, ip->samples, &note, vlist, e);
-	
+	if(utau) return nv;
 	/* Replace the sample if the sample is cached. */
 	if (! prescanning_flag) {
 		if (ip->sample->note_to_use)
@@ -2145,10 +2147,12 @@ static int find_voice(MidiEvent *e)
 	for (i = 0; i < upper_voices; i++)
 		if (voice[i].channel == ch && voice[i].note == note)
 			voice[i].proximate_flag = 0;
+        printf("voice: %i %i\n",lowest,upper_voices);
 	if (lowest != -1)	/* Found a free voice. */
 		return lowest;
 	if (upper_voices < voices)
 		return upper_voices++;
+	printf("reduce\n");
 	return reduce_voice();
 }
 
@@ -2404,8 +2408,11 @@ static void start_note(MidiEvent *e, int i, int vid, int cnt)
 
 static void finish_note(int i)
 {
+    if(utau) utau_finnish_note(i);
+    //if(0)//hack	
     if (voice[i].sample->modes & MODES_ENVELOPE)
     {
+		printf("kill voice %i\n",i);
 		/* We need to get the envelope out of Sustain stage. */
 		/* Note that voice[i].envelope_stage < EG_GUS_RELEASE1 */
 		voice[i].status = VOICE_OFF;
@@ -2416,13 +2423,15 @@ static void finish_note(int i)
 		apply_modulation_envelope(i);
 		apply_envelope_to_amp(i);
 		ctl_note_event(i);
-	}
+    }
     else
     {
-		if(current_file_info->pcm_mode != PCM_MODE_NON)
+		//if(1)
+		if(current_file_info->pcm_mode != PCM_MODE_NON)//utau note off hack
 		{
 			free_voice(i);
 			ctl_note_event(i);
+			printf("utau free voice %i\n",i);
 		}
 		else
 		{
@@ -2434,6 +2443,7 @@ static void finish_note(int i)
 			voice[i].status = VOICE_OFF;
 			ctl_note_event(i);
 			}
+			printf("voice off\n");
 		}
     }
 }
@@ -2978,6 +2988,7 @@ static void note_off(MidiEvent *e)
   if ((vid = last_vidq(ch, note)) == -1)
       return;
   sustain = channel[ch].sustain;
+  //if(utau) sustain=0;//disable sustain for now,does not work
   for (i = 0; i < uv; i++)
   {
       if(voice[i].status == VOICE_ON &&
@@ -6751,7 +6762,6 @@ static void do_compute_data_midi(int32 count)
 			}
 
 			if(!IS_SET_CHANNELMASK(channel_mute, voice[i].channel)) {
-				//utau_mix(&voice[i],i);
 				mix_voice(vpb, i, count);
 			} else {
 				free_voice(i);
@@ -7544,9 +7554,6 @@ int play_event(MidiEvent *ev)
     current_event = ev;
     cet = MIDI_EVENT_TIME(ev);
 
-    //printf("UTAU t in secs: %i %i\n",(cet - current_sample) / play_mode->rate,(cet) / play_mode->rate);
-	//if cet >= utau_dietime(); ->let the voice die	
-
     if(ctl->verbosity >= VERB_DEBUG_SILLY)
 	ctl->cmsg(CMSG_INFO, VERB_DEBUG_SILLY,
 		  "Midi Event %d: %s %d %d %d", cet,
@@ -7554,9 +7561,6 @@ int play_event(MidiEvent *ev)
     if(cet > current_sample)
     {
 	int rc;
-	//FIXME: utau needs event timing
-	
-	//if(utau) utau_time(cet,current_sample);
 
     if(midi_streaming!=0){
     	if ( (cet - current_sample) * 1000 / play_mode->rate > stream_max_compute ) {
@@ -7600,6 +7604,7 @@ int play_event(MidiEvent *ev)
     {
 	/* MIDI Events */
       case ME_NOTEOFF:
+	printf("note off %i\n",ev->time);
 	note_off(ev);
 	break;
 
@@ -7907,9 +7912,9 @@ int play_event(MidiEvent *ev)
       case ME_INSERT_TEXT:
       case ME_TEXT:
       case ME_KARAOKE_LYRIC:
-	ctl_mode_event(CTLE_LYRIC, 1, i, 0);
 	 i = ev->a | ((int)ev->b << 8);
 	 if(utau) utau_set_text(event2string(i)+1);
+	 else ctl_mode_event(CTLE_LYRIC, 1, i, 0);
 	break;
 
       case ME_GSLCD:
