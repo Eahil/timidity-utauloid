@@ -1,3 +1,4 @@
 #!/bin/bash
 export UTAU=~/.wine/drive_c/Program\ Files/UTAU/voice/Camila\ Melodia\ Act2/
-./timidity/timidity --preserve-silence $1 $2 --output-mono
+./timidity/timidity --preserve-silence $1 -Ow
+# --output-mono

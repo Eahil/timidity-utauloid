@@ -99,6 +99,8 @@ int min_sustain_time = 5000;
 
 static mix_t filter_buffer[AUDIO_BUFFER_SIZE];
 
+extern char* utau;
+
 /**************** interface function ****************/
 void mix_voice(int32 *buf, int v, int32 c)
 {
@@ -1492,6 +1494,8 @@ int recompute_envelope(int v)
 	 *  time it will take to decay a note to zero.
 	 * 2000-3000 msec seem to be decent values to use.
 	 */
+	
+	//if(utau) return next_stage(v);
 	if (stage == EG_GUS_RELEASE1 && vp->sample->modes & MODES_ENVELOPE
 	    && vp->status & (VOICE_ON | VOICE_SUSTAINED)) {
 
@@ -1705,10 +1709,10 @@ static inline void update_tremolo(int v)
 }
 
 int apply_envelope_to_amp(int v)
-{
+{//this func frees the voice
 	Voice *vp = &voice[v];
 	FLOAT_T lamp = vp->left_amp, ramp,
-		*v_table = vp->sample->inst_type == INST_SF2 ? sb_vol_table : vol_table;
+		*v_table = vp->sample->inst_type == INST_SF2 ? sb_vol_table : vol_table;//exponential
 	int32 la, ra;
 	
 	if (vp->panned == PANNED_MYSTERY) {
@@ -1731,6 +1735,7 @@ int apply_envelope_to_amp(int v)
 				vp->envelope_volume >> 20];
 			lamp *= vp->last_envelope_volume;
 			ramp *= vp->last_envelope_volume;
+			if(utau && vp->envelope_stage>3) ramp*=0;
 		}
 		la = TIM_FSCALE(lamp, AMP_BITS);
 		if (la > MAX_AMP_VALUE)
@@ -1738,14 +1743,27 @@ int apply_envelope_to_amp(int v)
 		ra = TIM_FSCALE(ramp, AMP_BITS);
 		if (ra > MAX_AMP_VALUE)
 			ra = MAX_AMP_VALUE;
+		static int utau_count=0;//remove this hack
+		//utau_count++;
+		if(utau && (utau_count>50)) 
+		{
+			printf("should free voice utau\n");
+			free_voice(v);
+			utau_count=0;
+			ctl_note_event(v);
+			return 1;
+		}
 		if ((vp->status & (VOICE_OFF | VOICE_SUSTAINED))
 				&& (la | ra) <= 0) {
+			printf("should free voice\n");
 			free_voice(v);
 			ctl_note_event(v);
 			return 1;
 		}
+		
 		vp->left_mix = FINAL_VOLUME(la);
 		vp->right_mix = FINAL_VOLUME(ra);
+		printf("mixes %i %i\n",vp->left_mix,vp->right_mix);
 	} else {
 		if (vp->tremolo_phase_increment)
 			lamp *= vp->tremolo_volume;

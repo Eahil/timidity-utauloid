@@ -6,13 +6,16 @@
     Copyright (C) 1995 Tuukka Toivonen <tt@cgs.fi>
 
     Special Thanks to Ameya/Ayame for creating UTAU.
-	UTAU was not disassembled by me as the usage policy and copyright laws forbid this.
+    resampler.exe is similar to resample.c, it changes the pitch
+    wavetool.exe is similar to mix.c, it concatenates and blends the wave files.
+    UTAU.exe is the gui frontend, a GNU GPL'ed replacement has to be written.
+    This patched version of TiMidiy++ can sing any midi file exported by UTAU.
+    The documentation written by Kirk at
+    http://utau.wikia.com/wiki/File:How_To_Create_your_own_UTAU_voice_bank_rev0.40.pdf
+    was useful at writing this file.
+    I wrote this program because UTAU does not work well on Unix Systems(broken wavetool) and European system locales.
 
-	see http://utau.wikia.com/wiki/UTAU_wiki:UTAU_Usage_Policy for more infomation.
-
-	Instead the documentation written by Kirk at
-	http://utau.wikia.com/wiki/File:How_To_Create_your_own_UTAU_voice_bank_rev0.40.pdf
-	was useful at writing this file.
+    
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -202,7 +205,8 @@ static int32 calc_rate(int diff, double msec)
 }
 
 
-
+//see playmidi.h for Voice
+//see intrum.h for Instrum
 
 void utau_init_sample(Oto* o)
 {
@@ -238,13 +242,14 @@ void utau_init_sample(Oto* o)
     s->data=riff->samples+offset;
 
     s->panning= 63;
-    s->volume= 20;
+    s->volume= 10;
     s->modes= 3;//FIXME use envelope
     s->data_alloced= 1;
 
     s->scale_freq= 70;
     s->scale_factor= 1024;
-    s->inst_type= INST_PCM;//not a soundfont
+    //s->inst_type= INST_PCM;//not a soundfont
+    s->inst_type=INST_SF2;//does not affect release stage
     s->sample_type= 1;
     s->chord = -1;
     s->root_freq_detected = freq_fourier(s, &(s->chord));
@@ -257,32 +262,38 @@ void utau_init_sample(Oto* o)
     //printf("root frq in hz: %f\n",((float)s->root_freq)/1000);
 
 
-
+//rate > OFFSET_MAX : instant
     /* envelope (0,1:attack, 2:sustain, 3,4,5:release) */
 #if 1
+#define OFFSET_MAX (0x3FFFFFFFL)
     s->modes |= MODES_ENVELOPE;
-    int rate1=env_offset(255);
-    int rate2=env_offset(255);
-    int rate3=env_offset(0);
-    int endoffs=env_offset(255);	
+    int endoffs=env_offset(1);	
     /* attack */
     s->envelope_offset[0] = env_offset(255);
-    s->envelope_rate[0]   = rate1;
+    s->envelope_rate[0]   = OFFSET_MAX+1;
     s->envelope_offset[1] = env_offset(255);
-    s->envelope_rate[1]   = 0; /* skip this stage */
+    s->envelope_rate[1]   = OFFSET_MAX+1; /* skip this stage */
     /* sustain */
-    s->envelope_offset[2] = s->envelope_offset[1];
+    s->envelope_offset[2] = s->envelope_offset[1]*0;
     s->envelope_rate[2]   = 0;
     /* release */
     s->envelope_offset[3] = endoffs;
-    s->envelope_rate[3] = rate3;
+    s->envelope_rate[3] = OFFSET_MAX+1;	
     s->envelope_offset[4] = endoffs;
-    s->envelope_rate[4] = 0;
+    s->envelope_rate[4] = OFFSET_MAX+1;
     s->envelope_offset[5] = endoffs;
-    s->envelope_rate[5] = 0;
+    s->envelope_rate[5] = OFFSET_MAX+1;
 #endif
+    //envelope_velf == envelope velocity-follow
+ 	
     //s->modes |= MODES_SUSTAIN;
     //s->modes |= MODES_LOOPING;
+    //vp->envelope_increment = (int32)rate;
+    //vp->envelope_target = offset;
+    //vp->envelope_keyf	//not for drums
+
+//rate = tan(angle)
+//offset = volume
 
 
 
@@ -301,8 +312,8 @@ void utau_init_sample(Oto* o)
 #endif
 }
 
-
-
+//The Shanghai Restoration Project - Miss Shanghai
+//The Golden Eckats - Schrauben Drehn, Muddern Drehn
 Riff * utau_read_riff(char* filename)
 {
 
@@ -446,14 +457,17 @@ Sample* utau_get_sample(int* count)
 }
 
 MidiEvent* start_event=0;
+MidiEvent* setup_start_event=0;
+MidiEvent* setup_stop_event=0;
 static int lyr_count=0;
 static int note_count=0;
-static char* utau_prescan_text;
+static char* utau_prescan_text=0;
+static int is_utau_midifile=0;
 //MidiEvent* setup_event=0;
 void utau_prescan_on(MidiEvent* e)
 {
-    start_event=e;
-    printf("%i note on %i note_count \n",MIDI_EVENT_NOTE(e),note_count);	
+    if(e->time==0) setup_start_event=e;	
+    start_event=e;	
 }
 void utau_prescan_off(MidiEvent* e)
 {
@@ -463,13 +477,25 @@ void utau_prescan_off(MidiEvent* e)
 	printf("missing lyrics for note %i\n",note_count);
 	exit(0);
     }
-    printf("%i note off\n",MIDI_EVENT_NOTE(e));		
-    //int length=t-prescan_start;
-    //if(length<22050) printf("UTAU prescan: %i %s is to shoort\n",length,utau_text);
+    if(e->time==0) setup_stop_event=e;
+    else
+    {
+	if(is_utau_midifile==1)
+	{
+ 	setup_start_event->type=ME_PROGRAM;
+	setup_stop_event->type=ME_PROGRAM;
+	is_utau_midifile=2;
+	}
+	//utau produces a setup event
+    }	
+    	
+    int p=2000;
+    //if(e->time>p) e->time-=p;
 	
 }
 void utau_prescan_lyr(char* t)
 {
+
     utau_prescan_text=t;
     if(strcmp(t,"(Setup)"))
     {	
@@ -479,18 +505,15 @@ void utau_prescan_lyr(char* t)
     else
 	printf("bad sample\n");
     }
+    else is_utau_midifile=1;	
     lyr_count++;	
 
 }
-static int utau_last_voice=1;
-void utau_finnish_note(int i)
-{
-	if(utau_last_voice==i)
-	{
-	//voice[i].cache=NULL;//leak ?
-	printf("BAD OVERLAP %i\n",i);
-	}
-	utau_last_voice=i;
-}
+
+/////
+//#0  0x0805b267 in recompute_envelope ()
+//#1  0x08071b31 in start_note ()
+//#2  0x08077acc in play_event ()
+//#3  0x0807948a in play_midi_file ()
 
 

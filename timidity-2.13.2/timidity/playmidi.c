@@ -60,8 +60,6 @@
 
 #include "utau.h"
 
-static int utau_nc=0;
-
 extern void convert_mod_to_midi_file(MidiEvent * ev);
 
 extern char* utau;
@@ -2147,12 +2145,10 @@ static int find_voice(MidiEvent *e)
 	for (i = 0; i < upper_voices; i++)
 		if (voice[i].channel == ch && voice[i].note == note)
 			voice[i].proximate_flag = 0;
-        printf("voice: %i %i\n",lowest,upper_voices);
 	if (lowest != -1)	/* Found a free voice. */
 		return lowest;
 	if (upper_voices < voices)
 		return upper_voices++;
-	printf("reduce\n");
 	return reduce_voice();
 }
 
@@ -2408,11 +2404,9 @@ static void start_note(MidiEvent *e, int i, int vid, int cnt)
 
 static void finish_note(int i)
 {
-    if(utau) utau_finnish_note(i);
-    //if(0)//hack	
     if (voice[i].sample->modes & MODES_ENVELOPE)
     {
-		printf("kill voice %i\n",i);
+
 		/* We need to get the envelope out of Sustain stage. */
 		/* Note that voice[i].envelope_stage < EG_GUS_RELEASE1 */
 		voice[i].status = VOICE_OFF;
@@ -2426,12 +2420,10 @@ static void finish_note(int i)
     }
     else
     {
-		//if(1)
 		if(current_file_info->pcm_mode != PCM_MODE_NON)//utau note off hack
 		{
 			free_voice(i);
 			ctl_note_event(i);
-			printf("utau free voice %i\n",i);
 		}
 		else
 		{
@@ -2443,7 +2435,6 @@ static void finish_note(int i)
 			voice[i].status = VOICE_OFF;
 			ctl_note_event(i);
 			}
-			printf("voice off\n");
 		}
     }
 }
@@ -6657,6 +6648,8 @@ inline static int is_insertion_effect_xg(int ch)
 	return 0;
 }
 
+
+
 #ifdef USE_DSP_EFFECT
 /* do_compute_data_midi() with DSP Effect */
 static void do_compute_data_midi(int32 count)
@@ -6839,10 +6832,11 @@ static void do_compute_data_midi(int32 count)
 
 		/* mixing signal and applying system effects */ 
 		mix_dry_signal(buffer_pointer, cnt);
-		if(channel_delay) {do_variation_effect1_xg(buffer_pointer, cnt);}
-		if(channel_chorus) {do_ch_chorus_xg(buffer_pointer, cnt);}
-		if(channel_reverb) {do_ch_reverb(buffer_pointer, cnt);}
-		if(multi_eq_xg.valid) {do_multi_eq_xg(buffer_pointer, cnt);}
+		//if(channel_delay) {do_variation_effect1_xg(buffer_pointer, cnt);}
+		//if(channel_chorus) {do_ch_chorus_xg(buffer_pointer, cnt);}
+		//if(channel_reverb) {do_ch_reverb(buffer_pointer, cnt);}
+		//if(multi_eq_xg.valid) {do_multi_eq_xg(buffer_pointer, cnt);}
+		//dothack
 	} else if(channel_effect) {	/* GM & GS */
 		if(opt_insertion_effect) { 	/* insertion effect */
 			/* applying insertion effect */
@@ -6858,7 +6852,7 @@ static void do_compute_data_midi(int32 count)
 			}
 		}
 
-		for(i = 0; i < MAX_CHANNELS; i++) {	/* system effects */
+		 for(i = 0; i < MAX_CHANNELS; i++) {	/* system effects */
 			int32 *p;	
 			p = vpblist[i];
 			if(p != buffer_pointer && p != insertion_effect_buffer) {
@@ -6878,14 +6872,14 @@ static void do_compute_data_midi(int32 count)
 					}
 				} else {
 					if(channel_chorus && channel[i].chorus_level > 0) {
-						set_ch_chorus(p, cnt, channel[i].chorus_level);
+					//	set_ch_chorus(p, cnt, channel[i].chorus_level);//utau hacks
 					}
 					if(channel_delay && channel[i].delay_level > 0) {
-						set_ch_delay(p, cnt, channel[i].delay_level);
+					//	set_ch_delay(p, cnt, channel[i].delay_level);//see PSR-630 manual
 					}
 					if(channel_reverb && channel[i].reverb_level > 0
 						&& current_sample - channel[i].lasttime < rev_max_delay_out) {
-						set_ch_reverb(p, cnt, channel[i].reverb_level);
+					//	set_ch_reverb(p, cnt, channel[i].reverb_level);//vocaloid hacks
 					}
 				}
 				if(channel_eq && channel[i].eq_gs) {
@@ -7604,7 +7598,6 @@ int play_event(MidiEvent *ev)
     {
 	/* MIDI Events */
       case ME_NOTEOFF:
-	printf("note off %i\n",ev->time);
 	note_off(ev);
 	break;
 
