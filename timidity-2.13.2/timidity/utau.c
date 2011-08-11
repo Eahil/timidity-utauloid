@@ -75,28 +75,11 @@
 #error utau does not work with lookup hack
 #endif
 #include "utau.h"
+#include <sndfile.h>
 
 //TODO and note adjusting
 
 static char* utau_text="default";
-
-
-struct riff_header
-{	
-    int riff;
-    int chunk_data_size;
-    int wave;
-    int fmt_chunk_id;
-    int fmt_chunk_data_size;
-    short compression;
-    short number_of_channels;
-    int sample_rate;
-    int bytes_per_sec;
-    short block_align;
-    short bits_per_sample;
-    int data_chunk;
-    int data_chunk_size;
-};
 
 typedef struct _Riff
 {
@@ -134,32 +117,6 @@ int utau_note_count=0;
 
 extern char* utau;//the utauloid voicebank path
 
-
-
-
-
-static void utau_write_wave(short* samples,int length,int sample_rate,char* filename) //only for debugging
-{
-    unlink(filename);
-    struct riff_header header;
-    header.riff='FFIR';
-    header.chunk_data_size=sizeof(struct riff_header)-8+length;
-    header.wave='EVAW';
-    header.fmt_chunk_id=' tmf';
-    header.fmt_chunk_data_size=16;
-    header.compression=1;
-    header.number_of_channels=1;
-    header.sample_rate=sample_rate;
-    header.block_align=4;
-    header.bytes_per_sec=header.sample_rate * header.block_align;
-    header.bits_per_sample=16;
-    header.data_chunk='atad';
-    header.data_chunk_size=length;
-    FILE* f=fopen(filename,"w");
-    fwrite(&header,1,sizeof(header),f);
-    fwrite(samples,1,length,f);
-    fclose(f);
-}
 #if 1
 static int32 to_offset(int32 offset)
 {
@@ -204,10 +161,6 @@ static int32 calc_rate(int diff, double msec)
     return (int32)rate;
 }
 
-
-//see playmidi.h for Voice
-//see intrum.h for Instrum
-
 void utau_init_sample(Oto* o)
 {
     Sample* s=o->sample;
@@ -229,27 +182,19 @@ void utau_init_sample(Oto* o)
     offset/=1000;
     cutoff*=riff->sample_rate;
     cutoff/=1000;
-
-    //offset=0;//ignore offset
+    
     cutoff=0;
-    //offset/=2;
-
-
-
     s->data_length =  (length-offset-cutoff+2) << FRACTION_BITS;
     s->loop_end    =  (length-offset-cutoff+2) << FRACTION_BITS;
     s->loop_start  = s->loop_end - 0x1000;
     s->data=riff->samples+offset;
-
     s->panning= 63;
     s->volume= 10;
     s->modes= 3;//FIXME use envelope
     s->data_alloced= 1;
-
     s->scale_freq= 70;
     s->scale_factor= 1024;
-    //s->inst_type= INST_PCM;//not a soundfont
-    s->inst_type=INST_SF2;//does not affect release stage
+    s->inst_type=INST_SF2;
     s->sample_type= 1;
     s->chord = -1;
     s->root_freq_detected = freq_fourier(s, &(s->chord));
@@ -257,9 +202,6 @@ void utau_init_sample(Oto* o)
     s->low_freq= s->root_freq/1.4;
     s->high_freq= s->root_freq*1.4;
 
-    //->inst_type == INST_SF2
-
-    //printf("root frq in hz: %f\n",((float)s->root_freq)/1000);
 
 
 //rate > OFFSET_MAX : instant
@@ -284,8 +226,7 @@ void utau_init_sample(Oto* o)
     s->envelope_offset[5] = endoffs;
     s->envelope_rate[5] = OFFSET_MAX+1;
 #endif
-    //envelope_velf == envelope velocity-follow
- 	
+    //envelope_velf == envelope velocity-follow	
     //s->modes |= MODES_SUSTAIN;
     //s->modes |= MODES_LOOPING;
     //vp->envelope_increment = (int32)rate;
@@ -298,52 +239,22 @@ void utau_init_sample(Oto* o)
 
 
 
-#if 0
-    s->high_vel= 127;
-    s->cutoff_freq= 5371;//ignored
-    //s->resonance= 110;
-    s->modenv_to_pitch= -113;
-    s->modenv_to_fc= 1800;
-    s->vel_to_fc= -2400;
-    s->envelope_velf_bpo= 64;
-    s->modenv_velf_bpo= 64;
-    s->key_to_fc_bpo= 60;
-    s->vel_to_fc_threshold= 64;
-#endif
 }
 
-//The Shanghai Restoration Project - Miss Shanghai
-//The Golden Eckats - Schrauben Drehn, Muddern Drehn
+
 Riff * utau_read_riff(char* filename)
 {
-
-    Riff* ret=0;
-    FILE* f=fopen(filename,"r");
-    if(f==NULL) return 0;
-    ret=malloc(sizeof(Riff));
-    struct riff_header header;
-    int l=fread(&header,1,sizeof(header),f);
-    if(l!=sizeof(header))  {printf("inVALID WAVE HEADER size\n");exit(1);}
-    if(!(header.riff=='FFIR' && header.wave=='EVAW')) {printf("inVALID WAVE HEADER\n");exit(1);}
-    if(!(header.fmt_chunk_id==' tmf' && header.fmt_chunk_data_size==16)) {printf("inVALID format\n");exit(1);}
-    if(!(header.data_chunk=='atad')) {printf("inVALID data\n");exit(1);}
-    int size=header.data_chunk_size*2;
-    //if(size % 0x1000 !=0) size += (0x1000 - (size % 0x1000));
-    ret->samples=(short*)malloc(size);
-    memset(ret->samples,0,size);
-    l=fread(ret->samples,1,header.data_chunk_size,f);
-
-    ret->sample_rate=header.sample_rate;
-    ret->length=size;
-    //if(l+0x1000!=ret->length)  {printf("inVALID data length\n");exit(1);}
-    //header.number_of_channels=1;
-    //header.sample_rate=sample_rate;
-    //header.block_align=4;
-    //header.bytes_per_sec=header.sample_rate * header.block_align;
-    //header.bits_per_sample=16;
-    //TODO check input
-    fclose(f);
-    return ret;
+	SF_INFO info={0};
+	printf("will read file %s\n",filename);
+	SNDFILE* sndfile = sf_open(filename,SFM_READ,&info);
+	printf("%s has %i samples filename\n",filename,info.frames);
+	Riff* r=(Riff*)malloc(sizeof(Riff));
+	r->length=info.frames*2;//fixme dont hardcode
+	r->samples=malloc(r->length);
+	r->sample_rate=info.samplerate;
+	sf_readf_short(sndfile,r->samples,info.frames);
+	sf_close(sndfile);
+	return r;   
 }
 
 static void parse_oto(char* oto,Oto* o)
@@ -435,12 +346,19 @@ char* utau_get_text()
     return utau_text;
 }
 
+Oto* utau_get_oto(char* name)
+{
+	Oto* o=bsearch(name,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
+	return 0;
+}
+
 Sample* utau_get_sample(int* count)
 {
    
    // printf("UTAU: set text %s %s %i %i %i\n",utau_text,utau_notes[utau_note_index].text,utau_notes[utau_note_index].start,utau_notes[utau_note_index].end,utau_note_index);
    // utau_note_index++;
-    Oto* o=bsearch(utau_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
+   // 
+    Oto* o=utau_get_oto(utau_text);
     if(o==0)
     {
 	printf("[oto not found %s]\n",utau_text);
@@ -493,13 +411,15 @@ void utau_prescan_off(MidiEvent* e)
     //if(e->time>p) e->time-=p;
 	
 }
+//fixme alias in oto.ini is broken
 void utau_prescan_lyr(char* t)
 {
 
     utau_prescan_text=t;
     if(strcmp(t,"(Setup)"))
     {	
-    Oto* o=bsearch(utau_prescan_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
+    //Oto* o=bsearch(utau_prescan_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
+    Oto* o=utau_get_oto(utau_prescan_text);	
     if(o)
         utau_init_sample(o);
     else

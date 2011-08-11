@@ -1,0 +1,7 @@
+#!/bin/bash
+cat oto.ini | kakasi -Ka -Ha -Ja > /tmp/oto.ini
+cp /tmp/oto.ini .
+for f in *.wav
+do
+otorename $f
+done
