@@ -1,0 +1,9 @@
+Q: How to change intonation of a Czech voice?
+
+A: Set the int_general_params variable after the Czech voice is selected, e.g.:
+
+     (voice_czech_ph)
+     (set! int_general_params (cons (list 'targ_func czech-int-targets) '((f0_mean 102) (f0_std 30))))
+
+   f0_mean sets the base frequency, f0_std determines how much expressive
+   intonation should be.

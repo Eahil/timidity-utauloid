@@ -1,0 +1,1082 @@
+2005-08-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-select-contours): Use generalized contour
+	lists instead of pairs.
+	(czech-int-targets): Honor the above change.
+
+2005-08-26  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token-to-words): Handle R-caron in a special
+	way, to work around a Festival bug.
+
+2005-06-30  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-basic-lts): If the word is empty or it contains
+	non-readable characters and czech-unknown-symbol-word is empty,
+	return nil.
+	(czech-lts): If the word or its transformation is empty, don't
+	syllabify it.
+
+2005-04-13  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (phoneSet): Typo in C's partner fixed; make CH* unvoiced.
+	(czech-adjust-segments): Typo in name reference fixed.
+
+2005-04-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-adjust-segments): Don't modify unvoiced-voiced
+	if the voiced consonant is V; test for pauses properly.
+	(czech-orthography): Missing declarations of #_ and Vowel+# added.
+	(czech-word): Don't call check-adjust-phonetic-form.
+	(czech-pause): Call check-adjust-phonetic-form.
+
+2005-04-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-diphones): Removed.
+	(czech-basic-lts): Don't apply czech-diphones rule set.
+	(czech-adjust-phonetic-form): New function.
+	(czech-word): Call it.
+	(phoneset): New feature `postnas'; feature `ctype' removed; `n'
+	value added to the `cvox' feature; 
+	(czech-adjust-segments): New function.
+
+2005-04-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-orthography): Handle Y in a similar way as I.
+
+2005-04-11  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm: Another diphtong removed.
+
+2005-04-11  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-mbrola.scm (mbrola_cz2): Set the `gender' voice property.
+    
+2005-04-11  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token-to-words): Handle r-caron in a special way, to
+	work around a Festival bug.
+    
+2005-04-07  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm: Phoneme durations changed, taken from voice-czech-ph.
+
+2005-04-07  Milan Zamazal  <pdm@brailcom.org>
+
+	* README.cs: Some credits added.
+
+2005-04-06  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-diphones): r~+# -> r~*+#.
+
+2005-04-06  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm: Don't use the `ou' phone.
+
+2005-03-14  Milan Zamazal  <pdm@brailcom.org>
+
+        * New diphone set.
+
+2005-02-17  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-next-punc, czech-prev-punc): Ensure that nil is
+	never returned.
+
+2005-02-14  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token-end-punc): Removed, no longer needed with
+	the right tokenization method.
+	(czech-phrase-cart-tree): Use token_end_punc instead of
+	czech-token-end-punc.
+
+2005-02-14  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-prev-simple-punc): Don't crash on non-existent
+	utterance elements.
+
+2005-02-14  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-word-stress-unit): Czech whether sylword has
+	any daughters before calling functions on them.
+
+2005-02-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (voice-czech-common): Set Token_Method to Token_Any.
+
+2005-02-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-next-punc, czech-prev-punc): Punctuation
+	detection regexp fixed.
+
+2005-02-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-identify-stress-units): Apply czech-downcase on
+	item.name before looking it in
+	czech-proper-single-syl-prepositions.
+
+2005-02-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-next-token-punc, czech-word-stress-unit)
+	(czech-stress-unit-punc, czech-next-punc, czech-prev-punc)
+	(czech-next-simple-punc, czech-prev-simple-punc): New functions.
+	(czech-phrase-cart-tree): Completely reworked, according to
+	phonetic rules.
+	(czech-intonation-units): Small break separates intonation units
+	too.
+	(czech-pos): Put commas before conjunctions.
+	(czech-token-end-punc): New function.
+	(czech-adjust-phrase-breaks): New function.
+	(czech-word): Call it.
+	(czech-duration): Perform pause duration adjustments.
+
+2005-02-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phoneme-durations): Pause duration set to 0.1.
+	(czech-duration): Multiply czech-silence-durations by 10.
+
+2005-02-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-intonation-units): Check for the very last
+	syllable directly in the Syllable relation; check for sentence
+	break there too.
+
+2005-02-05  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-silence-duration-factors): Replaced by
+	czech-silence-durations.
+	(czech-phoneme-durations): Pause duration changed to 1.00.
+	(czech-duration): Compute durations in the given range.
+
+2005-01-07  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-insert-filling-vowels): New variable.
+	(czech-translate-add-vowels): Honor it.
+
+2005-01-07  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-translate-add-vowels): Don't try to insert into
+	the SylStructure relation if it is not present.
+
+2004-07-19  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm (=): Added.
+
+2004-05-20  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pos): Set `pos' of separate punctuation
+	characters to `nil'.
+
+2004-05-20  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-intonation-units): Ensure the last syllable
+	always makes a new unit.
+
+2004-05-03  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (voice-czech-common): Reset postlex_rules_hooks.
+
+2004-04-20  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (voice-czech-common): Let after_synth_hooks is a list.
+
+2004-04-07  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-translate-split-diphthongs): Insert the new
+	item into the SylStructure relation too.
+
+2004-04-04  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token-to-words): Don't crash in separator
+	testing when there's no punctuation.
+
+2004-04-01  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-translate-add-vowels): Put the inserted
+	segments into the SylStructure too.
+
+2004-04-01  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-min, czech-max): New functions.
+	(czech-duration): Don't fail on initial single-syllabic words with
+	more than 12 phonemes.
+
+2004-03-31  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token-to-words): Handle multiple punctuation as
+	a separator.
+
+2004-03-30  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token-to-words): Downcase `name' before
+	checking it in czech-multiword-abbrevs.
+	(czech-multiword-abbrevs): Honor the previous change.
+
+2004-03-30  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-duration): Don't crash on initial empty words
+	carrying phrase breaks.
+
+2004-03-29  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-lts): Handle empty word correctly.
+	(czech-duration): Don't look at word leafs, look at its
+	granddaughters.
+
+2004-03-24  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-duration): When checking first word, start from
+	the Word relation, not from SylStructure.
+
+2004-03-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): Some vowel-vowel stroke insertion
+	disabled.
+
+2004-03-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): Typo in phoneme names fixed.
+	(czech-normalize): Sharp S added.
+
+2004-03-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm: `copyright' added.
+
+	* czech.scm (lts.ruleset): i-vowel handling fixed; `copy' removed.
+
+2004-03-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-mbrola.scm (czech-mbrola-lts): `_' added.
+
+2004-03-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm: Typo in e: transcription fixed.
+
+2004-03-22  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): Vowel-vowel rules added.
+
+2004-03-22  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm: Lexicon entries fixed.
+
+	* dump-pronounciation.scm (dump-pronounciation): Dump
+	pronounciation in a form suitable for the lexicon.
+
+	* czech.scm (czech-multiword-abbrevs): `=' added.
+	(lts.ruleset): New special rules added.
+
+2004-03-22  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech): `syl' feature of _ and @ set to `-'.
+
+2004-03-20  Milan Zamazal  <pdm@brailcom.org>
+
+	* gen-all-words.sh: New script.
+
+2004-03-19  Milan Zamazal  <pdm@brailcom.org>
+
+	* Makefile: New file.
+
+	* czech-lexicon.scm: Everything except lexicon entries moved to
+	czech.scm.
+
+	* czech.scm: Load compiled lexicon.
+	(czech-lexicon-file): New variable.
+
+2004-03-18  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-words: Updated.
+	* czech-words-all: Removed.
+
+2004-03-18  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-item.has_feat, czech-token.unknown_word_name)
+	(czech-token.separator_word_name, czech-token.garbage_word_name)
+	(czech-token_to_words): Underscores in names replaced by hyphens.
+
+2004-03-18  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-select-contours): First syllable adjustment
+	of final contours fixed.
+
+2004-03-18  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-contour-tree): New contourtypes FA and FB.
+	(czech-int-contours): Likewise; one missing FA/3 contour added.
+
+2004-03-18  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-select-contours): Redundant code removed.
+	(czech-int-contour-tree): Typo in M contour determination fixed;
+	test for preelement fixed.
+
+2004-03-18  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-guess-pos): "jak" and derivatives added to
+	`question'; "*pak" question words added; question words removed
+	from `misc'.
+	(czech-pos): Handle "*pak" question words; cosmetic changes.
+
+2004-03-17  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-identify-stress-units): Invalid counting in
+	many single-syllabic word processing fixed; single syllabic
+	initial processing fixed; ensure that in many single syllabic
+	chains no single syllabic element remains.
+	(czech-stress-unit-phonemes): Protection against preelement mark
+	added.
+
+2004-03-17  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token_to_words): Read "[ckm]m" as a measure
+	length only if the previous token is a number.
+
+2004-03-17  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pos-in-phrase-from, czech-pos-in-phrase-to):
+	New functions.
+	(czech-pos-last-in-phrase?): Use them.
+	(czech-item.feat*?): New function.
+	(czech-phrase-cart-tree): Standard phrase position feature
+	functions that don't work replaced by our own functions; number of
+	allowed in conjunction break guessing neighboring words reduced to
+	1.
+
+2004-03-17  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-select-contours): Contour values of final
+	single syllabic units fixed.
+	(czech-item.feat?): Don't crash when item is nil.
+
+2004-03-16  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-identify-stress-units): Don't append last-unit
+	if it is nil.
+
+2004-03-16  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-translate-split-diphthongs): make-item
+	undefined.
+	(czech-translate-add-vowels): make-item replaced by insert-item.
+
+2004-03-16  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-select-contours): Bug in long contour
+	handling fixed.
+
+2004-03-16  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-duration): Compute duration factor from the
+	number of phonemes, not syllables.
+	(czech-duration): Attach special durations to initial
+	single-syllabic words.
+
+2004-03-16  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-add-strokes): Pause testing condition fixed.
+
+2004-03-16  Milan Zamazal  <pdm@brailcom.org>
+	
+	* czech-debug.scm (czech-debug-print-relation): Exclude `NB'
+	feature values from the report; don't report empty feature sets.
+	(czech-debug-print-durations): The first occurance of this
+	function renamed to czech-debug-print-durfactors.
+	(czech-debug-print): Honor the previous change.
+	(czech-debug-print-units): Print contours multiplied by 100.
+
+2004-03-15  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-debug.scm: New file.
+
+2004-03-15  Milan Zamazal  <pdm@brailcom.org>
+	
+	* czech.scm (czech-identify-stress-units): List handling in
+	initial single-syllabic word processing fixed.
+
+2004-03-15  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-word): Don't call czech-add-keystrokes.
+	(czech-pause): Call czech-add-keystrokes.
+	(czech-add-strokes): Don't insert stroke if pause is present at
+	that place.
+
+2004-03-15  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pause-method): Renamed to czech-pause-breaks.
+	(czech-pause): New function.
+	(voice-czech-common): Honor the previous changes.
+
+2004-03-15  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-duration): Honor Duration_Stretch.
+
+2004-03-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-stress-units): When testing for an FF unit,
+	match any punctuation containing an FF termination character.
+
+2004-03-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pos-last-in-phrase?): Extended and improved.
+
+2004-03-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-duration): Set dur_factor on non-syllabic
+	stress units too.
+
+2004-03-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phoneme-durations): Pause length increased.
+	(czech-silence-duration-factors): B and SB lengths decreased.
+
+2004-03-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phoneset-translation): Long vowels removed.
+
+2004-03-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-targets): Don't ignore entries with
+	contourval 0 present.
+
+2004-03-12  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-mbrola.scm (mbrola_cz2): Adjust
+	czech-after-analysis-hooks*; use Param.Set for setting the
+	synthesis method.
+	(czech-mbrola-lts): Diphthongs added.
+	(czech-mbrola-phoneme-durations): Updated to the new phoneset.
+
+	* czech.scm (czech-translate-split-diphthongs): New function.
+	(czech-add-segments): Renamed to czech-translate-add-vowels; run
+	only when the current language is Czech.
+	(czech-phone-adjustment): Renamed to czech-translate-phonemes.
+	(czech-after-analysis-hooks): Honor previous changes; turned into
+	defvar.
+	(czech-phoneme-durations): Diphthong lengths increased.
+
+2004-03-11  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm (lex.add.entry): Pronounciation of angle
+	brackets unified with czech-multiword-abbrevs.
+
+	* czech.scm (czech-token_to_words): Look into lexicon only after
+	punctuation is processed; handle punctuation-only tokens.
+
+2004-03-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token_to_words): Assign `sym' pos to single
+	letter word expansions.
+
+2004-03-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-identify-stress-units): Paren typo fixed;
+	append last-unit to the result; invalid nth_cdr index fixed in
+	final single-syllabic processing.
+
+2004-03-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-stress-units): Handle multiple character
+	punctuation.
+	(czech-yes-no-question): Likewise.
+
+2004-03-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phrase-cart-tree): Put B before left
+	parenthesis; handle multiple character punctuation.
+
+2004-03-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phrase-cart-tree): Dash handling fixed.
+
+2004-03-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token.punctuation): `-' added.
+	(czech-token_to_words): Don't handle dashes; don't throw away
+	dashes inside words.
+
+2004-03-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm: Various kinds of braces added for `punc'.
+
+2004-03-09  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-targets): Apply the new contour value
+	conversion also when contourval is a list and fix the order of
+	values in such a case.
+	(czech-int-select-contours): Coding typo in parenthesis fixed for
+	long contours.
+
+2004-03-08  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-targets): Use int_general_params, not
+	czech-int-simple-params; value computation fixed.
+	(czech-int-contours): Values converted to from +-1 to +-0.
+
+2004-03-05  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-add-segments): Don't perform schwa insertion.
+
+2004-03-05  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-guess-pos): New words added to question.
+
+2004-03-05  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-identify-stress-units, czech-add-strokes): Use
+	POS information stored in word features.
+
+2004-03-05  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pos): Check all words against czech-guess-pos.
+
+2004-03-05  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-downcase, czech-word-pos?): New functions.
+	(czech-identify-stress-units, czech-pos, czech-add-strokes): Use
+	them.
+
+2004-03-05  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-contour-tree): New variable.
+	(czech-int-select-contours): Use it; preelements contour handling
+	fixed.
+
+2004-03-04  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-randomize): New variable.
+	(czech-rand): Honor it.
+
+2004-03-04  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-stress-units): Put last unit under type F
+	instead of FF if it is not followed by punctuation.
+
+2004-03-04  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-duration-random-factor): New variable.
+	(czech-duration): Randomize durations.
+
+2004-03-04  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-simple-params): f0_std set to 10.
+	(czech-int-targets): Honor f0_std in some way.
+
+2004-03-04  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-yes-no-question): Implementated.
+	(czech-guess-pos): `question' added.
+
+2004-03-04  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-countours): New variable.
+	(czech-intonation-targets): Completely rewritten and renamed to
+	czech-int-targets.
+	(czech-int-select-contours): New function.
+	(voice-czech-common): Set it as Int_Method.
+	(czech-stress-units): Handle question types and F*-1 positions.
+	(czech-yes-no-question): New function.
+	(czech-syllable-kernels): New function.
+	(czech-stress-unit-phonemes): Return items, not their names.
+	(czech-unit-syllable-count, czech-stress-unit-phonemes): Accept
+	units themselves, not only lists.
+	(czech-duration): Take advantage of the previous change.
+	(defPhoneSet): New phone feature `syl'.
+	(czech-syllabic-vocals, czech-syllabic-consonants): Removed.
+	(czech-item.feat?): New function.
+	(czech-rand-range): New variable.
+	(czech-rand): New function.
+	(czech-random-choice): Use it.
+
+2004-03-02  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-mbrola.scm (mbrola_cz2): Set czech-after-analysis-hooks*.
+
+	* czech.scm (czech-after-analysis-hooks): New variable.
+	(czech-reset-parameters): Set new variable
+	czech-after-analysis-hooks*.
+	(voice-czech-common): Use czech-after-analysis-hooks*.
+
+2004-03-02  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (voice-czech-common): Call czech-add-segments in
+	after_analysis_hooks, not postlex_rules_hooks.
+	(czech-add-segments): Adjust `end' features.
+	(czech-phoneme-durations): Don't consider segment adjustments. 
+	(czech-add-segments, czech-phone-adjustment): Return utterance.
+
+2004-02-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-duration-cart-tree): Removed.
+	(czech-duration): New function.
+	(voice-czech-common): Set it as the duration method.
+	(czech-silence-duration-factors)
+	(czech-stress-duration-factors): New variables.
+	(czech-stress-units): Create IntStress relation; don't put
+	intonation units to StressUnit, put segments there.
+
+2004-02-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-add-strokes): New function.
+	(czech-word): Call it.
+	(czech-add-segments): Don't insert strokes.
+
+2004-02-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-word): czech-add-segments moved to
+	postlex_rules_hooks.
+
+2004-02-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pos): Final word in phrase detection fixed and
+	other fixes.
+	(czech-pos-last-in-phrase?): New function.
+
+2004-02-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phone-adjustment): Typo in string-equal fixed.
+
+2004-02-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-stress-units): Paren typo in unit insertion
+	fixed; final punctuation check fixed.
+	(czech-syllabic-vocals): Diphthongs added.
+	(czech-identify-stress-units): Test for units* end in the while
+	loop condition; use cycle instead of recursion in merge-n;
+	preelement placement fixed.
+	(czech-word): Debugging code removed.
+
+2004-02-26  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm (czech-multiword-abbrevs): New variable.
+
+	* czech.scm (czech-word): Renamed to czech-add-segments.
+	(czech-word, czech-stress-units, czech-intonation-units)
+	(czech-identify-stress-units: New functions.
+	(czech-token_to_words): Handle multiword abbreviations.
+	(czech-non-syllabic-prepositions)
+	(czech-proper-1-syllabic-prepositions, czech-special-final-words):
+	New variables.
+	(czech-guess-pos): "ku" added.
+	(czech-syllabic-vocals, czech-syllabic-consonants): New variables.
+	(czech-syllable-count, czech-unit-syllable-count) 
+	(czech-stress-unit-phonemes): New functions.
+	(czech-random-choice): New function.
+
+2004-02-26  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phrase-cart-tree): Don't put breaks before
+	vowels.
+	(czech-word): Insert _ between vowels on word boundaries.
+
+2004-02-26  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): New phoneme _.
+	(czech-phoneme-durations): _ added.
+	(czech-phoneset-translation): Translate _ to #.
+
+2004-02-26  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): Unused symbol SchwaCons removed.
+
+2004-02-26  Milan Zamazal  <pdm@brailcom.org>
+
+	(lex.add.entry): Entry syllabification for the "unknown" word
+	fixed.
+	
+2004-02-26  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-non-pause-words, czech-phrasify): Removed.
+	(voice-czech-common): Set Phrasify_Method to Classic_Phrasify.
+	
+2004-02-25  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm: Use Param.get and Param.set instead of Parameter.get
+	and Parameter.set.
+
+
+2004-02-25  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phrase-cart-tree): Put B before some no-comma
+	conjunctions.
+
+2004-02-25  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phrasify): New function.
+	(czech-pause-method): Long phrase breaking moved to
+	czech-phrasify.
+	(voice-czech-common): Set Phrasify_Method.
+
+2004-02-25  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): Vowel duplication and schwa insertion
+ 	retracted.
+	(czech-word): New function.
+	(voice-czech-common): Set Word_Method parameter.
+
+2004-02-25  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm: Moved to new syllabification.
+
+2004-02-24  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phoneme-durations): New phonemes included;
+	phoneme lengths adjusted considering diphone construction.
+
+2004-02-24  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): Completely reworked to match the new
+	diphone set.
+
+2004-02-24  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-syllabify): Removed.
+	(czech-syllabify-phstress): Make the word as a single syllable.
+
+2004-02-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phoneset-translation): New variable.
+	(czech-reset-parameters): Use it as default.
+
+2004-02-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (defPhoneSet): Phonemes from literature added; phoneme
+	properties changed.
+
+2004-02-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-accent-cart-tree): Return NONE unconditionally.
+	(czech-syllabify-phstress): Don't generate starting accent.
+
+2004-02-23  Milan Zamazal  <pdm@brailcom.org>
+	
+	* README.Czech.cs: New file.
+
+2004-02-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-proclaim-voice): Introduce voice options,
+	support dialect and gender settings.
+
+2004-02-03  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): Infinite loop bug fixed; special words
+	moved to lexicon.
+
+2004-02-03  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-lexicon.scm: New file.
+
+2004-02-02  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-mbrola.scm (mbrola_cz2): Set czech-volume-scale*.
+
+2004-01-30  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-lr-params): Removed, use
+	czech-int-simple-params instead.
+	(czech-reset-parameters, voice-czech-common): Honor the previous
+	change.
+	(czech-int-simple-params): Values changed to reasonable numbers.
+	(voice-czech-common): Switch to general intonation method.
+	(czech-intonation-targets): New function.
+
+2004-01-30  Milan Zamazal  <pdm@brailcom.org>
+	
+	* czech.scm (czech-duration-cart-tree): Use other means than the
+	undocumented feature syl_break for determining clause
+	initials/finals; factor of stressed initials/finals reduced to
+	1.3.
+
+2004-01-29  Milan Zamazal  <pdm@brailcom.org>
+	
+	* czech.scm (czech-syllabify-phstress, czech-syllabify): New
+	functions.
+	(czech-lts): Use it instead of lex.syllabify.phstress.
+
+2004-01-29  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int-lr-params): Changed to respect the English
+	intonation tree parameters and an experimental Czech voice.
+
+2004-01-29  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-duration-tree): New variable.
+	(voice-czech-common): Duration method changed to Tree_ZScores.
+
+2004-01-29  Milan Zamazal  <pdm@brailcom.org>
+	
+	* czech.scm (czech-volume-scale, czech-volume-scale*): New variables.
+	(czech-adjust-volume): New function.
+	(czech-reset-parameters): Reset czech-volume-scale*.
+	(voice-czech-common): Set after_synth_hooks.
+
+2004-01-29  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-non-pause-words): New function.
+	(czech-pause-method): Insert pauses into long non-breaking
+	phrases.
+
+2004-01-29  Milan Zamazal  <pdm@brailcom.org>
+	
+	* czech.scm (defPhoneSet, PhoneSet.silences)
+	(czech-phoneme-durations): ## removed.
+	(czech-phrase-cart-tree): Use defvar instead of set; SB
+	introduced.
+	(czech-phone-adjustment): ## support removed.
+	(czech-pause-method): Handle SB instead of generating ##.
+
+2004-01-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-f2b-f0-lr-end): Renamed to czech-f0-lr-end.
+
+2004-01-15  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-unisyn.scm: Completely rewritten.
+	* czech-mbrola.scm (czech-mbrola-init, czech-mbrola-description):
+	Removed.
+	* czech.scm (czech-description, czech-parameter): Removed.
+	(czech-phoneset-translation*): New variable.
+	(czech-reset-parameters): Reset synthesis-method and
+	czech-phoneset-translation.
+	(czech-phone-adjustment, voice-czech-common): Honor the previous
+	changes.
+	(voice-czech-common): Don't initialize synthesizer.
+
+	* czech.scm (czech): Starting dz and dz~ fix in the ruleset.
+
+2004-01-07  Milan Zamazal  <pdm@brailcom.org>
+	
+	* czech.scm (czech-reset-parameters): New function.
+	(czech-proclaim-voice): Call it.
+	(czech-guess_pos): Renamed to czech-guess-pos.
+	(czech-phrase_cart_tree): Renamed to czech-phrase-cart-tree.
+	(czech-int_simple_params, czech-int_lr_params)
+	(czech-accent_cart_tree, czech-int-tone-cart-tree)
+	(czech-f0-lr-start, czech-f0-lr-mid, czech-f2b-f0-lr-end)
+	(czech-phoneme-durations): Likewise.
+	(czech-parameter): Use czech-description* instead of
+	czech-description.
+	(voice-czech-common): Use parameter variables.
+
+	* czech-mbrola.scm (czech-mbrola-lts): New ruleset.
+	(mbrola_cz2): Enable it.
+	* czech.scm (czech-basic-lts): New function.
+	(czech-lts-extra-rules): New variable.
+	(czech-lts): Apply czech-lts-extra-rules.
+	(voice-czech-common): Initialize czech-lts-extra-rules.	
+
+2003-12-31  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phoneme_durations): `e' and `e:' durations
+	increased.
+
+2003-12-22  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-proclaim-voice): Set current voice.  Voice name
+	in voice proclamation fixed.
+
+	* czech-mbrola.scm (czech-mbrola-phoneme_durations): New variable.
+	(mbrola_cz2): Set czech-phoneme_durations.
+	* czech.scm (czech-phoneme_durations): Completely changed.
+
+2003-12-17  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-unisyn.scm: New file.
+	* czech-mbrola.scm: Require `czech'.
+	(voice_czech_mbrola_cz2): New function.
+	(czech_mbrola_cz2): Voice declared.
+	* czech.scm: Unisyn database declaration etc. moved to
+	czech-unisyn.scm.
+	(voice_czech): Renamed to voice-czech-common.
+	(czech-proclaim-voice): New macro.
+
+	* czech.scm (czech-int_lr_params): Means set to 105.
+
+2003-12-01  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech): Phoneset made compatible with the
+	radio_phones phoneset.
+	(czech-phoneme_durations): Changed to defvar.  i: shortened, u:
+	lenghtened.
+	(lex.add.entry): New words added.
+	(czech-int_tone_cart_tree, czech-int_lr_params): New variables.
+	(voice_czech): Use Intonation_Tree intonation method.
+	(czech-int_simple_params, czech-accent_cart_tree): Changed to
+	defvar.
+	(czech-f0_lr_start, czech-f0_lr_mid, czech-f2b_f0_lr_end): New
+	variables.
+	(voice_czech): Use them.
+
+2003-11-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lex.add.entry): m/s and km/h added.
+	(czech-token_to_words): Check for presence of the token name in
+	lexicon at the proper place.
+	(czech-prepend-numprefix, czech-number*): New functions.
+	(czech-token_to_words): Support spaced numbers.
+	(czech-number-from-digits): Don't read thousands etc. when they
+	are zero.
+	(czech-item.has_feat): New function.
+	(czech-prepend-numprefix, czech-token_to_words, czech-pos): Use
+	it.
+	(czech-token_to_words): Time and ratio support added.
+	(czech-number@): New function.
+	(czech-downcase): Renamed to czech-normalize; some German
+	characters added.
+	(czech-char-regexp, czech-chars): New variables.
+	(czech-tokenize-on-nonalphas, czech-token_to_words, czech-pos):
+	Use them.
+	(czech-token_to_words): Missing argument to string-match added.
+	(czech-phrase_cart_tree): Make semicolon cause BB, exclude quote
+	from the rules.
+	(czech-guess_pos): New variable.
+	(voice_czech): Set guess_pos.
+	(czech-phrase_cart_tree): Insert B before some conjunctions.
+	(voice_czech): Int_Method value fixed.
+	(czech-int_simple_params): f0_std reduced to 5.
+	(czech-accent_cart_tree): Completely rewritten.
+	(czech-int_simple_params): f0_mean increased to 100.
+	(lex.add.entry): "GNU" added.
+	(czech-all-same): New function.
+	(czech-token_to_words): Use it, for separator matching fix.
+
+2003-11-27  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech): proclaim_voice added.
+	(czech-token_to_words, lex.add.entry): Czech monetary support
+	added.
+	(czech-token.punctuation): Dash removed.
+	(czech-token_to_words): Handle dashes.
+	(czech-token_to_words): Try to identify more acronyms; apply
+	czech-downcase on them.
+	(czech-token_to_words): Don't include spaces in number regexps.
+	(czech-token_to_words): Support for numeric ranges added.
+	(czech-pos): Don't set `pos' feature if already set.
+	(czech-token_to_words): Split non-alphanumeric tokens to
+	characters; handle separators and long sequences of
+	non-alphanumeric characters.
+	(czech-token.separator_word_name)
+	(czech-token.garbage_word_name): New variables.
+
+2003-11-26  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int_simple_params): New variable.
+	(voice_czech): Use `simple' intonation method.
+	(czech-default-synthesis-init): Initialize all required UniSyn
+	parameters.
+
+2003-11-10  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lex.add.entry): Non-words removed.
+
+2003-11-06  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pos): Put the `sym' type on certain words.
+
+2003-11-05  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lex.add.entry): Pronounciation of standalone
+	one-letter words added.
+
+2003-10-27  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pause_method): New function.
+	(voice_czech): Set it as the pause method.
+	(defPhoneSet): New phone `##'.
+	(PhoneSet.silences): Added.
+	(czech-phoneme_durations): Added.
+
+2003-10-17  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lex.add.entry): "shift" and "control" added.
+
+2003-10-01  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-phone-adjustment): Run only if the current
+	language is Czech.
+
+2003-09-23  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lex.add.entry): Braces added.
+	(lex.add.entry): `punc' parentheses added.
+	(czech-pos): Handle parentheses as punctuation.
+
+2003-09-22  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lex.add.entry): Mistakenly used y's replaced by i's.
+	(czech-pos): If there's no `punctype' feature set on the token,
+	mark punctuation characters as punctuation.
+
+2003-09-19  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token.whitespace): New variable.
+	(voice_czech): Set token.whitespace.
+
+2003-09-18  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (lts.ruleset): Bug fixes, additions, improvements.
+	(czech-number): Handle introducing + and -; handle commas.
+	(czech-tokenize-on-nonalphas): Handle numbers too.
+	(czech-token_to_words): Don't fail on numbers containing
+	punctuation; handle numbers with +, -, and comma.
+	(lex.add.entry): Numerical punctuation added; `range' - added.
+	(czech-number): Use lexicon lookup for + and -.
+	(czech-token_to_words): `punctype' token feature introduced.
+	(czech-pos): Consider it.
+	(czech-number): Use the comma character directly, not its spoken
+	form.
+	(czech-token_to_words): Don't accept final `,' or `.' as comma.
+	Handle dot just after dot in a very special way,
+	(lex.add.entry): Pronounce ("." num) as dot.
+	(czech-token_to_words, czech-pos): `punctype' token feature
+	handling cosmetic changes.
+	(czech-token_to_words): Don't duplicate after-number dot at end of
+	string.
+
+2003-09-17  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-token_to_words): Spell numbers starting with 0.
+	(czech-token_to_words): Exclude R from the list of spell-only
+	letters.
+	(czech-token_to_words): Don't split non-syllable words that are in
+	lexicon.  Let starting L or R doesn't make syllable.
+	(lex.add.entry): Duplicate backslash definition removed, double
+	quote definition added.
+
+2003-08-29  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-int_simple_params): Removed.
+	(voice_czech): Don't set czech-int_simple_params.  Set
+	Int_Targets.  Set Int_Method to Intonation_Tree.
+
+2003-08-28  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech.scm (czech-pos): New function.
+	(voice_czech): Set it as POS_Method.
+	(lex.add.entry): Punctuation entries defined properly.
+	(lex.add.entry): Pauses removed from the lexicon words.
+	(czech-token_to_words): Don't consider `s' being syllabic.
+	(lex.add.entry): New words.
+
+2003-08-27  Milan Zamazal  <pdm@brailcom.org>
+
+	* czech-mbrola.scm (PhoneSet.silences): Removed.
+	(provide): Added.
+
+	* czech.scm (czech-unknown-symbol-message): Renamed to
+	czech-unknown-symbol-word.  Value changed to a single word value.
+	(czech-downcase): Don't include punctuation.
+	(czech-token.punctuation, czech-token.prepunctuation): New
+	variables.
+	(voice_czech): Use them.
+	(lex.set.lts.ruleset): Don't call it.
+	(lex.add.entry): Parentheses added.
+	(lex.add.entry): Proper sylabification and accents added.
+	(czech-phoneme_durations): Typo in e:'s value fixed.
+	(czech-phoneme_durations): Random vowel duration adjustments.
+	(czech-token.punctuation): Dash added.
+	(lex.add.entry): "Emacs" and "copyright" added.
+	(czech-tokenize-on-nonalphas): New function.
+	(czech-token_to_words): Handle punctuation characters in tokens.
+	(czech-token_to_words): Apply recursively on parts separated by
+	punctuation.  Spell non-syllabic words.
+
