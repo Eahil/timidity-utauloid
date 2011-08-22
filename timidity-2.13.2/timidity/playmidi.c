@@ -2826,7 +2826,7 @@ static void note_on_prescan(MidiEvent *ev)
 		}
 	}
 }
-
+// echo "(voice_czech_dita) (utt.save.wave (tts \"/tmp/utau.xml\" 'singing) \"utau.wav\" 'riff)" | festival --pipe
 static void note_on(MidiEvent *e)
 {
     int i, nv, v, ch, note;

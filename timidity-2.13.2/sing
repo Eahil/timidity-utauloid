@@ -1,4 +1,4 @@
 #!/bin/bash
-export UTAU=~/kasane_teto
-/usr/local/bin/timidity --preserve-silence $1 -Ow
+export UTAU="/home/sakuraharuno/.wine/drive_c/Program Files/UTAU/voice/kasane_teto_kakashi_renamed"
+./timidity/timidity --preserve-silence $1 -Ow
 # --output-mono

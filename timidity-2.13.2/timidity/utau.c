@@ -109,6 +109,8 @@ typedef struct _Note
 Oto voicebank[4000];
 int voicebank_count;
 
+FILE* utau_xml=NULL;
+
 #if 0
 Note utau_notes[4000];
 int utau_note_index=0;
@@ -295,6 +297,12 @@ static int oto_compare_alias (const void * a, const void * b)
 
 void utau_init()
 {
+    if(strcmp("xml",utau)==0)
+    {	
+	utau_xml=fopen("/tmp/utau.xml","w");
+	fprintf(utau_xml,"<SINGING BPM=\"120\">\n");
+	return ;
+    }
     char oto_ini[1024];
     sprintf(oto_ini,"%s/oto.ini",utau);
     FILE* f=fopen(oto_ini,"r");
@@ -349,12 +357,17 @@ char* utau_get_text()
 Oto* utau_get_oto(char* name)
 {
 	Oto* o=bsearch(name,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
-	return 0;
+	return o;
 }
 
 Sample* utau_get_sample(int* count)
 {
-   
+   if(utau_xml)
+	{
+		fprintf(utau_xml,"</SINGING>");
+		exit(1);
+	}
+
    // printf("UTAU: set text %s %s %i %i %i\n",utau_text,utau_notes[utau_note_index].text,utau_notes[utau_note_index].start,utau_notes[utau_note_index].end,utau_note_index);
    // utau_note_index++;
    // 
@@ -387,8 +400,26 @@ void utau_prescan_on(MidiEvent* e)
     if(e->time==0) setup_start_event=e;	
     start_event=e;	
 }
+
+char* notenames[]={"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
+
+int utau_lastend=0;
+
 void utau_prescan_off(MidiEvent* e)
 {
+    	
+    if(utau_xml)
+    {
+		float scale = 1.0/22050;
+		float beats = scale*(e->time - start_event->time);
+		int note = MIDI_EVENT_NOTE(e);
+		int rest = start_event->time - utau_lastend;float restf=1.0*rest/22050;
+		utau_lastend=e->time;
+		if(rest) fprintf(utau_xml,"<REST BEATS=\"%f\"></REST>\n",restf);
+		fprintf(utau_xml,"<PITCH NOTE=\"%s%i\"><DURATION BEATS=\"%f\">%s</DURATION></PITCH>\n",notenames[note%12],note/12,beats,utau_prescan_text);
+		return ; 
+    }
+    		
     note_count++;
     if(note_count>lyr_count) 
     {
@@ -417,9 +448,9 @@ void utau_prescan_lyr(char* t)
 
     utau_prescan_text=t;
     if(strcmp(t,"(Setup)"))
-    {	
-    //Oto* o=bsearch(utau_prescan_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);
-    Oto* o=utau_get_oto(utau_prescan_text);	
+    {
+			
+    Oto* o=bsearch(utau_prescan_text,voicebank,voicebank_count,sizeof(Oto),oto_compare_name);	
     if(o)
         utau_init_sample(o);
     else

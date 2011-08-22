@@ -1763,7 +1763,6 @@ int apply_envelope_to_amp(int v)
 		
 		vp->left_mix = FINAL_VOLUME(la);
 		vp->right_mix = FINAL_VOLUME(ra);
-		printf("mixes %i %i\n",vp->left_mix,vp->right_mix);
 	} else {
 		if (vp->tremolo_phase_increment)
 			lamp *= vp->tremolo_volume;

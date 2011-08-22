@@ -1,0 +1,6 @@
+#!/bin/bash
+ruby jita.rb
+for file in *.fest; do cat $file | festival --pipe; done
+rm *.fest
+mkdir oto
+mv *.wav oto

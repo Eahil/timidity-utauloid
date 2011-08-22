@@ -1,0 +1,2 @@
+text2wave -eval singing-mode.scm -eval '(voice_kal_diphone)' -mode singing /tmp/utau.xml -o /tmp/voice_kal_diphone.wav
+text2wave -eval singing-mode.scm -eval '(voice_czech_dita)' -mode singing /tmp/utau.xml -o /tmp/voice_czech_dita.wav

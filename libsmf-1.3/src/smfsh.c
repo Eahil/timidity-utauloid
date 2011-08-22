@@ -373,23 +373,20 @@ show_event(smf_event_t *event)
 }
 
 static int
-show_event_vsq(smf_event_t *event)
+decode_vsq(smf_event_t *event,FILE* vocafile)
 {
 	int off = 0, i;
 	char *decoded, *type;
 
 	
 	
-	decoded = smf_event_decode(event);
+	decoded = smf_event_extract_text(event);
 
-	if (decoded == NULL) {
-		g_critical("show_event: malformed vsq.");
-		exit(1);
+	if (decoded) {
+		fprintf(vocafile,"%s",decoded+8);
+		free(decoded);
 	}
 
-	puts(decoded);
-
-	free(decoded);
 
 	return (0);
 }

@@ -1,0 +1,3076 @@
+Requested buffer size 32768, fragment size 8192
+ALSA pcm 'default' set buffer size 32768, period size 8192 bytes
+Playing ievan.vsq
+MIDI file: ievan.vsq
+Format: 1  Tracks: 2  Divisions: 480
+Sequence: Master Track
+Track name: Voice1
+Text: DM:0000:[Common]
+Version=DSB301
+Name=ÉÅÉCÉì
+Color=181,162,123
+DynamicsMode=1
+PlayMode=1
+[Master]
+PreMeasure=1
+[Mixer]
+MasterFed
+Text: DM:0001:er=0
+MasterPanpot=0
+MasterMute=0
+OutputMode=0
+Tracks=1
+Feder0=0
+Panpot0=0
+Mute0=0
+Solo0=0
+[EventList]
+0=ID#0000
+1920=ID
+Text: DM:0002:#0001
+2160=ID#0002
+2401=ID#0003
+2642=ID#0004
+2883=ID#0005
+3124=ID#0006
+3365=ID#0007
+3606=ID#0008
+3847=ID#0009
+4088=ID#0
+Text: DM:0003:010
+4329=ID#0011
+4570=ID#0012
+4811=ID#0013
+5052=ID#0014
+5293=ID#0015
+5774=ID#0016
+6015=ID#0017
+6256=ID#0018
+6497=ID#001
+Text: DM:0004:9
+6738=ID#0020
+6979=ID#0021
+7220=ID#0022
+7461=ID#0023
+7702=ID#0024
+7943=ID#0025
+8184=ID#0026
+8425=ID#0027
+8666=ID#0028
+
+Text: DM:0005:8907=ID#0029
+9388=ID#0030
+9629=ID#0031
+9870=ID#0032
+10111=ID#0033
+10352=ID#0034
+10593=ID#0035
+10834=ID#0036
+11075=ID#00
+Text: DM:0006:37
+11316=ID#0038
+11557=ID#0039
+11798=ID#0040
+12039=ID#0041
+12280=ID#0042
+12521=ID#0043
+12762=ID#0044
+13003=ID#0045
+1324
+Text: DM:0007:4=ID#0046
+13485=ID#0047
+13726=ID#0048
+13967=ID#0049
+14208=ID#0050
+14449=ID#0051
+14690=ID#0052
+14931=ID#0053
+15172=ID#00
+Text: DM:0008:54
+15413=ID#0055
+15654=ID#0056
+15895=ID#0057
+16136=ID#0058
+16377=ID#0059
+16618=ID#0060
+16859=ID#0061
+17180=ID#0062
+1766
+Text: DM:0009:1=ID#0063
+17822=ID#0064
+18063=ID#0065
+18304=ID#0066
+18545=ID#0067
+18786=ID#0068
+19027=ID#0069
+19268=ID#0070
+19509=ID#00
+Text: DM:0010:71
+19750=ID#0072
+19991=ID#0073
+20232=ID#0074
+20353=ID#0075
+20474=ID#0076
+20595=ID#0077
+20716=ID#0078
+20957=ID#0079
+2119
+Text: DM:0011:8=ID#0080
+21519=ID#0081
+21680=ID#0082
+21921=ID#0083
+22162=ID#0084
+22403=ID#0085
+22644=ID#0086
+23125=ID#0087
+23366=ID#00
+Text: DM:0012:88
+23487=ID#0089
+23608=ID#0090
+23849=ID#0091
+24090=ID#0092
+24331=ID#0093
+24572=ID#0094
+25053=ID#0095
+25374=ID#0096
+2553
+Text: DM:0013:5=ID#0097
+25776=ID#0098
+26017=ID#0099
+26258=ID#0100
+26499=ID#0101
+26740=ID#0102
+26981=ID#0103
+27222=ID#0104
+27463=ID#01
+Text: DM:0014:05
+27704=ID#0106
+27945=ID#0107
+28066=ID#0108
+28187=ID#0109
+28308=ID#0110
+28429=ID#0111
+28670=ID#0112
+28911=ID#0113
+2923
+Text: DM:0015:2=ID#0114
+29393=ID#0115
+29634=ID#0116
+29875=ID#0117
+30116=ID#0118
+30357=ID#0119
+30838=ID#0120
+31079=ID#0121
+31200=ID#01
+Text: DM:0016:22
+31321=ID#0123
+31562=ID#0124
+31803=ID#0125
+32044=ID#0126
+32285=ID#0127
+32766=ID#0128
+33087=ID#0129
+33248=ID#0130
+3348
+Text: DM:0017:9=ID#0131
+33730=ID#0132
+33971=ID#0133
+34212=ID#0134
+34453=ID#0135
+34694=ID#0136
+34935=ID#0137
+35056=ID#0138
+35177=ID#01
+Text: DM:0018:39
+35418=ID#0140
+35659=ID#0141
+35900=ID#0142
+36141=ID#0143
+36382=ID#0144
+36623=ID#0145
+36944=ID#0146
+37105=ID#0147
+3734
+Text: DM:0019:6=ID#0148
+37587=ID#0149
+37828=ID#0150
+38069=ID#0151
+38310=ID#0152
+38551=ID#0153
+38792=ID#0154
+38913=ID#0155
+39034=ID#01
+Text: DM:0020:56
+39275=ID#0157
+39516=ID#0158
+39757=ID#0159
+39998=ID#0160
+40479=ID#0161
+40800=ID#0162
+40961=ID#0163
+41202=ID#0164
+4144
+Text: DM:0021:3=ID#0165
+41684=ID#0166
+41925=ID#0167
+42166=ID#0168
+42407=ID#0169
+42648=ID#0170
+42769=ID#0171
+42890=ID#0172
+43131=ID#01
+Text: DM:0022:73
+43372=ID#0174
+43613=ID#0175
+43854=ID#0176
+44095=ID#0177
+44336=ID#0178
+44657=ID#0179
+44818=ID#0180
+45059=ID#0181
+4530
+Text: DM:0023:0=ID#0182
+45541=ID#0183
+45782=ID#0184
+46023=ID#0185
+46264=ID#0186
+46505=ID#0187
+46626=ID#0188
+46747=ID#0189
+46988=ID#01
+Text: DM:0024:90
+47229=ID#0191
+47470=ID#0192
+47711=ID#0193
+48191=EOS
+[ID#0000]
+Type=Singer
+IconHandle=h#0000
+[ID#0001]
+Type=Anote
+Len
+Text: DM:0025:gth=240
+Note#=57
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle
+Text: DM:0026:=h#0001
+[ID#0002]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGa
+Text: DM:0027:inRate=0
+DEMaccent=0
+LyricHandle=h#0002
+[ID#0003]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLeng
+Text: DM:0028:th=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0003
+[ID#0004]
+Type=Anote
+Length=241
+Note#=64
+Dynami
+Text: DM:0029:cs=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0004
+[ID#0005]
+Type=
+Text: DM:0030:Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Ly
+Text: DM:0031:ricHandle=h#0005
+[ID#0006]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+Text: DM:0032:
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0006
+[ID#0007]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+P
+Text: DM:0033:MBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0007
+[ID#0008]
+Type=Anote
+Length=241
+Note#=
+Text: DM:0034:65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0008
+[ID#00
+Text: DM:0035:09]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMac
+Text: DM:0036:cent=0
+LyricHandle=h#0009
+[ID#0010]
+Type=Anote
+Length=241
+Note#=60
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortam
+Text: DM:0037:entoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0010
+[ID#0011]
+Type=Anote
+Length=241
+Note#=60
+Dynamics=100
+PMBendD
+Text: DM:0038:epth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0011
+[ID#0012]
+Type=Anote
+Length=2
+Text: DM:0039:41
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#00
+Text: DM:0040:12
+[ID#0013]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRat
+Text: DM:0041:e=0
+DEMaccent=0
+LyricHandle=h#0013
+[ID#0014]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+
+Text: DM:0042:PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0014
+[ID#0015]
+Type=Anote
+Length=481
+Note#=62
+Dynamics=10
+Text: DM:0043:0
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0015
+[ID#0016]
+Type=Anote
+Text: DM:0044:
+Length=241
+Note#=57
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHa
+Text: DM:0045:ndle=h#0016
+[ID#0017]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMd
+Text: DM:0046:ecGainRate=0
+DEMaccent=0
+LyricHandle=h#0017
+[ID#0018]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBend
+Text: DM:0047:Length=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0018
+[ID#0019]
+Type=Anote
+Length=241
+Note#=64
+Dy
+Text: DM:0048:namics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0019
+[ID#0020]
+T
+Text: DM:0049:ype=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=
+Text: DM:0050:0
+LyricHandle=h#0020
+[ID#0021]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoU
+Text: DM:0051:se=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0021
+[ID#0022]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=
+Text: DM:0052:10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0022
+[ID#0023]
+Type=Anote
+Length=241
+No
+Text: DM:0053:te#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0023
+[I
+Text: DM:0054:D#0024]
+Type=Anote
+Length=241
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+D
+Text: DM:0055:EMaccent=0
+LyricHandle=h#0024
+[ID#0025]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPo
+Text: DM:0056:rtamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0025
+[ID#0026]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMB
+Text: DM:0057:endDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0026
+[ID#0027]
+Type=Anote
+Leng
+Text: DM:0058:th=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=
+Text: DM:0059:h#0027
+[ID#0028]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGai
+Text: DM:0060:nRate=0
+DEMaccent=0
+LyricHandle=h#0028
+[ID#0029]
+Type=Anote
+Length=481
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLengt
+Text: DM:0061:h=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0029
+[ID#0030]
+Type=Anote
+Length=241
+Note#=62
+Dynamic
+Text: DM:0062:s=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0030
+[ID#0031]
+Type=A
+Text: DM:0063:note
+Length=241
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Lyr
+Text: DM:0064:icHandle=h#0031
+[ID#0032]
+Type=Anote
+Length=241
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+
+Text: DM:0065:DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0032
+[ID#0033]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PM
+Text: DM:0066:BendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0033
+[ID#0034]
+Type=Anote
+Length=241
+Note#=6
+Text: DM:0067:5
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0034
+[ID#003
+Text: DM:0068:5]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMacc
+Text: DM:0069:ent=0
+LyricHandle=h#0035
+[ID#0036]
+Type=Anote
+Length=241
+Note#=60
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortame
+Text: DM:0070:ntoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0036
+[ID#0037]
+Type=Anote
+Length=241
+Note#=60
+Dynamics=100
+PMBendDe
+Text: DM:0071:pth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0037
+[ID#0038]
+Type=Anote
+Length=24
+Text: DM:0072:1
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#003
+Text: DM:0073:8
+[ID#0039]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate
+Text: DM:0074:=0
+DEMaccent=0
+LyricHandle=h#0039
+[ID#0040]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+P
+Text: DM:0075:MbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0040
+[ID#0041]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+Text: DM:0076:
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0041
+[ID#0042]
+Type=Anote
+
+Text: DM:0077:Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHan
+Text: DM:0078:dle=h#0042
+[ID#0043]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMde
+Text: DM:0079:cGainRate=0
+DEMaccent=0
+LyricHandle=h#0043
+[ID#0044]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendL
+Text: DM:0080:ength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0044
+[ID#0045]
+Type=Anote
+Length=241
+Note#=62
+Dyn
+Text: DM:0081:amics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0045
+[ID#0046]
+Ty
+Text: DM:0082:pe=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Text: DM:0083:
+LyricHandle=h#0046
+[ID#0047]
+Type=Anote
+Length=241
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUs
+Text: DM:0084:e=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0047
+[ID#0048]
+Type=Anote
+Length=241
+Note#=69
+Dynamics=100
+PMBendDepth=1
+Text: DM:0085:0
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0048
+[ID#0049]
+Type=Anote
+Length=241
+Not
+Text: DM:0086:e#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0049
+[ID
+Text: DM:0087:#0050]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DE
+Text: DM:0088:Maccent=0
+LyricHandle=h#0050
+[ID#0051]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPor
+Text: DM:0089:tamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0051
+[ID#0052]
+Type=Anote
+Length=241
+Note#=60
+Dynamics=100
+PMBe
+Text: DM:0090:ndDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0052
+[ID#0053]
+Type=Anote
+Lengt
+Text: DM:0091:h=241
+Note#=60
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h
+Text: DM:0092:#0053
+[ID#0054]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGain
+Text: DM:0093:Rate=0
+DEMaccent=0
+LyricHandle=h#0054
+[ID#0055]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength
+Text: DM:0094:=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0055
+[ID#0056]
+Type=Anote
+Length=241
+Note#=67
+Dynamics
+Text: DM:0095:=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0056
+[ID#0057]
+Type=An
+Text: DM:0096:ote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Lyri
+Text: DM:0097:cHandle=h#0057
+[ID#0058]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+D
+Text: DM:0098:EMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0058
+[ID#0059]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMB
+Text: DM:0099:endLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0059
+[ID#0060]
+Type=Anote
+Length=241
+Note#=62
+Text: DM:0100:
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0060
+[ID#0061
+Text: DM:0101:]
+Type=Anote
+Length=321
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMacce
+Text: DM:0102:nt=0
+LyricHandle=h#0061
+[ID#0062]
+Type=Anote
+Length=481
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamen
+Text: DM:0103:toUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0062
+[ID#0063]
+Type=Anote
+Length=161
+Note#=62
+Dynamics=100
+PMBendDep
+Text: DM:0104:th=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0063
+[ID#0064]
+Type=Anote
+Length=241
+Text: DM:0105:
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0064
+Text: DM:0106:
+[ID#0065]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=
+Text: DM:0107:0
+DEMaccent=0
+LyricHandle=h#0065
+[ID#0066]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PM
+Text: DM:0108:bPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0066
+[ID#0067]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+
+Text: DM:0109:PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0067
+[ID#0068]
+Type=Anote
+L
+Text: DM:0110:ength=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHand
+Text: DM:0111:le=h#0068
+[ID#0069]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdec
+Text: DM:0112:GainRate=0
+DEMaccent=0
+LyricHandle=h#0069
+[ID#0070]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLe
+Text: DM:0113:ngth=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0070
+[ID#0071]
+Type=Anote
+Length=241
+Note#=60
+Dyna
+Text: DM:0114:mics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0071
+[ID#0072]
+Typ
+Text: DM:0115:e=Anote
+Length=241
+Note#=60
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+
+Text: DM:0116:LyricHandle=h#0072
+[ID#0073]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse
+Text: DM:0117:=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0073
+[ID#0074]
+Type=Anote
+Length=121
+Note#=65
+Dynamics=100
+PMBendDepth=10
+Text: DM:0118:
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0074
+[ID#0075]
+Type=Anote
+Length=121
+Note
+Text: DM:0119:#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0075
+[ID#
+Text: DM:0120:0076]
+Type=Anote
+Length=121
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEM
+Text: DM:0121:accent=0
+LyricHandle=h#0076
+[ID#0077]
+Type=Anote
+Length=121
+Note#=60
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPort
+Text: DM:0122:amentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0077
+[ID#0078]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBen
+Text: DM:0123:dDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0078
+[ID#0079]
+Type=Anote
+Length
+Text: DM:0124:=241
+Note#=57
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#
+Text: DM:0125:0079
+[ID#0080]
+Type=Anote
+Length=321
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainR
+Text: DM:0126:ate=0
+DEMaccent=0
+LyricHandle=h#0080
+[ID#0081]
+Type=Anote
+Length=161
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=
+Text: DM:0127:5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0081
+[ID#0082]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=
+Text: DM:0128:100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0082
+[ID#0083]
+Type=Ano
+Text: DM:0129:te
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Lyric
+Text: DM:0130:Handle=h#0083
+[ID#0084]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DE
+Text: DM:0131:MdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0084
+[ID#0085]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBe
+Text: DM:0132:ndLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0085
+[ID#0086]
+Type=Anote
+Length=481
+Note#=62
+
+Text: DM:0133:Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0086
+[ID#0087]
+Text: DM:0134:
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccen
+Text: DM:0135:t=0
+LyricHandle=h#0087
+[ID#0088]
+Type=Anote
+Length=121
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortament
+Text: DM:0136:oUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0088
+[ID#0089]
+Type=Anote
+Length=121
+Note#=67
+Dynamics=100
+PMBendDept
+Text: DM:0137:h=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0089
+[ID#0090]
+Type=Anote
+Length=241
+
+Text: DM:0138:Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0090
+
+Text: DM:0139:[ID#0091]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+Text: DM:0140:
+DEMaccent=0
+LyricHandle=h#0091
+[ID#0092]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMb
+Text: DM:0141:PortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0092
+[ID#0093]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+P
+Text: DM:0142:MBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0093
+[ID#0094]
+Type=Anote
+Le
+Text: DM:0143:ngth=481
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandl
+Text: DM:0144:e=h#0094
+[ID#0095]
+Type=Anote
+Length=321
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecG
+Text: DM:0145:ainRate=0
+DEMaccent=0
+LyricHandle=h#0095
+[ID#0096]
+Type=Anote
+Length=161
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLen
+Text: DM:0146:gth=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0096
+[ID#0097]
+Type=Anote
+Length=241
+Note#=62
+Dynam
+Text: DM:0147:ics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0097
+[ID#0098]
+Type
+Text: DM:0148:=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+L
+Text: DM:0149:yricHandle=h#0098
+[ID#0099]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=
+Text: DM:0150:0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0099
+[ID#0100]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+
+Text: DM:0151:PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0100
+[ID#0101]
+Type=Anote
+Length=241
+Note#
+Text: DM:0152:=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0101
+[ID#0
+Text: DM:0153:102]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMa
+Text: DM:0154:ccent=0
+LyricHandle=h#0102
+[ID#0103]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPorta
+Text: DM:0155:mentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0103
+[ID#0104]
+Type=Anote
+Length=241
+Note#=60
+Dynamics=100
+PMBend
+Text: DM:0156:Depth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0104
+[ID#0105]
+Type=Anote
+Length=
+Text: DM:0157:241
+Note#=60
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0
+Text: DM:0158:105
+[ID#0106]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRa
+Text: DM:0159:te=0
+DEMaccent=0
+LyricHandle=h#0106
+[ID#0107]
+Type=Anote
+Length=121
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+Text: DM:0160:
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0107
+[ID#0108]
+Type=Anote
+Length=121
+Note#=64
+Dynamics=1
+Text: DM:0161:00
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0108
+[ID#0109]
+Type=Anot
+Text: DM:0162:e
+Length=121
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricH
+Text: DM:0163:andle=h#0109
+[ID#0110]
+Type=Anote
+Length=121
+Note#=60
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEM
+Text: DM:0164:decGainRate=0
+DEMaccent=0
+LyricHandle=h#0110
+[ID#0111]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBen
+Text: DM:0165:dLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0111
+[ID#0112]
+Type=Anote
+Length=241
+Note#=57
+D
+Text: DM:0166:ynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0112
+[ID#0113]
+
+Text: DM:0167:Type=Anote
+Length=321
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent
+Text: DM:0168:=0
+LyricHandle=h#0113
+[ID#0114]
+Type=Anote
+Length=161
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamento
+Text: DM:0169:Use=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0114
+[ID#0115]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth
+Text: DM:0170:=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0115
+[ID#0116]
+Type=Anote
+Length=241
+N
+Text: DM:0171:ote#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0116
+[
+Text: DM:0172:ID#0117]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+
+Text: DM:0173:DEMaccent=0
+LyricHandle=h#0117
+[ID#0118]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbP
+Text: DM:0174:ortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0118
+[ID#0119]
+Type=Anote
+Length=481
+Note#=62
+Dynamics=100
+PM
+Text: DM:0175:BendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0119
+[ID#0120]
+Type=Anote
+Len
+Text: DM:0176:gth=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle
+Text: DM:0177:=h#0120
+[ID#0121]
+Type=Anote
+Length=121
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGa
+Text: DM:0178:inRate=0
+DEMaccent=0
+LyricHandle=h#0121
+[ID#0122]
+Type=Anote
+Length=121
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLeng
+Text: DM:0179:th=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0122
+[ID#0123]
+Type=Anote
+Length=241
+Note#=65
+Dynami
+Text: DM:0180:cs=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0123
+[ID#0124]
+Type=
+Text: DM:0181:Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Ly
+Text: DM:0182:ricHandle=h#0124
+[ID#0125]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+Text: DM:0183:
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0125
+[ID#0126]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+P
+Text: DM:0184:MBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0126
+[ID#0127]
+Type=Anote
+Length=481
+Note#=
+Text: DM:0185:62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0127
+[ID#01
+Text: DM:0186:28]
+Type=Anote
+Length=321
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMac
+Text: DM:0187:cent=0
+LyricHandle=h#0128
+[ID#0129]
+Type=Anote
+Length=161
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortam
+Text: DM:0188:entoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0129
+[ID#0130]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendD
+Text: DM:0189:epth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0130
+[ID#0131]
+Type=Anote
+Length=2
+Text: DM:0190:41
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#01
+Text: DM:0191:31
+[ID#0132]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRat
+Text: DM:0192:e=0
+DEMaccent=0
+LyricHandle=h#0132
+[ID#0133]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+
+Text: DM:0193:PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0133
+[ID#0134]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=10
+Text: DM:0194:0
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0134
+[ID#0135]
+Type=Anote
+Text: DM:0195:
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHa
+Text: DM:0196:ndle=h#0135
+[ID#0136]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMd
+Text: DM:0197:ecGainRate=0
+DEMaccent=0
+LyricHandle=h#0136
+[ID#0137]
+Type=Anote
+Length=121
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBend
+Text: DM:0198:Length=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0137
+[ID#0138]
+Type=Anote
+Length=121
+Note#=67
+Dy
+Text: DM:0199:namics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0138
+[ID#0139]
+T
+Text: DM:0200:ype=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=
+Text: DM:0201:0
+LyricHandle=h#0139
+[ID#0140]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoU
+Text: DM:0202:se=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0140
+[ID#0141]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=
+Text: DM:0203:10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0141
+[ID#0142]
+Type=Anote
+Length=241
+No
+Text: DM:0204:te#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0142
+[I
+Text: DM:0205:D#0143]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+D
+Text: DM:0206:EMaccent=0
+LyricHandle=h#0143
+[ID#0144]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPo
+Text: DM:0207:rtamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0144
+[ID#0145]
+Type=Anote
+Length=321
+Note#=69
+Dynamics=100
+PMB
+Text: DM:0208:endDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0145
+[ID#0146]
+Type=Anote
+Leng
+Text: DM:0209:th=161
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=
+Text: DM:0210:h#0146
+[ID#0147]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGai
+Text: DM:0211:nRate=0
+DEMaccent=0
+LyricHandle=h#0147
+[ID#0148]
+Type=Anote
+Length=241
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLengt
+Text: DM:0212:h=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0148
+[ID#0149]
+Type=Anote
+Length=241
+Note#=67
+Dynamic
+Text: DM:0213:s=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0149
+[ID#0150]
+Type=A
+Text: DM:0214:note
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Lyr
+Text: DM:0215:icHandle=h#0150
+[ID#0151]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+
+Text: DM:0216:DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0151
+[ID#0152]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PM
+Text: DM:0217:BendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0152
+[ID#0153]
+Type=Anote
+Length=241
+Note#=6
+Text: DM:0218:7
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0153
+[ID#015
+Text: DM:0219:4]
+Type=Anote
+Length=121
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMacc
+Text: DM:0220:ent=0
+LyricHandle=h#0154
+[ID#0155]
+Type=Anote
+Length=121
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortame
+Text: DM:0221:ntoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0155
+[ID#0156]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDe
+Text: DM:0222:pth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0156
+[ID#0157]
+Type=Anote
+Length=24
+Text: DM:0223:1
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#015
+Text: DM:0224:7
+[ID#0158]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate
+Text: DM:0225:=0
+DEMaccent=0
+LyricHandle=h#0158
+[ID#0159]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+P
+Text: DM:0226:MbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0159
+[ID#0160]
+Type=Anote
+Length=481
+Note#=62
+Dynamics=100
+Text: DM:0227:
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0160
+[ID#0161]
+Type=Anote
+
+Text: DM:0228:Length=321
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHan
+Text: DM:0229:dle=h#0161
+[ID#0162]
+Type=Anote
+Length=161
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMde
+Text: DM:0230:cGainRate=0
+DEMaccent=0
+LyricHandle=h#0162
+[ID#0163]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendL
+Text: DM:0231:ength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0163
+[ID#0164]
+Type=Anote
+Length=241
+Note#=69
+Dyn
+Text: DM:0232:amics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0164
+[ID#0165]
+Ty
+Text: DM:0233:pe=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Text: DM:0234:
+LyricHandle=h#0165
+[ID#0166]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUs
+Text: DM:0235:e=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0166
+[ID#0167]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=1
+Text: DM:0236:0
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0167
+[ID#0168]
+Type=Anote
+Length=241
+Not
+Text: DM:0237:e#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0168
+[ID
+Text: DM:0238:#0169]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DE
+Text: DM:0239:Maccent=0
+LyricHandle=h#0169
+[ID#0170]
+Type=Anote
+Length=121
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPor
+Text: DM:0240:tamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0170
+[ID#0171]
+Type=Anote
+Length=121
+Note#=67
+Dynamics=100
+PMBe
+Text: DM:0241:ndDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0171
+[ID#0172]
+Type=Anote
+Lengt
+Text: DM:0242:h=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h
+Text: DM:0243:#0172
+[ID#0173]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGain
+Text: DM:0244:Rate=0
+DEMaccent=0
+LyricHandle=h#0173
+[ID#0174]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength
+Text: DM:0245:=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0174
+[ID#0175]
+Type=Anote
+Length=241
+Note#=64
+Dynamics
+Text: DM:0246:=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0175
+[ID#0176]
+Type=An
+Text: DM:0247:ote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+Lyri
+Text: DM:0248:cHandle=h#0176
+[ID#0177]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+D
+Text: DM:0249:EMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0177
+[ID#0178]
+Type=Anote
+Length=321
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMB
+Text: DM:0250:endLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0178
+[ID#0179]
+Type=Anote
+Length=161
+Note#=65
+Text: DM:0251:
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0179
+[ID#0180
+Text: DM:0252:]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMacce
+Text: DM:0253:nt=0
+LyricHandle=h#0180
+[ID#0181]
+Type=Anote
+Length=241
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamen
+Text: DM:0254:toUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0181
+[ID#0182]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+PMBendDep
+Text: DM:0255:th=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0182
+[ID#0183]
+Type=Anote
+Length=241
+Text: DM:0256:
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0183
+Text: DM:0257:
+[ID#0184]
+Type=Anote
+Length=241
+Note#=64
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=
+Text: DM:0258:0
+DEMaccent=0
+LyricHandle=h#0184
+[ID#0185]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PM
+Text: DM:0259:bPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0185
+[ID#0186]
+Type=Anote
+Length=241
+Note#=67
+Dynamics=100
+
+Text: DM:0260:PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0186
+[ID#0187]
+Type=Anote
+L
+Text: DM:0261:ength=121
+Note#=69
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHand
+Text: DM:0262:le=h#0187
+[ID#0188]
+Type=Anote
+Length=121
+Note#=67
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdec
+Text: DM:0263:GainRate=0
+DEMaccent=0
+LyricHandle=h#0188
+[ID#0189]
+Type=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLe
+Text: DM:0264:ngth=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0189
+[ID#0190]
+Type=Anote
+Length=241
+Note#=64
+Dyna
+Text: DM:0265:mics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0190
+[ID#0191]
+Typ
+Text: DM:0266:e=Anote
+Length=241
+Note#=65
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+
+Text: DM:0267:LyricHandle=h#0191
+[ID#0192]
+Type=Anote
+Length=241
+Note#=62
+Dynamics=100
+PMBendDepth=10
+PMBendLength=5
+PMbPortamentoUse
+Text: DM:0268:=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0192
+[ID#0193]
+Type=Anote
+Length=480
+Note#=62
+Dynamics=100
+PMBendDepth=10
+Text: DM:0269:
+PMBendLength=5
+PMbPortamentoUse=0
+DEMdecGainRate=0
+DEMaccent=0
+LyricHandle=h#0193
+[h#0000]
+IconID=$07010000
+IDS=Utau
+O
+Text: DM:0270:riginal=0
+Caption=
+length=1
+Language=0
+Program=0
+[h#0001]
+L0="nu","a",0.000000,64,0,0
+[h#0002]
+L0="a","a",0.000000,64,0
+Text: DM:0271:,0
+[h#0003]
+L0="pu","a",0.000000,64,0,0
+[h#0004]
+L0="ri","a",0.000000,64,0,0
+[h#0005]
+L0="sa","a",0.000000,64,0,0
+[h#00
+Text: DM:0272:06]
+L0="ku","a",0.000000,64,0,0
+[h#0007]
+L0="u","a",0.000000,64,0,0
+[h#0008]
+L0="ru","a",0.000000,64,0,0
+[h#0009]
+L0="s
+Text: DM:0273:e","a",0.000000,64,0,0
+[h#0010]
+L0="po","a",0.000000,64,0,0
+[h#0011]
+L0="ro","a",0.000000,64,0,0
+[h#0012]
+L0="ka","a",0
+Text: DM:0274:.000000,64,0,0
+[h#0013]
+L0="n","a",0.000000,64,0,0
+[h#0014]
+L0="ta","a",0.000000,64,0,0
+[h#0015]
+L0="chi","a",0.000000,
+Text: DM:0275:64,0,0
+[h#0016]
+L0="ya","a",0.000000,64,0,0
+[h#0017]
+L0="ra","a",0.000000,64,0,0
+[h#0018]
+L0="ka","a",0.000000,64,0,0
+[
+Text: DM:0276:h#0019]
+L0="ni","a",0.000000,64,0,0
+[h#0020]
+L0="po","a",0.000000,64,0,0
+[h#0021]
+L0="ji","a",0.000000,64,0,0
+[h#0022]
+
+Text: DM:0277:L0="i","a",0.000000,64,0,0
+[h#0023]
+L0="ku","a",0.000000,64,0,0
+[h#0024]
+L0="tsu","a",0.000000,64,0,0
+[h#0025]
+L0="ku",
+Text: DM:0278:"a",0.000000,64,0,0
+[h#0026]
+L0="chi","a",0.000000,64,0,0
+[h#0027]
+L0="ye","a",0.000000,64,0,0
+[h#0028]
+L0="va","a",0.0
+Text: DM:0279:00000,64,0,0
+[h#0029]
+L0="n","a",0.000000,64,0,0
+[h#0030]
+L0="a","a",0.000000,64,0,0
+[h#0031]
+L0="i","a",0.000000,64,0,
+Text: DM:0280:0
+[h#0032]
+L0="chi","a",0.000000,64,0,0
+[h#0033]
+L0="se","a",0.000000,64,0,0
+[h#0034]
+L0="tsu","a",0.000000,64,0,0
+[h#0
+Text: DM:0281:035]
+L0="to","a",0.000000,64,0,0
+[h#0036]
+L0="o","a",0.000000,64,0,0
+[h#0037]
+L0="sa","a",0.000000,64,0,0
+[h#0038]
+L0="
+Text: DM:0282:va","a",0.000000,64,0,0
+[h#0039]
+L0="chi","a",0.000000,64,0,0
+[h#0040]
+L0="va","a",0.000000,64,0,0
+[h#0041]
+L0="a","a",
+Text: DM:0283:0.000000,64,0,0
+[h#0042]
+L0="n","a",0.000000,64,0,0
+[h#0043]
+L0="ku","a",0.000000,64,0,0
+[h#0044]
+L0="ra","a",0.000000,
+Text: DM:0284:64,0,0
+[h#0045]
+L0="ha","a",0.000000,64,0,0
+[h#0046]
+L0="n","a",0.000000,64,0,0
+[h#0047]
+L0="ye","a",0.000000,64,0,0
+[h
+Text: DM:0285:#0048]
+L0="va","a",0.000000,64,0,0
+[h#0049]
+L0="se","a",0.000000,64,0,0
+[h#0050]
+L0="n","a",0.000000,64,0,0
+[h#0051]
+L0
+Text: DM:0286:="yu","a",0.000000,64,0,0
+[h#0052]
+L0="tsu","a",0.000000,64,0,0
+[h#0053]
+L0="ku","a",0.000000,64,0,0
+[h#0054]
+L0="chi",
+Text: DM:0287:"a",0.000000,64,0,0
+[h#0055]
+L0="shi","a",0.000000,64,0,0
+[h#0056]
+L0="ra","a",0.000000,64,0,0
+[h#0057]
+L0="e","a",0.00
+Text: DM:0288:0000,64,0,0
+[h#0058]
+L0="i","a",0.000000,64,0,0
+[h#0059]
+L0="me","a",0.000000,64,0,0
+[h#0060]
+L0="i","a",0.000000,64,0,
+Text: DM:0289:0
+[h#0061]
+L0="ta","a",0.000000,64,0,0
+[h#0062]
+L0="n","a",0.000000,64,0,0
+[h#0063]
+L0="ro","a",0.000000,64,0,0
+[h#0064
+Text: DM:0290:]
+L0="i","a",0.000000,64,0,0
+[h#0065]
+L0="n","a",0.000000,64,0,0
+[h#0066]
+L0="ki","a",0.000000,64,0,0
+[h#0067]
+L0="ro",
+Text: DM:0291:"a",0.000000,64,0,0
+[h#0068]
+L0="to","a",0.000000,64,0,0
+[h#0069]
+L0="ha","a",0.000000,64,0,0
+[h#0070]
+L0="i","a",0.000
+Text: DM:0292:000,64,0,0
+[h#0071]
+L0="ta","a",0.000000,64,0,0
+[h#0072]
+L0="a","a",0.000000,64,0,0
+[h#0073]
+L0="ku","a",0.000000,64,0,
+Text: DM:0293:0
+[h#0074]
+L0="n","a",0.000000,64,0,0
+[h#0075]
+L0="myo","a",0.000000,64,0,0
+[h#0076]
+L0="ta","a",0.000000,64,0,0
+[h#007
+Text: DM:0294:7]
+L0="n","a",0.000000,64,0,0
+[h#0078]
+L0="shi","a",0.000000,64,0,0
+[h#0079]
+L0="me","a",0.000000,64,0,0
+[h#0080]
+L0="r
+Text: DM:0295:a","a",0.000000,64,0,0
+[h#0081]
+L0="i","a",0.000000,64,0,0
+[h#0082]
+L0="a","a",0.000000,64,0,0
+[h#0083]
+L0="su","a",0.0
+Text: DM:0296:00000,64,0,0
+[h#0084]
+L0="ta","a",0.000000,64,0,0
+[h#0085]
+L0="ra","a",0.000000,64,0,0
+[h#0086]
+L0="i","a",0.000000,64,
+Text: DM:0297:0,0
+[h#0087]
+L0="ta","a",0.000000,64,0,0
+[h#0088]
+L0="a","a",0.000000,64,0,0
+[h#0089]
+L0="n","a",0.000000,64,0,0
+[h#009
+Text: DM:0298:0]
+L0="sa","a",0.000000,64,0,0
+[h#0091]
+L0="ri","a",0.000000,64,0,0
+[h#0092]
+L0="vi","a",0.000000,64,0,0
+[h#0093]
+L0="r
+Text: DM:0299:i","a",0.000000,64,0,0
+[h#0094]
+L0="hi","a",0.000000,64,0,0
+[h#0095]
+L0="pu","a",0.000000,64,0,0
+[h#0096]
+L0="tsu","a",
+Text: DM:0300:0.000000,64,0,0
+[h#0097]
+L0="tsu","a",0.000000,64,0,0
+[h#0098]
+L0="pu","a",0.000000,64,0,0
+[h#0099]
+L0="tsu","a",0.0000
+Text: DM:0301:00,64,0,0
+[h#0100]
+L0="ta","a",0.000000,64,0,0
+[h#0101]
+L0="pu","a",0.000000,64,0,0
+[h#0102]
+L0="tsu","a",0.000000,64,0
+Text: DM:0302:,0
+[h#0103]
+L0="a","a",0.000000,64,0,0
+[h#0104]
+L0="pu","a",0.000000,64,0,0
+[h#0105]
+L0="a","a",0.000000,64,0,0
+[h#0106
+Text: DM:0303:]
+L0="tsu","a",0.000000,64,0,0
+[h#0107]
+L0="chi","a",0.000000,64,0,0
+[h#0108]
+L0="pu","a",0.000000,64,0,0
+[h#0109]
+L0="
+Text: DM:0304:tsu","a",0.000000,64,0,0
+[h#0110]
+L0="hi","a",0.000000,64,0,0
+[h#0111]
+L0="ri","a",0.000000,64,0,0
+[h#0112]
+L0="ya","a"
+Text: DM:0305:,0.000000,64,0,0
+[h#0113]
+L0="re","a",0.000000,64,0,0
+[h#0114]
+L0="e","a",0.000000,64,0,0
+[h#0115]
+L0="n","a",0.000000,
+Text: DM:0306:64,0,0
+[h#0116]
+L0="ye","a",0.000000,64,0,0
+[h#0117]
+L0="va","a",0.000000,64,0,0
+[h#0118]
+L0="n","a",0.000000,64,0,0
+[h
+Text: DM:0307:#0119]
+L0="su","a",0.000000,64,0,0
+[h#0120]
+L0="u","a",0.000000,64,0,0
+[h#0121]
+L0="o","a",0.000000,64,0,0
+[h#0122]
+L0=
+Text: DM:0308:"ri","a",0.000000,64,0,0
+[h#0123]
+L0="ve","a",0.000000,64,0,0
+[h#0124]
+L0="na","a",0.000000,64,0,0
+[h#0125]
+L0="se","a"
+Text: DM:0309:,0.000000,64,0,0
+[h#0126]
+L0="ra","a",0.000000,64,0,0
+[h#0127]
+L0="ko","a",0.000000,64,0,0
+[h#0128]
+L0="i","a",0.000000
+Text: DM:0310:,64,0,0
+[h#0129]
+L0="me","a",0.000000,64,0,0
+[h#0130]
+L0="i","a",0.000000,64,0,0
+[h#0131]
+L0="se","a",0.000000,64,0,0
+[
+Text: DM:0311:h#0132]
+L0="tsu","a",0.000000,64,0,0
+[h#0133]
+L0="o","a",0.000000,64,0,0
+[h#0134]
+L0="n","a",0.000000,64,0,0
+[h#0135]
+L
+Text: DM:0312:0="ne","a",0.000000,64,0,0
+[h#0136]
+L0="e","a",0.000000,64,0,0
+[h#0137]
+L0="to","a",0.000000,64,0,0
+[h#0138]
+L0="e","a"
+Text: DM:0313:,0.000000,64,0,0
+[h#0139]
+L0="vo","a",0.000000,64,0,0
+[h#0140]
+L0="chi","a",0.000000,64,0,0
+[h#0141]
+L0="pe","a",0.0000
+Text: DM:0314:00,64,0,0
+[h#0142]
+L0="a","a",0.000000,64,0,0
+[h#0143]
+L0="o","a",0.000000,64,0,0
+[h#0144]
+L0="ri","a",0.000000,64,0,0
+
+Text: DM:0315:[h#0145]
+L0="ma","a",0.000000,64,0,0
+[h#0146]
+L0="ru","a",0.000000,64,0,0
+[h#0147]
+L0="ka","a",0.000000,64,0,0
+[h#0148]
+Text: DM:0316:
+L0="na","a",0.000000,64,0,0
+[h#0149]
+L0="yo","a",0.000000,64,0,0
+[h#0150]
+L0="ka","a",0.000000,64,0,0
+[h#0151]
+L0="i",
+Text: DM:0317:"a",0.000000,64,0,0
+[h#0152]
+L0="se","a",0.000000,64,0,0
+[h#0153]
+L0="ra","a",0.000000,64,0,0
+[h#0154]
+L0="ya","a",0.00
+Text: DM:0318:0000,64,0,0
+[h#0155]
+L0="bi","a",0.000000,64,0,0
+[h#0156]
+L0="u","a",0.000000,64,0,0
+[h#0157]
+L0="ru","a",0.000000,64,0
+Text: DM:0319:,0
+[h#0158]
+L0="se","a",0.000000,64,0,0
+[h#0159]
+L0="vi","a",0.000000,64,0,0
+[h#0160]
+L0="n","a",0.000000,64,0,0
+[h#016
+Text: DM:0320:1]
+L0="ku","a",0.000000,64,0,0
+[h#0162]
+L0="ya","a",0.000000,64,0,0
+[h#0163]
+L0="vo","a",0.000000,64,0,0
+[h#0164]
+L0="e
+Text: DM:0321:","a",0.000000,64,0,0
+[h#0165]
+L0="vo","a",0.000000,64,0,0
+[h#0166]
+L0="chi","a",0.000000,64,0,0
+[h#0167]
+L0="e","a",0.
+Text: DM:0322:000000,64,0,0
+[h#0168]
+L0="i","a",0.000000,64,0,0
+[h#0169]
+L0="ta","a",0.000000,64,0,0
+[h#0170]
+L0="ta","a",0.000000,64
+Text: DM:0323:,0,0
+[h#0171]
+L0="po","a",0.000000,64,0,0
+[h#0172]
+L0="i","a",0.000000,64,0,0
+[h#0173]
+L0="ko","a",0.000000,64,0,0
+[h#0
+Text: DM:0324:174]
+L0="o","a",0.000000,64,0,0
+[h#0175]
+L0="ma","a",0.000000,64,0,0
+[h#0176]
+L0="ru","a",0.000000,64,0,0
+[h#0177]
+L0="
+Text: DM:0325:ku","a",0.000000,64,0,0
+[h#0178]
+L0="u","a",0.000000,64,0,0
+[h#0179]
+L0="su","a",0.000000,64,0,0
+[h#0180]
+L0="ha","a",0
+Text: DM:0326:.000000,64,0,0
+[h#0181]
+L0="i","a",0.000000,64,0,0
+[h#0182]
+L0="ta","a",0.000000,64,0,0
+[h#0183]
+L0="a","a",0.000000,64
+Text: DM:0327:,0,0
+[h#0184]
+L0="shi","a",0.000000,64,0,0
+[h#0185]
+L0="ro","a",0.000000,64,0,0
+[h#0186]
+L0="n","a",0.000000,64,0,0
+[h#
+Text: DM:0328:0187]
+L0="ko","a",0.000000,64,0,0
+[h#0188]
+L0="ra","a",0.000000,64,0,0
+[h#0189]
+L0="su","a",0.000000,64,0,0
+[h#0190]
+L0
+Text: DM:0329:="ko","a",0.000000,64,0,0
+[h#0191]
+L0="o","a",0.000000,64,0,0
+[h#0192]
+L0="ra","a",0.000000,64,0,0
+[h#0193]
+L0="i","a",
+Text: DM:0330:0.000000,64,0,0
+
+No pre-resampling cache hit
+Playing time: ~3 seconds
+Notes cut: 0
+Notes lost totally: 0

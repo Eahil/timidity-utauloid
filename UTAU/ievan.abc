@@ -1,0 +1,127 @@
+X: 1
+T: from hattunen_mikuinenjp.mid
+M: 2/4
+L: 1/16
+Q:1/4=120
+K:F % 1 flats
+% from hattunen_mikuinen.midi
+V:1
+% from hattunen_mikuinen.midi
+%  1 flats
+%  Ievan polkka
+%  Savitaipaleen polkka
+%  Ievan polkka
+%  Savitaipaleen polkka
+%  D:Kevin Burke: Up Close
+%  O:South Karelia
+%  Z:id:hn-polka-41
+%  F:http://ecf-guest.mit.edu/~jc/music/abc/Finland/OivanIlo/tunes/polka.abc	 20100906 193308 UT
+%  Ievan polkka
+%  Savitaipaleen polkka
+%%MIDI program 27
+% from hattunen_mikuinen.midi
+A,2 D2 D2 E2| \
+F2 D2 D2 F2| \
+E2 C2 C2 E2| \
+F2 D2 D4|
+A,2 D2 D2 E2| \
+F2 D2 D2 F2| \
+A2 G2 F2 E2| \
+F2 D2 D4|
+A2 A2 G2 F2| \
+E2 C2 C2 E2| \
+G2 G2 F2 E2| \
+F2 D2 D2 F2|
+A2 A2 G2 F2| \
+E2 C2 C2 E2| \
+G2 G2 F2 E2| \
+F2 D2 D4|
+D2>D2 D2 E2| \
+F2 D2 D2 F2| \
+E2 C2 C2 E2| \
+FE DC D2 A,2|
+D2>D2 D2 E2| \
+F2 D2 D4| \
+G2 AG F2 E2| \
+F2 D2 D4|
+D2>D2 D2 E2| \
+F2 D2 D2 F2| \
+E2 C2 C2 E2| \
+FE DC D2 A,2|
+D2>D2 D2 E2| \
+F2 D2 D4| \
+G2 AG F2 E2| \
+F2 D2 D4|
+A2>F2 F2 A2| \
+G2 E2 E2 F2| \
+G2 AG F2 E2| \
+D2 E2 F2 G2|
+A2>F2 F2 A2| \
+G2 E2 E2 F2| \
+G2 AG F2 E2| \
+F2 D2 D4|
+A2>F2 F2 A2| \
+G2 E2 E2 F2| \
+G2 AG F2 E2| \
+D2 E2 F2 G2|
+A2>F2 F2 A2| \
+G2 E2 E2 F2| \
+G2 AG F2 E2| \
+F2 D2 D4|
+V:2
+%  D:Kevin Burke: Up Close
+%  O:South Karelia
+%  Z:id:hn-polka-41
+%  F:http://ecf-guest.mit.edu/~jc/music/abc/Finland/OivanIlo/tunes/polka.abc	 20100906 193308 UT
+%  Ievan polkka
+%  Savitaipaleen polkka
+%%MIDI program 35
+% from hattunen_mikuinen.midi
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x| \
+=D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x| \
+=D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x| \
+=D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x| \
+=D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x| \
+=D,,x [A,F,D,]x D,,x [A,F,D,]x|
+D,,x [A,F,D,]x D,,x [A,F,D,]x| \
+C,,x [G,E,C,]x C,,x [G,E,C,]x| \
+A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x A,,x [G/2-E/2-_D/2-A,/2][G/2E/2_D/2]x| \
+=D,,x [A,F,D,]x D,,x [A,F,D,]
