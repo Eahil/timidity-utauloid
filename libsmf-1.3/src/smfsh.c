@@ -373,26 +373,6 @@ show_event(smf_event_t *event)
 }
 
 static int
-decode_vsq(smf_event_t *event,FILE* vocafile)
-{
-	int off = 0, i;
-	char *decoded, *type;
-
-	
-	
-	decoded = smf_event_extract_text(event);
-
-	if (decoded) {
-		fprintf(vocafile,"%s",decoded+8);
-		free(decoded);
-	}
-
-
-	return (0);
-}
-
-
-static int
 cmd_events(char *notused)
 {
 	smf_event_t *event;
@@ -413,33 +393,6 @@ cmd_events(char *notused)
 
 	while ((event = smf_track_get_next_event(selected_track)) != NULL)
 		show_event(event);
-
-	smf_rewind(smf);
-
-	return (0);
-}
-
-static int
-cmd_showvsq(char *notused)
-{
-	smf_event_t *event;
-
-	if (selected_track == NULL) {
-		g_critical("No track selected - please use 'track <number>' command first.");
-		return (-1);
-	}
-
-	if (selected_track->number_of_events == 0) {
-		g_message("Selected track is empty.");
-		return (0);
-	}
-
-	g_message("Decoding VOCALOID2 seq:");
-
-	smf_rewind(smf);
-
-	while ((event = smf_track_get_next_event(selected_track)) != NULL)
-		show_event_vsq(event);
 
 	smf_rewind(smf);
 
@@ -833,7 +786,6 @@ static struct command_struct {
 		{"tempo", cmd_tempo, "Show tempo map."},
 		{"length", cmd_length, "Show length of the song."},
 		{"version", cmd_version, "Show libsmf version."},
-		{"showvsq", cmd_showvsq, "Decode vsq(Vocaloid Sequence) file."},
 		{"exit", cmd_exit, "Exit to shell."},
 		{"quit", cmd_exit, NULL},
 		{"bye", cmd_exit, NULL},

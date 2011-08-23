@@ -11,6 +11,7 @@ syntax: glob
 *.a
 *.orig
 *.diff.gz
+*build*
 abcmidi-20070318/abc2abc
 abcmidi-20070318/abc2midi
 abcmidi-20070318/abcmatch
