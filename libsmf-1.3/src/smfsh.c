@@ -61,10 +61,9 @@ char *last_file_name = NULL;
 static void
 log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer notused)
 {
-	if (strcmp(log_domain, "smfsh") == 0)
 		fprintf(stderr, "%s\n", message);
-	else
-		fprintf(stderr, "%s: %s\n", log_domain, message);
+//	else
+//		fprintf(stderr, "%s: %s\n", log_domain, message);
 }
 
 static int cmd_track(char *arg);
