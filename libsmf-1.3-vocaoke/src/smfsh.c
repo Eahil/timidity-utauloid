@@ -44,7 +44,7 @@
 #include <ctype.h>
 #include <assert.h>
 #include "smf.h"
-#include "config.h"
+
 
 #ifdef HAVE_LIBREADLINE
 #include <readline/readline.h>

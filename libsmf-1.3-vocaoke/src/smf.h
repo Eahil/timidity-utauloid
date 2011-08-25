@@ -412,5 +412,7 @@ const char *smf_get_version(void) WARN_UNUSED_RESULT;
 }
 #endif
 
+#define SMF_TEXT_TYPE_LYRIC 0x05
+
 #endif /* SMF_H */
 

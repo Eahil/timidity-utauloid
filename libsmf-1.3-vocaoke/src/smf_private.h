@@ -31,9 +31,7 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-#include "config.h"
-
-#define SMF_VERSION PACKAGE_VERSION
+#define SMF_VERSION "libsmf-1.3-vocaoke"
 
 /**
  * \file

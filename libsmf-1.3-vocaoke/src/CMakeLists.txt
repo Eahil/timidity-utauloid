@@ -8,10 +8,13 @@ set(smf_LIB_SRCS
     smf_load.c
     smf_save.c
     smf_tempo.c
-    smf_carray.c
-    minIni.c
-    smf_carray.h
-    minIni.c)
+    iniparser.c
+    iniparser.h
+    dictionary.c
+    dictionary.h	
+		
+	
+   )
 
 add_library(smf SHARED ${smf_LIB_SRCS})
 
@@ -22,8 +25,7 @@ set_target_properties(smf PROPERTIES VERSION 1.0.0 SOVERSION 1)
 
 
   
-  include_directories(/home/sakuraharuno/Projects/timidity-utauloid/libsmf-1.3/
-		      /usr/include/glib-2.0/
+  include_directories(/usr/include/glib-2.0/
 		      /usr/lib/i386-linux-gnu/glib-2.0/include/)
 add_definitions(-std=c99 -g)
 
@@ -48,6 +50,14 @@ add_executable(vsqdump ${vsqdump_SRCS})
 
 target_link_libraries(vsqdump smf m)
 
+########### next target ###############
+
+set(ustdump_SRCS ustdump.c)
+
+add_executable(ustdump ${ustdump_SRCS})
+
+target_link_libraries(ustdump smf m)
+
 
 ########### install files ###############
 
@@ -55,17 +65,4 @@ target_link_libraries(vsqdump smf m)
 
 
 
-#original Makefile.am contents follow:
 
-#include_HEADERS = smf.h
-#
-#lib_LTLIBRARIES = libsmf.la
-#libsmf_la_SOURCES = smf.h smf_private.h smf.c smf_decode.c smf_load.c smf_save.c smf_tempo.c smf_carray.c minIni.c smf_carray.h minIni.c
-#libsmf_la_CFLAGS = $(GLIB_CFLAGS) -DG_LOG_DOMAIN=\"libsmf\"
-#libsmf_la_LIBADD = 
-#
-#bin_PROGRAMS = smfsh
-#smfsh_SOURCES = smfsh.c
-#smfsh_CFLAGS = $(GLIB_CFLAGS) -DG_LOG_DOMAIN=\"smfsh\"
-#smfsh_LDADD = libsmf.la $(GLIB_LIBS) $(READLINE_LIBS) -lm
-#

@@ -162,7 +162,7 @@ smf_event_decode_metadata(const smf_event_t *event)
 		case 0x04:
 			return (smf_event_decode_textual(event, "Instrument"));
 
-		case 0x05:
+		case SMF_TEXT_TYPE_LYRIC:
 			return (smf_event_decode_textual(event, "Lyric"));
 
 		case 0x06:
