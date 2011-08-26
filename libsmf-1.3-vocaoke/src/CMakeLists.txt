@@ -58,6 +58,12 @@ add_executable(ustdump ${ustdump_SRCS})
 
 target_link_libraries(ustdump smf m)
 
+set(mididump_SRCS mididump.c)
+
+add_executable(mididump ${mididump_SRCS})
+
+target_link_libraries(mididump smf m)
+
 
 ########### install files ###############
 
