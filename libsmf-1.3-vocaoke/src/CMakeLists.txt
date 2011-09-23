@@ -11,22 +11,24 @@ set(smf_LIB_SRCS
     iniparser.c
     iniparser.h
     dictionary.c
-    dictionary.h	
+    dictionary.h
+    array.h
+    array.c			
 		
 	
    )
 
 add_library(smf SHARED ${smf_LIB_SRCS})
 
-target_link_libraries(smf -lglib-2.0)
+target_link_libraries(smf)
 
 set_target_properties(smf PROPERTIES VERSION 1.0.0 SOVERSION 1)
 #install(TARGETS smf ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 
   
-  include_directories(/usr/include/glib-2.0/
-		      /usr/lib/i386-linux-gnu/glib-2.0/include/)
+  #include_directories(/usr/include/glib-2.0/
+#		      /usr/lib/i386-linux-gnu/glib-2.0/include/)
 add_definitions(-std=c99 -g)
 
 
@@ -63,6 +65,21 @@ set(mididump_SRCS mididump.c)
 add_executable(mididump ${mididump_SRCS})
 
 target_link_libraries(mididump smf m)
+
+
+
+set(kardump_SRCS kardump.c)
+
+add_executable(kardump ${kardump_SRCS})
+
+target_link_libraries(kardump smf m)
+
+
+set(lauloidimport_SRCS lauloidimport.c)
+
+add_executable(lauloidimport ${lauloidimport_SRCS})
+
+target_link_libraries(lauloidimport smf m)
 
 
 ########### install files ###############

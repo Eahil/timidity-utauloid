@@ -67,7 +67,18 @@ int main(int argc,char** argv)
 	smf_t* smf=smf_new();
 	smf_add_track(smf,track);	
 	float tempo=atof(iniparser_getstring(root,"#SETTING:Tempo",""));
+	printf("%f tempo\n",tempo);
 	write_tempo(track,tempo);
+
+	if(0){
+	        smf_event_t* evtlyr=smf_event_new_textual(SMF_TEXT_TYPE_LYRIC,"(Setup)");
+		char notenum=60;
+		smf_event_t* evton=smf_event_new_from_bytes(0x90,notenum,127);
+		smf_event_t* evtoff=smf_event_new_from_bytes(0x80,notenum,0);
+		smf_track_add_event_seconds(track,evton,0);	
+		smf_track_add_event_seconds(track,evtlyr,0);
+		smf_track_add_event_seconds(track,evtoff,0);
+	}
 	
 	
 	int i=0;
@@ -91,10 +102,10 @@ int main(int argc,char** argv)
 		   smf_event_t* evton=smf_event_new_from_bytes(0x90,notenum,127);
 		   smf_event_t* evtoff=smf_event_new_from_bytes(0x80,notenum,0);
 
-		  double ond=((double) start)/960;
-		  double offd=((double) end)/960;
-		  smf_track_add_event_seconds(track,evton,ond);	
+		  double ond=((double) start)/(8*tempo);
+		  double offd=((double) end)/(8*tempo);
 		  smf_track_add_event_seconds(track,evtlyr,ond);
+		  smf_track_add_event_seconds(track,evton,ond);	
 		  smf_track_add_event_seconds(track,evtoff,offd);	
 
 		

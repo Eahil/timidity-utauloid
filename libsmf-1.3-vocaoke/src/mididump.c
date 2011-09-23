@@ -12,12 +12,16 @@
 #include <assert.h>
 #include "smf.h"
 
+const char* notenames[]={"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
+
 int main()
 {
 	smf_t* smf=smf_load("/tmp/autosave.mid");
+	FILE* xml=fopen("/tmp/lauloid.xml","w");
+	float bpm=180;
+	fprintf(xml,"<SINGING BPM=\"%f\">\n",bpm);
 	
 	smf_track_t* track=smf_get_track_by_number(smf,1);
-
 	smf_event_t* event;
 
 	
@@ -25,8 +29,10 @@ int main()
 	int notenum=-1;
 	int dynamics=-1;
 	char* lyric=NULL;
-	int start;	
-	int end=-1;
+	float start;	
+	float end=-1;
+
+		
 
 	while ((event = smf_track_get_next_event(track)) != NULL)
 	{
@@ -34,6 +40,7 @@ int main()
 		{
 			//handle lyric events
 			lyric = smf_event_extract_text(event);
+			//handle other meta events
 		}
 		else
 		{
@@ -43,26 +50,41 @@ int main()
 				int cmd=(int)event->midi_buffer[0];
 				int arg1=(int)event->midi_buffer[1];
 				int arg2=(int)event->midi_buffer[2];
-				int pulses=event->time_pulses;
+				float seconds=event->time_seconds;
 				
 				if(cmd==0x80) //note off
 				{
-					
-					int l=printf("%4i %3i %5s {}\n",pulses-start,notenum,lyric);					
+					//use notenames here
+					//printf("%4i %3i %5s {}\n",pulses-start,notenum,lyric);
+					float beats=(seconds-start)*bpm/60;
+					fprintf(xml,"   <PITCH NOTE=\"%s%i\"><DURATION BEATS=\"%f\">%s</DURATION></PITCH>\n",notenames[notenum%12],notenum/12,beats,lyric);					
 					notenum=-1;
 					dynamics=-1;
-					end=pulses;	
-					
+					end=seconds;	
+					lyric=0;
 				}
 				else if(cmd==0x90) //note on
 				{
 					if(notenum!=-1) printf("error\n");
-					if(end!=pulses && end!=-1) printf("%4i R\n",pulses-end);
+					if(end!=seconds && end!=-1)
+					{
+                     			 float restf=(seconds-end)*bpm/60;
+					 fprintf(xml,"   <REST BEATS=\"%f\"></REST>\n",restf);
+					 //printf("%4i R\n",pulses-end);
+					}
 					notenum=arg1;
 					dynamics=arg2;
-					start=pulses;
-				}	
+					start=seconds;
+					
+				}
+				//0xAn relative to start time,Polyphonic Aftertouch
+				//Control Change,Program Change
+				//0xEn Pitch Bending
+				//not allowed Monophonic / Channel Aftertouch
+				//TODO encode other events		
 			}
 		}
 	}
+	fprintf(xml,"</SINGING>");
+	fclose(xml);
 }

@@ -218,7 +218,7 @@ extern "C" {
 #endif
 
 #include <stdio.h>
-#include <glib.h>
+#include "array.h"
 
 #if defined(__GNUC__) && __GNUC__ >= 4
 #define WARN_UNUSED_RESULT __attribute__ ((warn_unused_result))
@@ -244,12 +244,12 @@ struct smf_struct {
 	int		expected_number_of_tracks;
 
 	/** Private, used by smf.c. */
-	GPtrArray	*tracks_array;
+	array	*tracks_array;
 	double		last_seek_position;
 
 	/** Private, used by smf_tempo.c. */
 	/** Array of pointers to smf_tempo_struct. */
-	GPtrArray	*tempo_array;
+	array	*tempo_array;
 };
 
 typedef struct smf_struct smf_t;
@@ -286,7 +286,7 @@ struct smf_track_struct {
 
 	/** Absolute time of next event on events_queue. */
 	int		time_of_next_event;
-	GPtrArray	*events_array;
+	array	*events_array;
 
 	/** API consumer is free to use this for whatever purpose.  NULL in freshly allocated track.
 	    Note that tracks might be deallocated not only explicitly, by calling smf_track_delete(),

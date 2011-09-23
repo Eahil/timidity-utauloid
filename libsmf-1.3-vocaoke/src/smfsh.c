@@ -58,13 +58,7 @@ char *last_file_name = NULL;
 
 #define COMMAND_LENGTH 10
 
-static void
-log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer notused)
-{
-		fprintf(stderr, "%s\n", message);
-//	else
-//		fprintf(stderr, "%s: %s\n", log_domain, message);
-}
+
 
 static int cmd_track(char *arg);
 
@@ -1012,7 +1006,7 @@ main(int argc, char *argv[])
 	if (argc > 2)
 		usage();
 
-	g_log_set_default_handler(log_handler, NULL);
+	//g_log_set_default_handler(log_handler, NULL);
 
 	smf = smf_new();
 	if (smf == NULL) {
