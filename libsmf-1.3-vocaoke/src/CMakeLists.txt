@@ -23,12 +23,11 @@ add_library(smf SHARED ${smf_LIB_SRCS})
 target_link_libraries(smf)
 
 set_target_properties(smf PROPERTIES VERSION 1.0.0 SOVERSION 1)
-#install(TARGETS smf ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS smf LIBRARY DESTINATION /opt/smf/lib)
+install(FILES smf.h array.h iniparser.h DESTINATION /opt/smf/include)
 
 
-  
-  #include_directories(/usr/include/glib-2.0/
-#		      /usr/lib/i386-linux-gnu/glib-2.0/include/)
+
 add_definitions(-std=c99 -g)
 
 
