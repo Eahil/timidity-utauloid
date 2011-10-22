@@ -1334,7 +1334,7 @@
 										<bool key="EncodedWithXMLCoder">YES</bool>
 										<object class="NSCustomView" id="147953873">
 											<reference key="NSNextResponder" ref="439475072"/>
-											<int key="NSvFlags">274</int>
+											<int key="NSvFlags">258</int>
 											<string key="NSFrameSize">{440, 320}</string>
 											<reference key="NSSuperview" ref="439475072"/>
 											<reference key="NSWindow"/>
@@ -3550,9 +3550,9 @@
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{466, 444}, {496, 376}}</string>
+					<string>{{127, 402}, {496, 376}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{466, 444}, {496, 376}}</string>
+					<string>{{127, 402}, {496, 376}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<string>{3.40282e+38, 3.40282e+38}</string>

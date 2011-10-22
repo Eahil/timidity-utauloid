@@ -11,21 +11,26 @@
 
 
 
-@interface OngakuUSTNote : NSObject {
+@interface OngakuUSTNote : NSObject <NSTextViewDelegate>{
 	float begin;
 	float end;
 	int pitch;//0 to 127
 	NSAttributedString* lyric;
+	BOOL selected;
 	//NSColor color;
 	//int voicebank
 }
 
 -(void) drawRect:(NSRect)rect;
 +(id) noteWithPitch:(int)pitch begin:(float)begin end:(float)end;
+-(void) toggleSelection;
+-(NSColor*) color;
+-(BOOL) isSelected;
 @property float begin;
 @property float end;
 @property int pitch;
-@property id lyric;
+@property(assign) id lyric;
+
 
 
 @end

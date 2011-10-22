@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class OngakuUSTNote;
 
 
 @interface OngakuScoreView : NSView {
@@ -15,6 +16,11 @@
 	int keyHeight;
 	int quarterLength;
 	NSMutableArray* notes;
+	NSPoint start_point;
+	OngakuUSTNote* noteUnderCursor;
+	NSTextView* editor;
+	int dragAction;
+	BOOL drag;
 
 }
 
