@@ -23,6 +23,7 @@
 @synthesize begin;
 @synthesize end;
 @synthesize pitch;
+@synthesize track;
 
 -(void) drawRect:(NSRect)rect
 {
@@ -58,17 +59,34 @@
 -(NSColor*) color
 {
 	if(selected)
-		return [NSColor colorWithDeviceRed:0.7 green:0.3 blue:1.0 alpha:1.0];
+		return [NSColor blueColor];
 	else
 	{
-		if([lyric length]==0)
-			return [NSColor darkGrayColor];
-		return [NSColor cyanColor];
+		//if([lyric length]==0)
+		//	return [NSColor darkGrayColor];
+		switch (track) {
+			case 0:
+				return [NSColor redColor];
+			case 1:
+				return [NSColor cyanColor];
+			case 2:
+				return [NSColor yellowColor];
+			case 3:
+				return [NSColor magentaColor];
+			case 4:
+				return [NSColor brownColor];
+			default:
+				return [NSColor darkGrayColor];
+		}
 	}
 }
 -(BOOL) isSelected
 {
 	return selected;
+}
+-(void) deselect
+{
+	selected=NO;
 }
 
 @end

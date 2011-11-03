@@ -17,6 +17,7 @@
 	int pitch;//0 to 127
 	NSAttributedString* lyric;
 	BOOL selected;
+	int track;//1 to 4
 	//NSColor color;
 	//int voicebank
 }
@@ -29,6 +30,7 @@
 @property float begin;
 @property float end;
 @property int pitch;
+@property int track;
 @property(assign) id lyric;
 
 

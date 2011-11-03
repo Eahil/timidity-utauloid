@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 @class OngakuUSTNote;
+@class OngakuScore;
 
 
 @interface OngakuScoreView : NSView {
@@ -21,7 +22,8 @@
 	NSTextView* editor;
 	int dragAction;
 	BOOL drag;
+	OngakuScore* score;
 
 }
-
+@property(readonly) OngakuScore* score;
 @end

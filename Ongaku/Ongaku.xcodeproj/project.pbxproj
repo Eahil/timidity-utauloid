@@ -12,6 +12,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		99D5F3261461EA7400CEDCBE /* OngakuScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D5F3251461EA7300CEDCBE /* OngakuScore.m */; };
 		99FB0564142BB1F500117545 /* OngakuScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB0563142BB1F500117545 /* OngakuScoreView.m */; };
 		99FB0666142BC53600117545 /* OngakuUSTNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB0665142BC53600117545 /* OngakuUSTNote.m */; };
 /* End PBXBuildFile section */
@@ -29,6 +30,8 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Ongaku-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Ongaku-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Ongaku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ongaku.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99D5F3241461EA7300CEDCBE /* OngakuScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OngakuScore.h; sourceTree = "<group>"; };
+		99D5F3251461EA7300CEDCBE /* OngakuScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OngakuScore.m; sourceTree = "<group>"; };
 		99FB0562142BB1F500117545 /* OngakuScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OngakuScoreView.h; sourceTree = "<group>"; };
 		99FB0563142BB1F500117545 /* OngakuScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OngakuScoreView.m; sourceTree = "<group>"; };
 		99FB0664142BC53600117545 /* OngakuUSTNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OngakuUSTNote.h; sourceTree = "<group>"; };
@@ -52,6 +55,8 @@
 			children = (
 				99FB0664142BC53600117545 /* OngakuUSTNote.h */,
 				99FB0665142BC53600117545 /* OngakuUSTNote.m */,
+				99D5F3241461EA7300CEDCBE /* OngakuScore.h */,
+				99D5F3251461EA7300CEDCBE /* OngakuScore.m */,
 				99FB0562142BB1F500117545 /* OngakuScoreView.h */,
 				99FB0563142BB1F500117545 /* OngakuScoreView.m */,
 				256AC3D80F4B6AC300CF3369 /* OngakuAppDelegate.h */,
@@ -192,6 +197,7 @@
 				256AC3DA0F4B6AC300CF3369 /* OngakuAppDelegate.m in Sources */,
 				99FB0564142BB1F500117545 /* OngakuScoreView.m in Sources */,
 				99FB0666142BC53600117545 /* OngakuUSTNote.m in Sources */,
+				99D5F3261461EA7400CEDCBE /* OngakuScore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

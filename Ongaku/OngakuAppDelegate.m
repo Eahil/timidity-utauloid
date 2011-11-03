@@ -8,12 +8,22 @@
 
 #import "OngakuAppDelegate.h"
 
+
+
 @implementation OngakuAppDelegate
 
 @synthesize window;
+@synthesize scoreView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
+}
+- (void)windowWillClose:(NSNotification *)notification
+{
+	NSLog(@"close %@",scoreView);
+	[[scoreView score]writeToFile:@"/tmp/score.dat"];//TODO write to score
+	[NSApp terminate:nil];
+	
 }
 
 @end

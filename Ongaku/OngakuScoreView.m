@@ -8,6 +8,7 @@
 
 #import "OngakuScoreView.h"
 #import "OngakuUSTNote.h"
+#import "OngakuScore.h"
 #include "smf.h"
 #include "dictionary.h"
 #include "iniparser.h"
@@ -16,6 +17,32 @@
 #define DRAG_MOVE 1
 #define DRAG_MOVE_LEFT 2
 #define DRAG_MOVE_RIGHT 3
+
+//Import/Export
+//OngakuScore(UTAU,VOICALOID,XML,MIDI,NSKeyedArchiver)
+
+//OngakuUSTPlayer
+//OngakuScore
+
+//fluidsynth backend 
+
+//native format ? 
+
+//midi output devices
+//	OngakuMIDIOutput
+//  OngakuMIDIInput
+
+//TODO implement snap to grid for notes
+
+//USE cases from UTAU docs
+//2-1. Setting the tempo
+//2-6. Changing the length of notes and rests
+//2-2. Entering notes and lyrics
+//
+//STATUS bar: show number of selected notes
+
+//SELECT tracks with 1 .. 4
+
 
 
 static NSColor* pianoRollColor(int i)
@@ -38,40 +65,19 @@ static NSColor* pianoRollColor(int i)
 
 @implementation OngakuScoreView
 
+@synthesize score;
+
 - (id)initWithFrame:(NSRect)frame {
 	frame.size.height=18*127;
+	frame.size.width=8000;//FIXME do not hardcode
     self = [super initWithFrame:frame];
     if (self) {
         keyHeight=18;
 		quarterLength=50;
-		notes=[[NSMutableArray alloc]init];
+		//notes=[[NSMutableArray alloc]init];
+		score=[[OngakuScore alloc]initWithMidiFile:@"/Users/tobiasplaten/Documents/Sheetmusic/finlandia.mid"];
+		notes=[score notes];
 		
-		dictionary* root=iniparser_load("/tmp/test.ust");
-		int i=0;
-		int cur=0;
-		while(1)
-		{
-			char sect[6];
-			sprintf(sect,"#%04i",i);
-			char* lyric=iniparser_getstring2(root,sect,"Lyric","");
-			char* note=iniparser_getstring2(root,sect,"NoteNum","");
-			char* length=iniparser_getstring2(root,sect,"Length","");
-			i++;
-			if(strlen(lyric)==0) break;
-			int start=cur;
-			cur+=atoi(length);
-      		int end=cur;
-			
-			if(strcmp(lyric,"R"))
-			{
-				NSLog(@"got lyric %s",lyric);
-				float scale=1.0/480.0;	
-				OngakuUSTNote* n=[OngakuUSTNote noteWithPitch:atoi(note) begin:start*scale end:end*scale];
-				n.lyric=[NSString stringWithUTF8String:lyric];
-				[notes addObject:n];
-				
-			}
-		}
     }
 	[NSTimer scheduledTimerWithTimeInterval:1.0/50 target:self selector:@selector(timerEvent:) userInfo:nil repeats:YES];
     return self;
@@ -94,7 +100,7 @@ static NSColor* pianoRollColor(int i)
 	
 	static int t=0;
 	t++;
-	int length=8+1;
+	int length=8*16+1;
 	
 	
 	NSRect bound = [self bounds];
@@ -213,6 +219,11 @@ static NSColor* pianoRollColor(int i)
 	if(drag==0)
 	{
 		[noteUnderCursor toggleSelection];
+		if(!([theEvent modifierFlags] & NSShiftKeyMask))
+			for(OngakuUSTNote* note in notes)
+				if(note!=noteUnderCursor)
+					[note deselect];
+		
 	}
 	if(noteUnderCursor.end<noteUnderCursor.begin) [notes removeObject:noteUnderCursor];
 	noteUnderCursor=nil;
@@ -262,7 +273,7 @@ static NSColor* pianoRollColor(int i)
 {
 	int keycode=[theEvent keyCode];
 	NSLog(@"k=%i",keycode);
-	if(keycode==117)
+	if(keycode==117)//delete
 	{
 		NSMutableIndexSet* idx=[NSMutableIndexSet indexSet];
 		for(int i=0;i<[notes count];i++)
@@ -271,18 +282,55 @@ static NSColor* pianoRollColor(int i)
 		}
 		[notes removeObjectsAtIndexes:idx];
 	}
+	if(keycode==125)
+	{
+		for(OngakuUSTNote* note in notes)
+		{
+			if([note isSelected]) note.pitch-=1;
+		}
+	}
+	if(keycode==126)
+	{
+		for(OngakuUSTNote* note in notes)
+		{
+			if([note isSelected]) note.pitch+=1;
+		}
+	}
+	if(keycode==123)
+	{
+		for(OngakuUSTNote* note in notes)
+		{
+			if([note isSelected]) 
+			{
+				note.begin-=1;
+				note.end-=1;
+			}
+		}
+	}
+	if(keycode==124)
+	{
+		for(OngakuUSTNote* note in notes)
+		{
+			if([note isSelected]) 
+			{
+				note.begin+=1;
+				note.end+=1;
+			}
+		}
+	}
+			
 	//TODO move shift notes
 }
 -(void) keyDown:(NSEvent *)theEvent
 {
 	
 }
-
+#if 0
 - (BOOL)canBecomeKeyView
 {
 	return YES;
 }
-
+#endif
 
 
 

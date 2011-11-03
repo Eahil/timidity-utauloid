@@ -8,10 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class OngakuScoreView;
+
 @interface OngakuAppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow *window;
+	OngakuScoreView* *view;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet OngakuScoreView *scoreView;
 
 @end
