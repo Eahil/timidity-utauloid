@@ -157,7 +157,37 @@ static NSColor* pianoRollColor(int i)
 	
 	if(editor)
 	{
-		[(OngakuUSTNote*)[editor delegate]setLyric:[editor string]];
+		NSString* s=[editor string];
+		if([s rangeOfString:@" "].location==NSNotFound)
+			[(OngakuUSTNote*)[editor delegate]setLyric:s];
+		else
+		{
+			NSMutableArray* tmp=[NSMutableArray new];
+			for(NSString* s2 in [s componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"- \n"]])
+			{
+				NSLog(@"lyr=%@",s2);
+				[tmp addObject:s2];
+			}
+			float begin=((OngakuUSTNote*)[editor delegate]).begin;
+			int track=((OngakuUSTNote*)[editor delegate]).track;
+			
+			int i=0;
+			for(OngakuUSTNote* note in notes)
+			{
+				if(note.begin>=begin && note.track==track)
+				{
+					if(i<[tmp count])
+					{
+						NSString* s3=[tmp objectAtIndex:i];
+						i++;
+						[note setLyric:s3];	
+					}
+				}
+			}
+			
+			
+			
+		}
 		[editor removeFromSuperview];
 		[editor release];
 		editor=nil;
