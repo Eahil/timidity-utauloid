@@ -75,8 +75,10 @@ static NSColor* pianoRollColor(int i)
         keyHeight=18;
 		quarterLength=50;
 		//notes=[[NSMutableArray alloc]init];
-		score=[[OngakuScore alloc]initWithMidiFile:@"/Users/tobiasplaten/Documents/Sheetmusic/finlandia.mid"];
+		score=[[OngakuScore alloc]initWithMidiFile:@"/home/kakashi/Desktop/finlandia1.mid"];
 		notes=[score notes];
+		NSLog(@"notes count = %i",[notes count]);
+		editor=nil;
 		
     }
 	[NSTimer scheduledTimerWithTimeInterval:1.0/50 target:self selector:@selector(timerEvent:) userInfo:nil repeats:YES];
@@ -151,7 +153,7 @@ static NSColor* pianoRollColor(int i)
 	
 	int pitch=start_point.y/keyHeight;
 	
-	if([theEvent clickCount]==2) NSLog(@"doubleclick");
+	
 	
 	
 	
@@ -162,14 +164,21 @@ static NSColor* pianoRollColor(int i)
 			[(OngakuUSTNote*)[editor delegate]setLyric:s];
 		else
 		{
+			smf_t* smftmp=smf_new();
+			smf_track_t* tracktmp=smf_track_new();
+			smf_add_track(smftmp,tracktmp);
+			
 			NSMutableArray* tmp=[NSMutableArray new];
 			for(NSString* s2 in [s componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"- \n"]])
 			{
 				NSLog(@"lyr=%@",s2);
 				[tmp addObject:s2];
+				
 			}
 			float begin=((OngakuUSTNote*)[editor delegate]).begin;
 			int track=((OngakuUSTNote*)[editor delegate]).track;
+
+			NSLog(@"aaa");
 			
 			int i=0;
 			for(OngakuUSTNote* note in notes)
@@ -180,10 +189,25 @@ static NSColor* pianoRollColor(int i)
 					{
 						NSString* s3=[tmp objectAtIndex:i];
 						i++;
-						[note setLyric:s3];	
+						[note setLyric:s3];
+						NSLog(@"s3 %@",s3);
+						smf_event_t* evtlyr=smf_event_new_textual(SMF_TEXT_TYPE_LYRIC,[s3 cString]);
+		 				char notenum=note.pitch;
+		  				smf_event_t* evton=smf_event_new_from_bytes(0x90,notenum,127);
+		  				smf_event_t* evtoff=smf_event_new_from_bytes(0x80,notenum,0);
+		  				
+		  				double ond=(note.begin);
+		  				double offd=(note.end);
+						smf_track_add_event_seconds(tracktmp,evtlyr,ond);
+		  				smf_track_add_event_seconds(tracktmp,evton,ond);			  				
+		  				smf_track_add_event_seconds(tracktmp,evtoff,offd);	
 					}
 				}
 			}
+
+			
+			smf_save(smftmp,"/tmp/lauloid.mid");
+			//(voice_ogi_abc_diphone)(Flinger.sing "z:/tmp/lauloid.mid" nil)(quit)
 			
 			
 			
@@ -193,11 +217,12 @@ static NSColor* pianoRollColor(int i)
 		editor=nil;
 	}
 	
-	
+	if([theEvent clickCount]==2) NSLog(@"doubleclick");
 	
 	
 	for(OngakuUSTNote* note in notes)	
 	{
+		NSLog(@"note:");	
 		if(fabs(note.begin*quarterLength - start_point.x)<2 && note.pitch==pitch)
 		{
 			[[NSCursor resizeLeftCursor]set];
@@ -217,7 +242,12 @@ static NSColor* pianoRollColor(int i)
 		{
 			if([theEvent clickCount]==2)
 			{
+			NSLog(@"%@",editor);
 			editor=[[NSTextView alloc]initWithFrame:NSMakeRect(quarterLength*note.begin,note.pitch*keyHeight, quarterLength*(note.end-note.begin), keyHeight)];
+			#ifndef __APPLE__
+			[editor retain];
+			#endif
+			NSLog(@"%@",editor);
 			[editor setDelegate:note];
 			[editor setBackgroundColor:[NSColor colorWithDeviceRed:0.7 green:0.3 blue:1.0 alpha:1.0]]; 
 			[editor setString:[note.lyric string]];

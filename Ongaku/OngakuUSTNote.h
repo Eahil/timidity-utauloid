@@ -11,7 +11,7 @@
 
 
 
-@interface OngakuUSTNote : NSObject <NSTextViewDelegate>{
+@interface OngakuUSTNote : NSObject /*<NSTextViewDelegate>*/{
 	float begin;
 	float end;
 	int pitch;//0 to 127

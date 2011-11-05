@@ -28,9 +28,9 @@
 	OngakuUSTNote* tmp=NULL;
 	smf_t* smf=smf_load([fileName UTF8String]);
 	smf_event_t *event;
-	for(int i=0;i<4;i++)
+	for(int i=0;i<smf->number_of_tracks;i++)
 	{
-		smf_track_t* track=smf_get_track_by_number(smf,2+i);
+		smf_track_t* track=smf_get_track_by_number(smf,1+i);
 		while ((event = smf_track_get_next_event(track)) != NULL)
 		{
 			if(event->midi_buffer_length==3)

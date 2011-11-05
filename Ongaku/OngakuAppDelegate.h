@@ -10,7 +10,7 @@
 
 @class OngakuScoreView;
 
-@interface OngakuAppDelegate : NSObject <NSApplicationDelegate> {
+@interface OngakuAppDelegate : NSObject /*<NSApplicationDelegate>*/ {
     NSWindow *window;
 	OngakuScoreView* *view;
 }
