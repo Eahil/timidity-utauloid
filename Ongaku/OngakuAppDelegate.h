@@ -17,5 +17,5 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet OngakuScoreView *scoreView;
-
+-(IBAction) openDocument:(id)sender;
 @end

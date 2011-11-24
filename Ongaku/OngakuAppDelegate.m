@@ -23,7 +23,13 @@
 	NSLog(@"close %@",scoreView);
 	[[scoreView score]writeToFile:@"/tmp/score.dat"];//TODO write to score
 	[NSApp terminate:nil];
-	
+}
+
+-(IBAction) openDocument:(id)sender
+{
+	NSOpenPanel* p=[NSOpenPanel openPanel];
+	[p runModal];
+	[scoreView loadScore:[[p filenames]objectAtIndex:0]];
 }
 
 @end

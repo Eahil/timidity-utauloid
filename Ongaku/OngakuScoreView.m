@@ -75,7 +75,7 @@ static NSColor* pianoRollColor(int i)
         keyHeight=18;
 		quarterLength=50;
 		//notes=[[NSMutableArray alloc]init];
-		score=[[OngakuScore alloc]initWithMidiFile:@"/home/kakashi/Desktop/finlandia1.mid"];
+		//score=[[OngakuScore alloc]initWithMidiFile:@"/home/kakashi/Desktop/finlandia1.mid"];
 		notes=[score notes];
 		NSLog(@"notes count = %i",[notes count]);
 		editor=nil;
@@ -383,6 +383,14 @@ static NSColor* pianoRollColor(int i)
 }
 -(void) keyDown:(NSEvent *)theEvent
 {
+	
+}
+-(void) loadScore:(NSString*)fileName
+{
+	NSLog(@"%@",fileName);
+	score=[[OngakuScore alloc]initWithMidiFile:fileName];
+	notes=[score notes];
+	[self setNeedsDisplay:YES];
 	
 }
 #if 0
