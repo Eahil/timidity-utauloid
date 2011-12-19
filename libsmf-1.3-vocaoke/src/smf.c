@@ -477,8 +477,18 @@ smf_track_add_event(smf_track_t *track, smf_event_t *event)
 	/* We need to insert in the middle of the track.  XXX: This is slow. */
 	} else {
 		/* Append, then sort according to ->time_pulses. */
-		array_add(track->events_array, event);
-		array_sort(track->events_array, events_array_compare_function);
+		//array_add(track->events_array, event);
+		//array_sort(track->events_array, events_array_compare_function);
+		
+		/* insert in the middle of the track. */
+		for (i = 1; i <= track->number_of_events-1; i++) {//last event has not been inserted yet
+			smf_event_t *tmp = smf_track_get_event_by_number(track, i);
+			if(tmp->time_pulses >= event->time_pulses) 
+			{
+				array_add_middle(track->events_array, event,i-1);//this should be faster
+				break;
+			}
+		}
 
 		/* Renumber entries and fix their ->delta_pulses. */
 		for (i = 1; i <= track->number_of_events; i++) {
