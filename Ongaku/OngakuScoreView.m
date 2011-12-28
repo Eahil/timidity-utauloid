@@ -495,6 +495,26 @@ static int pianoRollLength(int i)
 	//TODO showContextMenu
 }
 
+-(void) markNotesBelow:(int) i
+{
+	OngakuUSTNote* selected=nil;
+	int count=0;
+		for(OngakuUSTNote* note in [score notes])
+		{
+			if([note isSelected]) 
+			{
+				selected=note;
+				count++;
+			}
+		}
+	if(count==1)
+		for(OngakuUSTNote* note in [score notes])
+		{
+			if(note.pitch<selected.pitch) note.track=i;
+		}
+		
+}
+
 -(void)keyUp:(NSEvent *)theEvent
 {
 	int keycode=[theEvent keyCode];
@@ -548,9 +568,17 @@ static int pianoRollLength(int i)
 	{
 		[score exportSelection];
 	}
-			
+	if(keycode==kVK_ANSI_1)
+	{
+		[self markNotesBelow:1];
+	}
+	if(keycode==kVK_ANSI_1)
+	{
+		[self markNotesBelow:2];
+	}
 	//TODO move shift notes
 }
+
 -(void) keyDown:(NSEvent *)theEvent
 {
 	

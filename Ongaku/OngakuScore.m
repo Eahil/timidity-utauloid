@@ -170,6 +170,8 @@ void write_tempo(smf_track_t* newtrack,smf_tempo_t* tempo) {
 -(void) exportSelection
 {
 	smf_t* smf=smf_new();
+	for(int it=0;it<4;it++)
+	{
 	smf_track_t* track=smf_track_new();
 	smf_add_track(smf, track);
 	
@@ -184,12 +186,17 @@ void write_tempo(smf_track_t* newtrack,smf_tempo_t* tempo) {
 	
 	for(OngakuUSTNote* note in notes)
 	{
+		if(note.track==it)
+		{
 		//NSLog(@"%@",note);
 		char pitch = note.pitch;
 		smf_event_t* evtbegin=smf_event_new_from_bytes(0x90, pitch, 127);
 		smf_event_t* evtend=smf_event_new_from_bytes(0x80, pitch, 0);
 		smf_track_add_event_seconds(track,evtbegin,note.begin);
 		smf_track_add_event_seconds(track,evtend,note.end);
+		//TODO we should export lyrics	
+		}
+	}
 	}
 	
 	smf_save(smf,"/tmp/lauloid.mid");

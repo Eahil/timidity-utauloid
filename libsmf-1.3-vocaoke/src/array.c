@@ -32,7 +32,7 @@ void array_add(array* a,void* d)
 void array_add_middle(array* a,void* d,int i)
 {
 	assert(i<a->len);
-	assert(i>0);
+	assert(i>=0);
 	if(a->len==a->size)
 	{
 		a->size*=2;
